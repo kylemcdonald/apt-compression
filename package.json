@@ -1,0 +1,20 @@
+{
+  "name": "apt-pos-compression-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build:wasm": "python3 scripts/build_cdf_v2_wasm.py",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.176.0",
+    "vite": "^6.3.5"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.28.17",
+    "playwright-core": "^1.60.0"
+  }
+}

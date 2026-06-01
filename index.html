@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>APT Compression Prototype</title>
+  </head>
+  <body>
+    <div id="app">
+      <aside id="controlPanel" class="panel">
+        <div class="panel-title">APT Compression</div>
+
+        <label>
+          Dataset
+          <select id="datasetSelect"></select>
+        </label>
+
+        <label>
+          Compression method
+          <select id="methodSelect"></select>
+        </label>
+
+        <div class="field-row">
+          <label>
+            <span class="label-row">
+              <span>Point size</span>
+              <span id="pointSizeValue">1.25</span>
+            </span>
+            <input id="pointSizeInput" type="range" min="0.5" max="5" step="0.01" value="1.25" />
+          </label>
+          <label>
+            Opacity
+            <input id="opacityInput" type="range" min="0.02" max="1" step="0.01" value="0.94" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label>
+            Render budget
+            <input id="budgetInput" type="number" min="1000" max="16000000" step="1000" value="1000000" />
+          </label>
+          <label>
+            Point color
+            <select id="colorModeSelect">
+              <option value="bin" selected>Hypernetwork bin</option>
+              <option value="mass">Mass/charge</option>
+            </select>
+          </label>
+        </div>
+
+        <input id="budgetRange" type="range" min="10000" max="16000000" step="10000" value="1000000" />
+
+        <div class="field-row">
+          <label>
+            Spectrum scale
+            <select id="spectrumScaleSelect">
+              <option value="log">Log counts</option>
+              <option value="linear">Linear counts</option>
+            </select>
+          </label>
+          <span></span>
+        </div>
+
+        <div class="range-grid">
+          <label>
+            Mass min
+            <input id="massMinInput" type="number" step="0.01" />
+          </label>
+          <label>
+            Mass max
+            <input id="massMaxInput" type="number" step="0.01" />
+          </label>
+        </div>
+
+        <label id="binSliderWrap" class="bin-slider">
+          <span class="label-row">
+            <span>CDF bin</span>
+            <span id="binSliderLabel">Bin 01 / 32</span>
+          </span>
+          <input id="binSliderInput" type="range" min="1" max="32" step="1" value="1" />
+        </label>
+
+        <div id="statusLine" class="status">Loading manifest...</div>
+
+        <div class="metrics-title">Metrics</div>
+        <dl id="metricsPanel" class="metrics"></dl>
+      </aside>
+
+      <main id="viewer">
+        <div id="canvasHost"></div>
+        <div id="budgetNotice" class="notice"></div>
+        <section id="spectrumPanel">
+          <div class="spectrum-heading">
+            <span>Mass spectrum</span>
+            <span id="spectrumHint">Drag range or edit values</span>
+          </div>
+          <canvas id="spectrumCanvas"></canvas>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
