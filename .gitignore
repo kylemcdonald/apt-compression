@@ -19,3 +19,5 @@ __pycache__/
 *.pth
 *.ckpt
 public/*.wasm
+public/.nojekyll
+public/artifacts/

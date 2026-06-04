@@ -3,31 +3,35 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { generateAllCdfV2Points } from './cdfV2.js';
 import './style.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE || window.location.origin;
+const STATIC_DEMO = import.meta.env.VITE_STATIC_DEMO === 'true';
+const APP_BASE = new URL(import.meta.env.BASE_URL || '/', window.location.origin).href;
+const API_BASE = STATIC_DEMO ? APP_BASE : (import.meta.env.VITE_API_BASE || window.location.origin);
 const MAX_RENDER_BUDGET = 16_000_000;
 const DEFAULT_RENDER_BUDGET = 1_000_000;
 const DEFAULT_DATASET_PREFIX = '499';
-const DEFAULT_METHOD = new URLSearchParams(window.location.search).get('method') || 'cdf_v2_linear_64_10mb';
+const COMPRESSED_METHOD = new URLSearchParams(window.location.search).get('method') || 'cdf_v2_linear_64_10mb';
 const DEFAULT_CAMERA_DIRECTION = new THREE.Vector3(0.0, -1.0, 0.42).normalize();
 const ORBIT_UP = new THREE.Vector3(0.0, 0.0, 1.0);
 const POINT_IMAGE_PLANE_ROTATION = Math.PI / 2;
 const BOUNDS_TICK_SPACING_NM = 10;
 const BOUNDS_TICK_LENGTH_SCALE = 1 / 3;
-
-const METHOD_OPTIONS = [
-  { id: 'full', label: 'Full file' },
-  { id: 'cdf_v2_linear_64_10mb', label: 'CDF grid v2 linear 64-bin 10MB' }
-];
+const DEFAULT_OPACITY = 0.10;
+const AUTO_POINT_SIZE_BASE = 0.5;
+const AUTO_POINT_SIZE_EXPONENT = 1.5;
+const AUTO_POINT_SIZE_MAX = 10;
 
 const dom = {
+  app: document.getElementById('app'),
+  panelContent: document.getElementById('panelContent'),
+  paneToggle: document.getElementById('paneToggle'),
   dataset: document.getElementById('datasetSelect'),
-  method: document.getElementById('methodSelect'),
+  compressed: document.getElementById('compressedToggle'),
   pointSize: document.getElementById('pointSizeInput'),
   pointSizeValue: document.getElementById('pointSizeValue'),
   opacity: document.getElementById('opacityInput'),
+  opacityValue: document.getElementById('opacityValue'),
   budget: document.getElementById('budgetInput'),
   budgetRange: document.getElementById('budgetRange'),
-  colorMode: document.getElementById('colorModeSelect'),
   spectrumScale: document.getElementById('spectrumScaleSelect'),
   massMin: document.getElementById('massMinInput'),
   massMax: document.getElementById('massMaxInput'),
@@ -35,10 +39,12 @@ const dom = {
   binSlider: document.getElementById('binSliderInput'),
   binLabel: document.getElementById('binSliderLabel'),
   status: document.getElementById('statusLine'),
+  metricsToggle: document.getElementById('metricsToggle'),
   metrics: document.getElementById('metricsPanel'),
   host: document.getElementById('canvasHost'),
   notice: document.getElementById('budgetNotice'),
-  spectrum: document.getElementById('spectrumCanvas')
+  spectrum: document.getElementById('spectrumCanvas'),
+  spectrumHint: document.getElementById('spectrumHint')
 };
 
 const vertexShader = `
@@ -47,9 +53,6 @@ const vertexShader = `
   uniform float uPointSize;
   uniform float uMassMin;
   uniform float uMassMax;
-  uniform float uMassLow;
-  uniform float uMassHigh;
-  uniform float uColorMode;
   uniform float uBinCount;
   uniform float uOpacity;
   varying vec3 vColor;
@@ -74,9 +77,8 @@ const vertexShader = `
 
   void main() {
     vVisible = (mass >= uMassMin && mass <= uMassMax) ? 1.0 : 0.0;
-    float massT = (mass - uMassLow) / max(uMassHigh - uMassLow, 0.00001);
     float binT = binIndex / max(uBinCount - 1.0, 1.0);
-    vColor = palette(uColorMode < 0.5 ? massT : binT);
+    vColor = palette(binT);
     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
     gl_PointSize = max(uPointSize, 0.25);
     gl_Position = projectionMatrix * mvPosition;
@@ -114,6 +116,7 @@ let frontendGenerationMs = null;
 let frontendGenerationBackend = null;
 let massMin = 0;
 let massMax = 1;
+let massRangeActive = false;
 let loadToken = 0;
 let loadTimer = null;
 let activePointAbort = null;
@@ -124,6 +127,14 @@ let cameraMoving = false;
 let settleFrames = 0;
 let boundsLine = null;
 let cloudBounds = null;
+let axisLabelElements = [];
+let fitCameraDistance = null;
+let manualPointSize = null;
+let manualOpacity = null;
+let opacityRenderedPointCount = null;
+let pointSizeDragging = false;
+let metricsExpanded = false;
+let paneCollapsed = true;
 
 function formatNumber(value) {
   return Number(value || 0).toLocaleString();
@@ -150,8 +161,8 @@ function currentDataset() {
 }
 
 function selectedMethod() {
-  const [base, variantId = ''] = dom.method.value.split(':');
-  return { base, variantId };
+  if (STATIC_DEMO) return { base: COMPRESSED_METHOD, variantId: '' };
+  return { base: dom.compressed.checked ? COMPRESSED_METHOD : 'full', variantId: '' };
 }
 
 function currentMethodInfo() {
@@ -168,17 +179,86 @@ function currentMetrics() {
   return info?.metrics || null;
 }
 
-function currentColorModeValue() {
-  return dom.colorMode?.value === 'mass' ? 0 : 1;
+function autoPointSize() {
+  const scale = Math.max(1, currentViewScale());
+  const size = AUTO_POINT_SIZE_BASE * Math.pow(scale, AUTO_POINT_SIZE_EXPONENT);
+  return Math.max(AUTO_POINT_SIZE_BASE, Math.min(AUTO_POINT_SIZE_MAX, size));
 }
 
 function currentPointSize() {
-  const value = Number(dom.pointSize.value);
-  return Math.max(0.5, Math.min(5, Number.isFinite(value) ? value : 1.25));
+  return manualPointSize ?? autoPointSize();
+}
+
+function clampPointSize(value) {
+  const size = Number(value);
+  return Math.max(AUTO_POINT_SIZE_BASE, Math.min(AUTO_POINT_SIZE_MAX, Number.isFinite(size) ? size : autoPointSize()));
+}
+
+function renderedPointCountForOpacity() {
+  if (!pointFloats && !loadedPointCount) return null;
+  return Math.max(0, displayedPointCount);
+}
+
+function autoOpacity() {
+  const total = Number(currentDataset()?.atom_count || loadedPointCount || displayedPointCount || 0);
+  const rendered = renderedPointCountForOpacity();
+  if (!total || rendered === null) return DEFAULT_OPACITY;
+  if (rendered <= 0) return 1;
+  const fraction = Math.min(1, Math.max(rendered / total, 0));
+  return Math.min(1, Math.max(DEFAULT_OPACITY, DEFAULT_OPACITY / Math.max(fraction, 1e-6)));
+}
+
+function currentOpacity() {
+  return manualOpacity ?? autoOpacity();
+}
+
+function clampOpacity(value) {
+  const opacity = Number(value);
+  return Math.max(0.02, Math.min(1, Number.isFinite(opacity) ? opacity : autoOpacity()));
 }
 
 function syncPointSizeLabel() {
-  dom.pointSizeValue.textContent = currentPointSize().toFixed(2);
+  const size = currentPointSize();
+  dom.pointSize.value = size.toFixed(2);
+  dom.pointSizeValue.textContent = size.toFixed(2);
+}
+
+function syncOpacityLabel() {
+  const opacity = currentOpacity();
+  dom.opacity.value = opacity.toFixed(2);
+  dom.opacityValue.textContent = `${Math.round(opacity * 100)}%`;
+}
+
+function currentViewScale() {
+  if (!camera || !controls || !fitCameraDistance) return 1;
+  const distance = camera.position.distanceTo(controls.target);
+  if (!Number.isFinite(distance) || distance <= 0) return 1;
+  return fitCameraDistance / distance;
+}
+
+function syncViewScaleLabel() {
+  // View scale is internal; point size follows it unless temporarily overridden.
+}
+
+function syncPointSizeForViewScale({ clearManual = false } = {}) {
+  if (clearManual) manualPointSize = null;
+  const size = currentPointSize();
+  syncPointSizeLabel();
+  if (pointMaterial) {
+    pointMaterial.uniforms.uPointSize.value = size;
+  }
+}
+
+function syncOpacityForRenderedPoints({ forceAuto = false } = {}) {
+  const rendered = renderedPointCountForOpacity();
+  if (forceAuto || rendered !== opacityRenderedPointCount) {
+    manualOpacity = null;
+    opacityRenderedPointCount = rendered;
+  }
+  syncOpacityLabel();
+  if (pointMaterial) {
+    pointMaterial.uniforms.uOpacity.value = currentOpacity();
+  }
 }
 
 function methodRanges(dataset = currentDataset(), methodId = selectedMethod().base) {
@@ -222,7 +302,7 @@ function nearestCdfBinIndex() {
 
 function syncBinSlider() {
   const ranges = currentCdfRanges();
-  if (!ranges.length) {
+  if (!ranges.length || !massRangeActive) {
     dom.binWrap.classList.remove('visible');
     return;
   }
@@ -232,7 +312,7 @@ function syncBinSlider() {
   dom.binSlider.min = '1';
   dom.binSlider.max = String(ranges.length);
   dom.binSlider.value = String(index + 1);
-  dom.binLabel.textContent = `Bin ${String(index + 1).padStart(2, '0')} / ${ranges.length} (${Number(range.mass_min).toFixed(2)}-${Number(range.mass_max).toFixed(2)})`;
+  dom.binLabel.textContent = `${String(index + 1).padStart(2, '0')} / ${ranges.length} (${Number(range.mass_min).toFixed(2)}-${Number(range.mass_max).toFixed(2)})`;
 }
 
 function setMassRangeFromCdfBin(index) {
@@ -242,13 +322,15 @@ function setMassRangeFromCdfBin(index) {
   const range = ranges[clamped];
   massMin = Number(range.mass_min);
   massMax = Number(range.mass_max);
+  massRangeActive = true;
   syncMassInputs();
   updateMassFilter({ syncBin: false });
   syncBinSlider();
 }
 
-function setStatus(message) {
+function setStatus(message, visible = false) {
   dom.status.textContent = message;
+  dom.status.classList.toggle('visible', Boolean(message && visible));
 }
 
 function currentBudgetLimit() {
@@ -319,7 +401,15 @@ function initThree() {
     settleFrames = 24;
     startRenderLoop();
   });
-  controls.addEventListener('change', requestRender);
+  controls.addEventListener('change', () => {
+    syncViewScaleLabel();
+    syncPointSizeForViewScale();
+    requestRender();
+  });
+  renderer.domElement.addEventListener('dblclick', (event) => {
+    event.preventDefault();
+    resetCamera();
+  });
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.35));
 
@@ -349,6 +439,9 @@ function resizeRenderer() {
   renderer.setSize(width, height, true);
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
+  syncViewScaleLabel();
+  syncPointSizeForViewScale();
+  updateAxisLabelScreenPositions();
 }
 
 function requestRender() {
@@ -357,6 +450,7 @@ function requestRender() {
   requestAnimationFrame(() => {
     renderOnceQueued = false;
     updateBoundsGuide();
+    updateAxisLabelScreenPositions();
     renderer.render(scene, camera);
   });
 }
@@ -370,6 +464,7 @@ function startRenderLoop() {
 function renderWhileMoving() {
   controls.update();
   updateBoundsGuide();
+  updateAxisLabelScreenPositions();
   renderer.render(scene, camera);
   if (cameraMoving || settleFrames > 0) {
     settleFrames = Math.max(0, settleFrames - 1);
@@ -380,7 +475,10 @@ function renderWhileMoving() {
 }
 
 async function loadManifest() {
-  const response = await fetch(`${API_BASE}/api/manifest`);
+  const url = STATIC_DEMO
+    ? new URL('artifacts/manifest.json', API_BASE)
+    : new URL('/api/manifest', API_BASE);
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Manifest request failed: ${response.status}`);
   }
@@ -389,40 +487,43 @@ async function loadManifest() {
 
 function populateDatasets() {
   dom.dataset.innerHTML = '';
-  for (const dataset of manifest.datasets || []) {
+  const datasets = STATIC_DEMO
+    ? (manifest.datasets || []).filter((dataset) => dataset.name?.toLowerCase().startsWith(DEFAULT_DATASET_PREFIX))
+    : (manifest.datasets || []);
+  for (const dataset of datasets) {
     const option = document.createElement('option');
     option.value = dataset.id;
     option.textContent = `${dataset.name} (${formatNumber(dataset.atom_count)} atoms)`;
     dom.dataset.appendChild(option);
   }
-  const preferred = (manifest.datasets || []).find((dataset) =>
-    dataset.name?.startsWith(DEFAULT_DATASET_PREFIX) || dataset.id?.startsWith(DEFAULT_DATASET_PREFIX)
+  const preferred = datasets.find((dataset) =>
+    dataset.name?.toLowerCase().startsWith(DEFAULT_DATASET_PREFIX)
+    && dataset.name?.toLowerCase().endsWith('.pos')
+  ) || datasets.find((dataset) =>
+    dataset.name?.toLowerCase().startsWith(DEFAULT_DATASET_PREFIX)
+    || dataset.id?.toLowerCase().startsWith(DEFAULT_DATASET_PREFIX)
   );
   if (preferred) dom.dataset.value = preferred.id;
 }
 
-function populateMethods() {
+function setDefaultControlValues() {
+  dom.opacity.value = DEFAULT_OPACITY.toFixed(2);
+  dom.pointSize.disabled = false;
+  syncOpacityForRenderedPoints({ forceAuto: true });
+  syncPointSizeForViewScale({ clearManual: true });
+}
+
+function syncCompressedToggle() {
+  if (STATIC_DEMO) {
+    dom.compressed.checked = true;
+    dom.compressed.disabled = true;
+    return;
+  }
   const dataset = currentDataset();
-  const prior = dom.method.value;
-  dom.method.innerHTML = '';
-  for (const method of METHOD_OPTIONS) {
-    const info = dataset?.methods?.[method.id];
-    const option = document.createElement('option');
-    option.value = method.id;
-    option.textContent = info?.method_label || info?.label || method.label;
-    option.disabled = !info || info.available === false;
-    if (info?.available === false) option.textContent += ' (unavailable)';
-    dom.method.appendChild(option);
-  }
-  const canKeep = Array.from(dom.method.options).some((option) => option.value === prior && !option.disabled);
-  if (canKeep) {
-    dom.method.value = prior;
-  } else {
-    const options = Array.from(dom.method.options);
-    const preferred = options.find((option) => option.value === DEFAULT_METHOD && !option.disabled);
-    const firstAvailable = options.find((option) => !option.disabled);
-    if (preferred || firstAvailable) dom.method.value = (preferred || firstAvailable).value;
-  }
+  const compressed = dataset?.methods?.[COMPRESSED_METHOD];
+  const canLoadCompressed = Boolean(compressed && compressed.available !== false);
+  dom.compressed.disabled = !canLoadCompressed;
+  if (!canLoadCompressed) dom.compressed.checked = false;
 }
 
 function populateLevels() {
@@ -434,6 +535,7 @@ function setMassInputsFromDataset() {
   if (!dataset) return;
   massMin = dataset.mass_range[0];
   massMax = dataset.mass_range[1];
+  massRangeActive = false;
   for (const input of [dom.massMin, dom.massMax]) {
     input.min = dataset.mass_range[0];
     input.max = dataset.mass_range[1];
@@ -460,6 +562,7 @@ function applyMassFromInputs() {
   if (a > b) [a, b] = [b, a];
   massMin = a;
   massMax = b;
+  massRangeActive = !(a <= lo && b >= hi);
   syncMassInputs();
   updateMassFilter();
 }
@@ -470,22 +573,19 @@ function updateMassFilter(options = {}) {
     pointMaterial.uniforms.uMassMax.value = massMax;
   }
   displayedPointCount = countDisplayedPoints();
+  syncOpacityForRenderedPoints();
   if (options.syncBin !== false) syncBinSlider();
   updateMetricsPanel();
   drawSpectrum();
   requestRender();
 }
 
-function updateColorMode() {
-  if (pointMaterial) {
-    pointMaterial.uniforms.uColorMode.value = currentColorModeValue();
-    requestRender();
-  }
-}
-
 function updateOpacity() {
+  manualOpacity = clampOpacity(dom.opacity.value);
+  opacityRenderedPointCount = renderedPointCountForOpacity();
+  syncOpacityLabel();
   if (pointMaterial) {
-    pointMaterial.uniforms.uOpacity.value = Number(dom.opacity.value) || 0.94;
+    pointMaterial.uniforms.uOpacity.value = currentOpacity();
     requestRender();
   }
 }
@@ -551,6 +651,7 @@ function clearPointCloud() {
     scene.remove(cloudGroup);
     cloudGroup.traverse((child) => {
       if (child.geometry) child.geometry.dispose();
+      if (child.material?.map) child.material.map.dispose();
       if (child.material) child.material.dispose();
     });
   }
@@ -562,6 +663,8 @@ function clearPointCloud() {
   generatedSpectrumCounts = null;
   boundsLine = null;
   cloudBounds = null;
+  for (const item of axisLabelElements) item.element.remove();
+  axisLabelElements = [];
   loadedPointCount = 0;
   displayedPointCount = 0;
   frontendGenerationMs = null;
@@ -598,11 +701,8 @@ function createPointCloud(floats, options = {}) {
       uPointSize: { value: currentPointSize() },
       uMassMin: { value: massMin },
       uMassMax: { value: massMax },
-      uMassLow: { value: dataset?.mass_range?.[0] ?? massMin },
-      uMassHigh: { value: dataset?.mass_range?.[1] ?? massMax },
-      uColorMode: { value: currentColorModeValue() },
       uBinCount: { value: options.binCount || datasetCdfRanges(dataset).length || 1 },
-      uOpacity: { value: Number(dom.opacity.value) || 0.94 }
+      uOpacity: { value: currentOpacity() }
     },
     vertexShader,
     fragmentShader,
@@ -640,11 +740,54 @@ function createBoundsGuide() {
   );
   boundsLine.frustumCulled = false;
   cloudGroup.add(boundsLine);
+  createAxisLabelElements();
   updateBoundsGuide();
 }
 
 function pushSegment(vertices, a, b) {
   vertices.push(a.x, a.y, a.z, b.x, b.y, b.z);
+}
+
+function createAxisLabelElements() {
+  axisLabelElements = ['x', 'y', 'z'].map((axis) => {
+    const element = document.createElement('div');
+    element.className = 'axis-label';
+    element.hidden = true;
+    dom.host.appendChild(element);
+    return {
+      axis,
+      element,
+      localPosition: new THREE.Vector3(),
+      visible: false
+    };
+  });
+}
+
+function updateAxisLabelElement(label, text, position) {
+  label.element.textContent = text;
+  label.localPosition.copy(position);
+  label.visible = true;
+  label.element.hidden = false;
+}
+
+function updateAxisLabelScreenPositions() {
+  if (!camera || !cloudGroup || !axisLabelElements.length) return;
+  const rect = dom.host.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  cloudGroup.updateMatrixWorld(true);
+  for (const label of axisLabelElements) {
+    if (!label.visible) {
+      label.element.hidden = true;
+      continue;
+    }
+    const position = cloudGroup.localToWorld(label.localPosition.clone()).project(camera);
+    const onscreen = position.z >= -1 && position.z <= 1;
+    label.element.hidden = !onscreen;
+    if (!onscreen) continue;
+    const x = (position.x * 0.5 + 0.5) * rect.width;
+    const y = (-position.y * 0.5 + 0.5) * rect.height;
+    label.element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+  }
 }
 
 function updateBoundsGuide() {
@@ -672,6 +815,7 @@ function updateBoundsGuide() {
   }
 
   const vertices = [];
+  const labels = [];
   const ranges = [
     { axis: 'x', min: min.x, max: max.x },
     { axis: 'y', min: min.y, max: max.y },
@@ -695,14 +839,30 @@ function updateBoundsGuide() {
       const tickEnd = tickStart.clone();
       tickEnd[tickAxis] += tickDirection * tickSize;
       pushSegment(vertices, tickStart, tickEnd);
+      if (i === steps) {
+        const labelPosition = tickEnd.clone();
+        labelPosition[tickAxis] += tickDirection * tickSize * 2.1;
+        labels.push({
+          text: `${i * BOUNDS_TICK_SPACING_NM} nm`,
+          position: labelPosition
+        });
+      }
     }
   }
   boundsLine.geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
   boundsLine.geometry.computeBoundingSphere();
+  for (let i = 0; i < axisLabelElements.length; i++) {
+    const label = labels[i];
+    if (label) updateAxisLabelElement(axisLabelElements[i], label.text, label.position);
+    else {
+      axisLabelElements[i].visible = false;
+      axisLabelElements[i].element.hidden = true;
+    }
+  }
 }
 
-function fitCameraToCloud(geometry) {
-  if (!geometry || hasFitCamera) return;
+function fitCameraToCloud(geometry, force = false) {
+  if (!geometry || (!force && hasFitCamera)) return;
   geometry.computeBoundingSphere();
   const sphere = geometry.boundingSphere;
   if (!sphere) return;
@@ -712,6 +872,7 @@ function fitCameraToCloud(geometry) {
   const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
   const fitFov = Math.max(0.001, Math.min(verticalFov, horizontalFov));
   const distance = (radius * 1.18) / Math.sin(fitFov / 2);
+  fitCameraDistance = distance;
 
   camera.position.copy(DEFAULT_CAMERA_DIRECTION.clone().multiplyScalar(distance));
   camera.up.copy(ORBIT_UP);
@@ -721,7 +882,16 @@ function fitCameraToCloud(geometry) {
   camera.updateProjectionMatrix();
   controls.target.set(0, 0, 0);
   controls.update();
+  syncViewScaleLabel();
+  syncPointSizeForViewScale({ clearManual: true });
   hasFitCamera = true;
+}
+
+function resetCamera() {
+  if (!pointCloud?.geometry) return;
+  fitCameraToCloud(pointCloud.geometry, true);
+  settleFrames = 12;
+  requestRender();
 }
 
 function selectedPointBudget() {
@@ -743,7 +913,7 @@ function scheduleLoad(delay = 250) {
     loadPoints().catch((error) => {
       if (error.name === 'AbortError') return;
       console.error(error);
-      setStatus(error.message);
+      setStatus(error.message, true);
     });
   }, delay);
 }
@@ -755,7 +925,7 @@ async function loadPoints() {
   const methodInfo = currentMethodInfo();
   if (!dataset || !methodInfo || methodInfo.available === false) {
     clearPointCloud();
-    setStatus(methodInfo?.notes || 'Selected method is unavailable.');
+    setStatus(methodInfo?.notes || 'Selected method is unavailable.', true);
     updateMetricsPanel();
     drawSpectrum();
     return;
@@ -768,10 +938,8 @@ async function loadPoints() {
   activePointAbort = controller;
   if (methodInfo.cdf_v2 && methodInfo.frontend_generated) {
     const started = performance.now();
-    setStatus('Unpacking CDF v2 grids locally...');
-    const generated = await generateAllCdfV2Points(methodInfo, budget, API_BASE, (message) => {
-      if (token === loadToken) setStatus(message);
-    });
+    setStatus('');
+    const generated = await generateAllCdfV2Points(methodInfo, budget, API_BASE, () => {});
     if (activePointAbort === controller) activePointAbort = null;
     if (token !== loadToken) return;
     createPointCloud(generated.points, {
@@ -782,8 +950,7 @@ async function loadPoints() {
     frontendGenerationMs = elapsedMs;
     frontendGenerationBackend = generated.timings?.backend || null;
     updateMetricsPanel();
-    const backendLabel = frontendGenerationBackend ? ` via ${frontendGenerationBackend}` : '';
-    setStatus(`Generated ${generated.offsets.length} CDF v2 clouds locally${backendLabel} (${formatNumber(loadedPointCount)} visible-source atoms) in ${elapsedMs.toFixed(0)} ms.`);
+    setStatus('');
     updateBudgetNotice();
     return;
   }
@@ -794,10 +961,7 @@ async function loadPoints() {
     url.searchParams.set('variant', selected.variantId);
   }
 
-  const selectedLabel = dom.method.selectedOptions[0]?.textContent || METHOD_OPTIONS.find((x) => x.id === method)?.label || method;
-  const fullLabel = method === 'full' || methodInfo.raw_range ? ` all ${formatNumber(budget)}` : '';
-  setStatus(`Loading${fullLabel} ${selectedLabel} points...`);
-  const started = performance.now();
+  setStatus('');
   const response = await fetch(url, { signal: controller.signal });
   if (!response.ok) {
     const text = await response.text();
@@ -807,8 +971,7 @@ async function loadPoints() {
   if (activePointAbort === controller) activePointAbort = null;
   if (token !== loadToken) return;
   createPointCloud(new Float32Array(buffer));
-  const elapsed = (performance.now() - started) / 1000;
-  setStatus(`Loaded ${formatNumber(loadedPointCount)} atoms in ${elapsed.toFixed(2)} s.`);
+  setStatus('');
   updateBudgetNotice();
 }
 
@@ -820,8 +983,7 @@ function updateBudgetNotice() {
     return;
   }
   if (loadedPointCount < dataset.atom_count) {
-    const method = selectedMethod().base === 'full' || currentMethodInfo()?.raw_range ? 'raw POS sample' : 'representative/reconstructed set';
-    dom.notice.textContent = `Showing ${formatNumber(loadedPointCount)} ${method} atoms from ${formatNumber(dataset.atom_count)} source atoms. Increase render budget for more points.`;
+    dom.notice.textContent = `Only showing ${formatNumber(loadedPointCount)} representative atoms of ${formatNumber(dataset.atom_count)} total.`;
     dom.notice.classList.add('visible');
   } else {
     dom.notice.classList.remove('visible');
@@ -882,6 +1044,27 @@ function updateMetricsPanel() {
   }
 }
 
+function syncMetricsVisibility() {
+  dom.metrics.hidden = !metricsExpanded;
+  dom.metricsToggle.setAttribute('aria-expanded', String(metricsExpanded));
+  dom.metricsToggle.classList.toggle('expanded', metricsExpanded);
+}
+
+function syncPaneVisibility() {
+  dom.app.classList.toggle('pane-collapsed', paneCollapsed);
+  dom.paneToggle.textContent = paneCollapsed ? '>' : '<';
+  dom.paneToggle.title = paneCollapsed ? 'Show controls' : 'Hide controls';
+  dom.paneToggle.setAttribute('aria-label', paneCollapsed ? 'Show controls' : 'Hide controls');
+  dom.paneToggle.setAttribute('aria-expanded', String(!paneCollapsed));
+  dom.panelContent.inert = paneCollapsed;
+  dom.panelContent.setAttribute('aria-hidden', String(paneCollapsed));
+  requestAnimationFrame(() => {
+    resizeRenderer();
+    drawSpectrum();
+    requestRender();
+  });
+}
+
 function resizeSpectrumCanvas() {
   const rect = dom.spectrum.getBoundingClientRect();
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -903,6 +1086,92 @@ function xToMass(x, plot, minMass, maxMass) {
   return minMass + Math.max(0, Math.min(1, t)) * (maxMass - minMass);
 }
 
+function fillSpectrumArea(ctx, values, plot, scaleCount, color) {
+  if (!values?.length) return;
+  const baseline = plot.top + plot.height;
+  const binWidth = plot.width / values.length;
+  ctx.beginPath();
+  ctx.moveTo(plot.left, baseline);
+  for (let i = 0; i < values.length; i++) {
+    const x = plot.left + (i + 0.5) * binWidth;
+    const y = baseline - scaleCount(values[i]) * plot.height;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(plot.left + plot.width, baseline);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+function formatSpectrumTick(value) {
+  const abs = Math.abs(value);
+  if (abs >= 1_000_000) return `${(value / 1_000_000).toFixed(abs >= 10_000_000 ? 0 : 1)}M`;
+  if (abs >= 1_000) return `${(value / 1_000).toFixed(abs >= 10_000 ? 0 : 1)}K`;
+  if (abs >= 10) return value.toFixed(0);
+  return value.toFixed(1);
+}
+
+function drawSpectrumTicks(ctx, plot, dpr, minMass, maxMass, maxCount, logMax, useLog) {
+  ctx.save();
+  ctx.font = `${10 * dpr}px ui-sans-serif, system-ui`;
+  ctx.fillStyle = '#8f9892';
+  ctx.strokeStyle = 'rgba(143, 152, 146, 0.32)';
+  ctx.lineWidth = 1 * dpr;
+
+  const xTicks = 5;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  for (let i = 0; i < xTicks; i++) {
+    const t = i / (xTicks - 1);
+    const x = plot.left + t * plot.width;
+    const mass = minMass + t * (maxMass - minMass);
+    ctx.beginPath();
+    ctx.moveTo(x, plot.top + plot.height);
+    ctx.lineTo(x, plot.top + plot.height + 4 * dpr);
+    ctx.stroke();
+    ctx.fillText(formatSpectrumTick(mass), x, plot.top + plot.height + 7 * dpr);
+  }
+
+  const yTicks = [0.25, 0.5, 0.75, 1.0];
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  for (const t of yTicks) {
+    const y = plot.top + plot.height - t * plot.height;
+    const count = useLog ? Math.pow(10, logMax * t) - 1 : maxCount * t;
+    ctx.beginPath();
+    ctx.moveTo(plot.left - 4 * dpr, y);
+    ctx.lineTo(plot.left, y);
+    ctx.stroke();
+    ctx.fillText(formatSpectrumTick(count), plot.left - 7 * dpr, y);
+  }
+  ctx.restore();
+}
+
+function drawSpectrumLegend(ctx, plot, dpr, hasGenerated) {
+  if (!hasGenerated) return;
+  ctx.save();
+  ctx.font = `${11 * dpr}px ui-sans-serif, system-ui`;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  const items = [
+    { label: 'raw', color: 'rgba(225, 230, 226, 0.72)' },
+    { label: 'generated', color: '#e5b45a' }
+  ];
+  const square = 8 * dpr;
+  const rowHeight = 15 * dpr;
+  const labelWidth = Math.max(...items.map((item) => ctx.measureText(item.label).width));
+  const x = plot.left + plot.width - labelWidth - square - 18 * dpr;
+  let y = plot.top + 12 * dpr;
+  for (const item of items) {
+    ctx.fillStyle = item.color;
+    ctx.fillRect(x, y - square / 2, square, square);
+    ctx.fillStyle = '#dce1dd';
+    ctx.fillText(item.label, x + square + 6 * dpr, y);
+    y += rowHeight;
+  }
+  ctx.restore();
+}
+
 function drawSpectrum() {
   const dataset = currentDataset();
   const { width, height, dpr } = resizeSpectrumCanvas();
@@ -917,10 +1186,10 @@ function drawSpectrum() {
   const overlay = isCdfMethod() ? generatedSpectrumCounts : null;
   const useLog = dom.spectrumScale?.value !== 'linear';
   const plot = {
-    left: 42 * dpr,
+    left: 52 * dpr,
     top: 10 * dpr,
-    width: width - 54 * dpr,
-    height: height - 34 * dpr
+    width: width - 64 * dpr,
+    height: height - 38 * dpr
   };
   const minMass = edges[0];
   const maxMass = edges[edges.length - 1];
@@ -935,55 +1204,34 @@ function drawSpectrum() {
   ctx.lineWidth = 1 * dpr;
   ctx.strokeRect(plot.left, plot.top, plot.width, plot.height);
 
-  const binWidth = plot.width / counts.length;
-  ctx.fillStyle = 'rgba(225, 230, 226, 0.58)';
-  for (let i = 0; i < counts.length; i++) {
-    const h = scaleCount(counts[i]) * plot.height;
-    const x = plot.left + i * binWidth;
-    ctx.fillRect(x, plot.top + plot.height - h, Math.max(1, binWidth), h);
-  }
+  fillSpectrumArea(ctx, counts, plot, scaleCount, 'rgba(225, 230, 226, 0.54)');
 
   if (overlay && overlay.length === counts.length) {
+    fillSpectrumArea(ctx, overlay, plot, scaleCount, 'rgba(229, 180, 90, 0.42)');
+  }
+
+  drawSpectrumTicks(ctx, plot, dpr, minMass, maxMass, maxCount, logMax, useLog);
+  drawSpectrumLegend(ctx, plot, dpr, overlay && overlay.length === counts.length);
+
+  if (massRangeActive) {
+    const x1 = massToX(massMin, plot, minMass, maxMass);
+    const x2 = massToX(massMax, plot, minMass, maxMass);
+    ctx.fillStyle = 'rgba(89, 186, 169, 0.16)';
+    ctx.fillRect(x1, plot.top, x2 - x1, plot.height);
+    ctx.strokeStyle = '#59baa9';
+    ctx.lineWidth = 2 * dpr;
     ctx.beginPath();
-    ctx.strokeStyle = '#e5b45a';
-    ctx.lineWidth = 1.4 * dpr;
-    for (let i = 0; i < overlay.length; i++) {
-      const x = plot.left + (i + 0.5) * binWidth;
-      const y = plot.top + plot.height - scaleCount(overlay[i]) * plot.height;
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
+    ctx.moveTo(x1, plot.top);
+    ctx.lineTo(x1, plot.top + plot.height);
+    ctx.moveTo(x2, plot.top);
+    ctx.lineTo(x2, plot.top + plot.height);
     ctx.stroke();
   }
 
-  if (overlay && overlay.length === counts.length) {
-    ctx.font = `${11 * dpr}px ui-sans-serif, system-ui`;
-    ctx.textAlign = 'left';
-    ctx.fillStyle = 'rgba(225, 230, 226, 0.72)';
-    ctx.fillText('raw', plot.left + 8 * dpr, plot.top + 14 * dpr);
-    ctx.fillStyle = '#e5b45a';
-    ctx.fillText('generated', plot.left + 42 * dpr, plot.top + 14 * dpr);
-  }
-
-  const x1 = massToX(massMin, plot, minMass, maxMass);
-  const x2 = massToX(massMax, plot, minMass, maxMass);
-  ctx.fillStyle = 'rgba(89, 186, 169, 0.16)';
-  ctx.fillRect(x1, plot.top, x2 - x1, plot.height);
-  ctx.strokeStyle = '#59baa9';
-  ctx.lineWidth = 2 * dpr;
-  ctx.beginPath();
-  ctx.moveTo(x1, plot.top);
-  ctx.lineTo(x1, plot.top + plot.height);
-  ctx.moveTo(x2, plot.top);
-  ctx.lineTo(x2, plot.top + plot.height);
-  ctx.stroke();
+  dom.spectrumHint.textContent = massRangeActive ? `${massMin.toFixed(2)}-${massMax.toFixed(2)} Da` : '';
 
   ctx.fillStyle = '#9ea8a1';
   ctx.font = `${11 * dpr}px ui-sans-serif, system-ui`;
-  ctx.textAlign = 'left';
-  ctx.fillText(minMass.toFixed(1), plot.left, height - 8 * dpr);
-  ctx.textAlign = 'right';
-  ctx.fillText(maxMass.toFixed(1), plot.left + plot.width, height - 8 * dpr);
   ctx.textAlign = 'left';
   ctx.fillText(useLog ? 'log count' : 'linear count', 8 * dpr, plot.top + 10 * dpr);
 }
@@ -992,18 +1240,18 @@ function setupSpectrumDrag() {
   let drag = null;
   const handleRadius = 9;
 
-  dom.spectrum.addEventListener('pointerdown', (event) => {
+  const contextForEvent = (event) => {
     const dataset = currentDataset();
-    if (!dataset) return;
+    if (!dataset) return null;
     const { dpr } = resizeSpectrumCanvas();
     const rect = dom.spectrum.getBoundingClientRect();
     const x = (event.clientX - rect.left) * dpr;
     const edges = dataset.spectrum.edges;
     const plot = {
-      left: 42 * dpr,
+      left: 52 * dpr,
       top: 10 * dpr,
-      width: dom.spectrum.width - 54 * dpr,
-      height: dom.spectrum.height - 34 * dpr
+      width: dom.spectrum.width - 64 * dpr,
+      height: dom.spectrum.height - 38 * dpr
     };
     const minMass = edges[0];
     const maxMass = edges[edges.length - 1];
@@ -1011,27 +1259,65 @@ function setupSpectrumDrag() {
     const maxX = massToX(massMax, plot, minMass, maxMass);
     const mass = xToMass(x, plot, minMass, maxMass);
     let mode = 'new';
-    if (Math.abs(x - minX) < handleRadius * dpr) mode = 'min';
-    else if (Math.abs(x - maxX) < handleRadius * dpr) mode = 'max';
-    else if (x > minX && x < maxX) mode = 'range';
+    if (massRangeActive) {
+      const borderTolerance = 2 * dpr;
+      const leftEdge = Math.abs(x - minX) <= borderTolerance || (x < minX && minX - x <= handleRadius * dpr);
+      const rightEdge = Math.abs(x - maxX) <= borderTolerance || (x > maxX && x - maxX <= handleRadius * dpr);
+      if (leftEdge) mode = 'min';
+      else if (rightEdge) mode = 'max';
+      else if (x > minX && x < maxX) mode = 'range';
+    }
+    return { dpr, x, mass, mode, plot, minMass, maxMass };
+  };
+
+  const syncSpectrumCursor = (event) => {
+    const context = contextForEvent(event);
+    if (!context || !massRangeActive) {
+      dom.spectrum.style.cursor = 'crosshair';
+      return;
+    }
+    if (context.mode === 'min' || context.mode === 'max') {
+      dom.spectrum.style.cursor = 'col-resize';
+    } else if (context.mode === 'range') {
+      dom.spectrum.style.cursor = 'move';
+    } else {
+      dom.spectrum.style.cursor = 'crosshair';
+    }
+  };
+
+  dom.spectrum.addEventListener('pointerdown', (event) => {
+    const context = contextForEvent(event);
+    if (!context) return;
+    if (context.mode === 'new') {
+      massRangeActive = true;
+      massMin = context.mass;
+      massMax = context.mass;
+      syncMassInputs();
+    }
     drag = {
-      mode,
-      startMass: mass,
+      mode: context.mode,
+      startMass: context.mass,
       startMin: massMin,
       startMax: massMax,
-      plot,
-      minMass,
-      maxMass
+      plot: context.plot,
+      minMass: context.minMass,
+      maxMass: context.maxMass,
+      moved: false
     };
+    syncSpectrumCursor(event);
     dom.spectrum.setPointerCapture(event.pointerId);
   });
 
   dom.spectrum.addEventListener('pointermove', (event) => {
-    if (!drag) return;
+    if (!drag) {
+      syncSpectrumCursor(event);
+      return;
+    }
     const rect = dom.spectrum.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const x = (event.clientX - rect.left) * dpr;
     const mass = xToMass(x, drag.plot, drag.minMass, drag.maxMass);
+    drag.moved = true;
     if (drag.mode === 'min') {
       massMin = Math.min(mass, massMax);
     } else if (drag.mode === 'max') {
@@ -1057,25 +1343,47 @@ function setupSpectrumDrag() {
     }
     syncMassInputs();
     updateMassFilter();
+    syncSpectrumCursor(event);
   });
 
   const end = (event) => {
     if (!drag) return;
+    const endedDrag = drag;
     drag = null;
+    const minWidth = Math.max((endedDrag.maxMass - endedDrag.minMass) * 0.0005, 0.001);
+    if (endedDrag.mode === 'new' && (!endedDrag.moved || Math.abs(massMax - massMin) < minWidth)) {
+      massRangeActive = false;
+      massMin = endedDrag.minMass;
+      massMax = endedDrag.maxMass;
+      syncMassInputs();
+      updateMassFilter();
+    }
     try {
       dom.spectrum.releasePointerCapture(event.pointerId);
     } catch {
       // Pointer capture may already be released by the browser.
     }
+    syncSpectrumCursor(event);
   };
   dom.spectrum.addEventListener('pointerup', end);
   dom.spectrum.addEventListener('pointercancel', end);
+  dom.spectrum.addEventListener('pointerleave', () => {
+    if (!drag) dom.spectrum.style.cursor = 'crosshair';
+  });
 }
 
 function setupEvents() {
+  dom.paneToggle.addEventListener('click', () => {
+    paneCollapsed = !paneCollapsed;
+    syncPaneVisibility();
+  });
+
   dom.dataset.addEventListener('change', () => {
     hasFitCamera = false;
-    populateMethods();
+    fitCameraDistance = null;
+    syncViewScaleLabel();
+    syncPointSizeForViewScale({ clearManual: true });
+    syncCompressedToggle();
     populateLevels();
     setMassInputsFromDataset();
     syncBinSlider();
@@ -1086,7 +1394,7 @@ function setupEvents() {
     scheduleLoad(0);
   });
 
-  dom.method.addEventListener('change', () => {
+  dom.compressed.addEventListener('change', () => {
     populateLevels();
     syncBudgetControls();
     setDefaultBudgetForSelectedMethod();
@@ -1096,14 +1404,28 @@ function setupEvents() {
   });
 
   dom.pointSize.addEventListener('input', () => {
+    manualPointSize = clampPointSize(dom.pointSize.value);
     syncPointSizeLabel();
     if (pointMaterial) {
-      pointMaterial.uniforms.uPointSize.value = currentPointSize();
-      requestRender();
+      pointMaterial.uniforms.uPointSize.value = manualPointSize;
     }
+    requestRender();
   });
+  dom.pointSize.addEventListener('pointerdown', () => {
+    pointSizeDragging = true;
+    manualPointSize = clampPointSize(dom.pointSize.value);
+  });
+  const finishPointSizeDrag = () => {
+    pointSizeDragging = false;
+  };
+  dom.pointSize.addEventListener('pointerup', finishPointSizeDrag);
+  dom.pointSize.addEventListener('pointercancel', finishPointSizeDrag);
 
   dom.opacity.addEventListener('input', updateOpacity);
+  dom.metricsToggle.addEventListener('click', () => {
+    metricsExpanded = !metricsExpanded;
+    syncMetricsVisibility();
+  });
 
   dom.budget.addEventListener('change', () => {
     const budget = selectedPointBudget();
@@ -1120,7 +1442,6 @@ function setupEvents() {
     const selected = selectedMethod();
     if (!currentCdfRanges().length) return;
     if (selected.variantId) {
-      dom.method.value = selected.base;
       populateLevels();
       syncBudgetControls();
       scheduleLoad(0);
@@ -1128,7 +1449,6 @@ function setupEvents() {
     setMassRangeFromCdfBin(Math.floor(Number(dom.binSlider.value) || 1) - 1);
   });
 
-  dom.colorMode.addEventListener('change', updateColorMode);
   dom.spectrumScale.addEventListener('change', drawSpectrum);
   dom.massMin.addEventListener('change', applyMassFromInputs);
   dom.massMax.addEventListener('change', applyMassFromInputs);
@@ -1141,13 +1461,17 @@ async function main() {
   try {
     await loadManifest();
     if (!manifest.datasets?.length) {
-      setStatus('No datasets in manifest. Run preprocess.py.');
+      setStatus('No datasets in manifest. Run preprocess.py.', true);
       return;
     }
     populateDatasets();
-    populateMethods();
+    dom.compressed.checked = true;
+    syncCompressedToggle();
     populateLevels();
-    syncPointSizeLabel();
+    setDefaultControlValues();
+    syncViewScaleLabel();
+    syncMetricsVisibility();
+    syncPaneVisibility();
     setMassInputsFromDataset();
     syncBinSlider();
     syncBudgetControls();
@@ -1157,7 +1481,7 @@ async function main() {
     await loadPoints();
   } catch (error) {
     console.error(error);
-    setStatus(error.message);
+    setStatus(error.message, true);
   }
 }
 

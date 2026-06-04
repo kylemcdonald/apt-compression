@@ -1,4 +1,7 @@
-const WASM_URL = '/cdf_v2_sampler.wasm';
+const WASM_URL = new URL(
+  'cdf_v2_sampler.wasm',
+  new URL(import.meta.env.BASE_URL || '/', window.location.origin)
+).href;
 let wasmPromise = null;
 
 function bytesOf(array) {

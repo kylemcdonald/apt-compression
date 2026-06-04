@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build:wasm": "python3 scripts/build_cdf_v2_wasm.py",
+    "build:pages": "python3 scripts/build_pages_demo.py && VITE_STATIC_DEMO=true VITE_BASE_PATH=/apt-compression/ vite build",
     "build": "vite build",
     "preview": "vite preview"
   },
