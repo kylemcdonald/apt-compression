@@ -15,6 +15,7 @@ dist/
 /docs/
 public/
 site/
+/experiments/lossless12/work/
 
 demo/data/*
 !demo/data/example.cpos

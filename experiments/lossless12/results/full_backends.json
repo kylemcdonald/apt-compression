@@ -1,0 +1,817 @@
+{
+  "generated_at": "2026-07-23T11:23:30.490335+00:00",
+  "stage": "backends",
+  "source": "experiments/lossless12/results/full_axes.json",
+  "files": [
+    {
+      "label": "rangefinder/controls/control_Ck10_steel_felfer_R56_01769.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_Ck10_steel_felfer_R56_01769.pos",
+      "raw_bytes": 88405776,
+      "point_count": 5525361,
+      "quantized_baseline_bytes": 33152210,
+      "quantize_seconds": 0.199972,
+      "marginal_entropy_bits_per_point": 37.236427,
+      "methods": {
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 1.082456,
+          "encoding": {
+            "bytes": 12463039,
+            "bytes_per_point": 2.255606,
+            "ratio_vs_float32_pos": 7.093437,
+            "fraction_of_12bit_baseline": 0.375934
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11012181,
+              "bytes_per_point": 1.993025,
+              "ratio_vs_float32_pos": 8.027999,
+              "fraction_of_12bit_baseline": 0.33217,
+              "seconds": 0.837302
+            },
+            "xz-9e": {
+              "bytes": 11005116,
+              "bytes_per_point": 1.991746,
+              "ratio_vs_float32_pos": 8.033153,
+              "fraction_of_12bit_baseline": 0.331957,
+              "seconds": 1.576762
+            },
+            "brotli-11": {
+              "bytes": 10973434,
+              "bytes_per_point": 1.986012,
+              "ratio_vs_float32_pos": 8.056346,
+              "fraction_of_12bit_baseline": 0.331002,
+              "seconds": 9.850565
+            }
+          }
+        }
+      },
+      "total_seconds": 13.72689
+    },
+    {
+      "label": "rangefinder/controls/control_MoHf_leitner_R21_08680.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_MoHf_leitner_R21_08680.pos",
+      "raw_bytes": 73337088,
+      "point_count": 4583568,
+      "quantized_baseline_bytes": 27501452,
+      "quantize_seconds": 0.182489,
+      "marginal_entropy_bits_per_point": 40.558582,
+      "methods": {
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 1.334643,
+          "encoding": {
+            "bytes": 12256351,
+            "bytes_per_point": 2.673976,
+            "ratio_vs_float32_pos": 5.983599,
+            "fraction_of_12bit_baseline": 0.445662
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11367464,
+              "bytes_per_point": 2.480047,
+              "ratio_vs_float32_pos": 6.451491,
+              "fraction_of_12bit_baseline": 0.413341,
+              "seconds": 0.757965
+            },
+            "xz-9e": {
+              "bytes": 11327044,
+              "bytes_per_point": 2.471229,
+              "ratio_vs_float32_pos": 6.474513,
+              "fraction_of_12bit_baseline": 0.411871,
+              "seconds": 1.515155
+            },
+            "brotli-11": {
+              "bytes": 11327243,
+              "bytes_per_point": 2.471272,
+              "ratio_vs_float32_pos": 6.474399,
+              "fraction_of_12bit_baseline": 0.411878,
+              "seconds": 9.266469
+            }
+          }
+        }
+      },
+      "total_seconds": 13.224848
+    },
+    {
+      "label": "rangefinder/controls/control_ODSsteel_wang_R31_06365.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_ODSsteel_wang_R31_06365.pos",
+      "raw_bytes": 77891232,
+      "point_count": 4868202,
+      "quantized_baseline_bytes": 29209256,
+      "quantize_seconds": 0.20033,
+      "marginal_entropy_bits_per_point": 38.626451,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.402786,
+          "encoding": {
+            "bytes": 11675556,
+            "bytes_per_point": 2.39833,
+            "ratio_vs_float32_pos": 6.671308,
+            "fraction_of_12bit_baseline": 0.399721
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10771964,
+              "bytes_per_point": 2.212719,
+              "ratio_vs_float32_pos": 7.230922,
+              "fraction_of_12bit_baseline": 0.368786,
+              "seconds": 0.655116
+            },
+            "xz-9e": {
+              "bytes": 10765072,
+              "bytes_per_point": 2.211303,
+              "ratio_vs_float32_pos": 7.235551,
+              "fraction_of_12bit_baseline": 0.36855,
+              "seconds": 1.365193
+            },
+            "brotli-11": {
+              "bytes": 10762051,
+              "bytes_per_point": 2.210683,
+              "ratio_vs_float32_pos": 7.237583,
+              "fraction_of_12bit_baseline": 0.368447,
+              "seconds": 8.810773
+            }
+          }
+        }
+      },
+      "total_seconds": 12.608683
+    },
+    {
+      "label": "rangefinder/controls/control_Si_apav_usa_denton_smith.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_Si_apav_usa_denton_smith.pos",
+      "raw_bytes": 15123376,
+      "point_count": 945211,
+      "quantized_baseline_bytes": 5671310,
+      "quantize_seconds": 0.038614,
+      "marginal_entropy_bits_per_point": 37.680295,
+      "methods": {
+        "mass_prefix_10_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.306578,
+          "encoding": {
+            "bytes": 2663574,
+            "bytes_per_point": 2.817968,
+            "ratio_vs_float32_pos": 5.677851,
+            "fraction_of_12bit_baseline": 0.469658
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208102,
+              "bytes_per_point": 2.336094,
+              "ratio_vs_float32_pos": 6.849039,
+              "fraction_of_12bit_baseline": 0.389346,
+              "seconds": 0.115719
+            },
+            "xz-9e": {
+              "bytes": 2199124,
+              "bytes_per_point": 2.326596,
+              "ratio_vs_float32_pos": 6.877,
+              "fraction_of_12bit_baseline": 0.387763,
+              "seconds": 0.332865
+            },
+            "brotli-11": {
+              "bytes": 2188086,
+              "bytes_per_point": 2.314918,
+              "ratio_vs_float32_pos": 6.911692,
+              "fraction_of_12bit_baseline": 0.385817,
+              "seconds": 2.109801
+            }
+          }
+        }
+      },
+      "total_seconds": 2.948186
+    },
+    {
+      "label": "rangefinder/controls/extra/steelHD_5534859_70a59eff-003c-4337-832a-604c260dc623.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/extra/steelHD_5534859_70a59eff-003c-4337-832a-604c260dc623.POS",
+      "raw_bytes": 1952368,
+      "point_count": 122023,
+      "quantized_baseline_bytes": 732182,
+      "quantize_seconds": 0.005266,
+      "marginal_entropy_bits_per_point": 43.531647,
+      "methods": {
+        "mass_prefix_0_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.020211,
+          "encoding": {
+            "bytes": 555516,
+            "bytes_per_point": 4.552552,
+            "ratio_vs_float32_pos": 3.514513,
+            "fraction_of_12bit_baseline": 0.758713
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 425807,
+              "bytes_per_point": 3.489563,
+              "ratio_vs_float32_pos": 4.585101,
+              "fraction_of_12bit_baseline": 0.581559,
+              "seconds": 0.021133
+            },
+            "xz-9e": {
+              "bytes": 422604,
+              "bytes_per_point": 3.463314,
+              "ratio_vs_float32_pos": 4.619852,
+              "fraction_of_12bit_baseline": 0.577184,
+              "seconds": 0.059581
+            },
+            "brotli-11": {
+              "bytes": 418665,
+              "bytes_per_point": 3.431033,
+              "ratio_vs_float32_pos": 4.663318,
+              "fraction_of_12bit_baseline": 0.571805,
+              "seconds": 0.581123
+            }
+          }
+        }
+      },
+      "total_seconds": 0.702421
+    },
+    {
+      "label": "rangefinder/controls/extra/steelHD_5534859_8fe936a9-c8bf-417a-8006-bff810375bc7.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/extra/steelHD_5534859_8fe936a9-c8bf-417a-8006-bff810375bc7.POS",
+      "raw_bytes": 3650816,
+      "point_count": 228176,
+      "quantized_baseline_bytes": 1369100,
+      "quantize_seconds": 0.008636,
+      "marginal_entropy_bits_per_point": 43.927346,
+      "methods": {
+        "mass_prefix_2_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.052346,
+          "encoding": {
+            "bytes": 943986,
+            "bytes_per_point": 4.137096,
+            "ratio_vs_float32_pos": 3.867447,
+            "fraction_of_12bit_baseline": 0.689494
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 746829,
+              "bytes_per_point": 3.273039,
+              "ratio_vs_float32_pos": 4.888423,
+              "fraction_of_12bit_baseline": 0.545489,
+              "seconds": 0.042079
+            },
+            "xz-9e": {
+              "bytes": 735756,
+              "bytes_per_point": 3.224511,
+              "ratio_vs_float32_pos": 4.961993,
+              "fraction_of_12bit_baseline": 0.537401,
+              "seconds": 0.108111
+            },
+            "brotli-11": {
+              "bytes": 726725,
+              "bytes_per_point": 3.184932,
+              "ratio_vs_float32_pos": 5.023655,
+              "fraction_of_12bit_baseline": 0.530805,
+              "seconds": 0.85186
+            }
+          }
+        }
+      },
+      "total_seconds": 1.08392
+    },
+    {
+      "label": "rangefinder/controls/extra/steelHD_5534859_aa137df8-ce0e-481e-93e6-a22cb5a34882.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/extra/steelHD_5534859_aa137df8-ce0e-481e-93e6-a22cb5a34882.POS",
+      "raw_bytes": 2273952,
+      "point_count": 142122,
+      "quantized_baseline_bytes": 852776,
+      "quantize_seconds": 0.005981,
+      "marginal_entropy_bits_per_point": 40.114066,
+      "methods": {
+        "mass_prefix_9_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.056706,
+          "encoding": {
+            "bytes": 542764,
+            "bytes_per_point": 3.819001,
+            "ratio_vs_float32_pos": 4.189578,
+            "fraction_of_12bit_baseline": 0.636467
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 448821,
+              "bytes_per_point": 3.157998,
+              "ratio_vs_float32_pos": 5.066501,
+              "fraction_of_12bit_baseline": 0.526306,
+              "seconds": 0.020636
+            },
+            "xz-9e": {
+              "bytes": 444868,
+              "bytes_per_point": 3.130184,
+              "ratio_vs_float32_pos": 5.111521,
+              "fraction_of_12bit_baseline": 0.52167,
+              "seconds": 0.058896
+            },
+            "brotli-11": {
+              "bytes": 442065,
+              "bytes_per_point": 3.110461,
+              "ratio_vs_float32_pos": 5.143931,
+              "fraction_of_12bit_baseline": 0.518383,
+              "seconds": 0.671978
+            }
+          }
+        }
+      },
+      "total_seconds": 0.830231
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_al_mg_si.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_al_mg_si.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.059391,
+      "marginal_entropy_bits_per_point": 38.362472,
+      "methods": {
+        "mass_prefix_9_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.375257,
+          "encoding": {
+            "bytes": 4155436,
+            "bytes_per_point": 2.770291,
+            "ratio_vs_float32_pos": 5.775567,
+            "fraction_of_12bit_baseline": 0.461713
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3629104,
+              "bytes_per_point": 2.419403,
+              "ratio_vs_float32_pos": 6.613203,
+              "fraction_of_12bit_baseline": 0.403232,
+              "seconds": 0.166927
+            },
+            "xz-9e": {
+              "bytes": 3630384,
+              "bytes_per_point": 2.420256,
+              "ratio_vs_float32_pos": 6.610871,
+              "fraction_of_12bit_baseline": 0.403374,
+              "seconds": 0.496552
+            },
+            "brotli-11": {
+              "bytes": 3616526,
+              "bytes_per_point": 2.411017,
+              "ratio_vs_float32_pos": 6.636203,
+              "fraction_of_12bit_baseline": 0.401834,
+              "seconds": 3.741197
+            }
+          }
+        }
+      },
+      "total_seconds": 4.899818
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_si_o.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_si_o.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.063065,
+      "marginal_entropy_bits_per_point": 39.985554,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.525038,
+          "encoding": {
+            "bytes": 4132385,
+            "bytes_per_point": 2.754923,
+            "ratio_vs_float32_pos": 5.807784,
+            "fraction_of_12bit_baseline": 0.459152
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3953953,
+              "bytes_per_point": 2.635969,
+              "ratio_vs_float32_pos": 6.069875,
+              "fraction_of_12bit_baseline": 0.439326,
+              "seconds": 0.137241
+            },
+            "xz-9e": {
+              "bytes": 3946924,
+              "bytes_per_point": 2.631283,
+              "ratio_vs_float32_pos": 6.080685,
+              "fraction_of_12bit_baseline": 0.438545,
+              "seconds": 0.371322
+            },
+            "brotli-11": {
+              "bytes": 3928029,
+              "bytes_per_point": 2.618686,
+              "ratio_vs_float32_pos": 6.109935,
+              "fraction_of_12bit_baseline": 0.436446,
+              "seconds": 3.882493
+            }
+          }
+        }
+      },
+      "total_seconds": 5.041121
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_zn_cu_al.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_zn_cu_al.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.061562,
+      "marginal_entropy_bits_per_point": 41.242039,
+      "methods": {
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.503188,
+          "encoding": {
+            "bytes": 4343186,
+            "bytes_per_point": 2.895457,
+            "ratio_vs_float32_pos": 5.525897,
+            "fraction_of_12bit_baseline": 0.482574
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4196628,
+              "bytes_per_point": 2.797752,
+              "ratio_vs_float32_pos": 5.718877,
+              "fraction_of_12bit_baseline": 0.46629,
+              "seconds": 0.15127
+            },
+            "xz-9e": {
+              "bytes": 4189068,
+              "bytes_per_point": 2.792712,
+              "ratio_vs_float32_pos": 5.729198,
+              "fraction_of_12bit_baseline": 0.46545,
+              "seconds": 0.418299
+            },
+            "brotli-11": {
+              "bytes": 4168048,
+              "bytes_per_point": 2.778699,
+              "ratio_vs_float32_pos": 5.758091,
+              "fraction_of_12bit_baseline": 0.463114,
+              "seconds": 4.130726
+            }
+          }
+        }
+      },
+      "total_seconds": 5.324774
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_zn_layer_on_al.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_zn_layer_on_al.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.062978,
+      "marginal_entropy_bits_per_point": 40.160422,
+      "methods": {
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.512172,
+          "encoding": {
+            "bytes": 4168780,
+            "bytes_per_point": 2.779187,
+            "ratio_vs_float32_pos": 5.75708,
+            "fraction_of_12bit_baseline": 0.463196
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3869968,
+              "bytes_per_point": 2.579979,
+              "ratio_vs_float32_pos": 6.201602,
+              "fraction_of_12bit_baseline": 0.429994,
+              "seconds": 0.162675
+            },
+            "xz-9e": {
+              "bytes": 3851880,
+              "bytes_per_point": 2.56792,
+              "ratio_vs_float32_pos": 6.230724,
+              "fraction_of_12bit_baseline": 0.427985,
+              "seconds": 0.397555
+            },
+            "brotli-11": {
+              "bytes": 3827099,
+              "bytes_per_point": 2.551399,
+              "ratio_vs_float32_pos": 6.271069,
+              "fraction_of_12bit_baseline": 0.425231,
+              "seconds": 3.277129
+            }
+          }
+        }
+      },
+      "total_seconds": 4.472779
+    },
+    {
+      "label": "apt-analysis/data/12d8ba7d-b728-4362-a879-558857c7b4d2.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/12d8ba7d-b728-4362-a879-558857c7b4d2.POS",
+      "raw_bytes": 335186368,
+      "point_count": 20949148,
+      "quantized_baseline_bytes": 125694932,
+      "quantize_seconds": 0.879856,
+      "marginal_entropy_bits_per_point": 42.351786,
+      "methods": {
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 5.727047,
+          "encoding": {
+            "bytes": 54969050,
+            "bytes_per_point": 2.623928,
+            "ratio_vs_float32_pos": 6.097729,
+            "fraction_of_12bit_baseline": 0.437321
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50225009,
+              "bytes_per_point": 2.397473,
+              "ratio_vs_float32_pos": 6.673695,
+              "fraction_of_12bit_baseline": 0.399579,
+              "seconds": 3.01229
+            },
+            "xz-9e": {
+              "bytes": 50103904,
+              "bytes_per_point": 2.391692,
+              "ratio_vs_float32_pos": 6.689825,
+              "fraction_of_12bit_baseline": 0.398615,
+              "seconds": 11.461904
+            },
+            "brotli-11": {
+              "bytes": 50240298,
+              "bytes_per_point": 2.398202,
+              "ratio_vs_float32_pos": 6.671664,
+              "fraction_of_12bit_baseline": 0.3997,
+              "seconds": 45.519667
+            }
+          }
+        }
+      },
+      "total_seconds": 67.274006
+    },
+    {
+      "label": "apt-analysis/data/2166bb75-7ff6-4c85-bf2d-564431f0b089.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/2166bb75-7ff6-4c85-bf2d-564431f0b089.POS",
+      "raw_bytes": 476961088,
+      "point_count": 29810068,
+      "quantized_baseline_bytes": 178860452,
+      "quantize_seconds": 1.287063,
+      "marginal_entropy_bits_per_point": 36.489527,
+      "methods": {
+        "mass_prefix_12_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 8.615232,
+          "encoding": {
+            "bytes": 53285914,
+            "bytes_per_point": 1.787514,
+            "ratio_vs_float32_pos": 8.950979,
+            "fraction_of_12bit_baseline": 0.297919
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 46988031,
+              "bytes_per_point": 1.576247,
+              "ratio_vs_float32_pos": 10.150693,
+              "fraction_of_12bit_baseline": 0.262708,
+              "seconds": 2.920205
+            },
+            "xz-9e": {
+              "bytes": 47004028,
+              "bytes_per_point": 1.576784,
+              "ratio_vs_float32_pos": 10.147239,
+              "fraction_of_12bit_baseline": 0.262797,
+              "seconds": 10.27794
+            },
+            "brotli-11": {
+              "bytes": 46903591,
+              "bytes_per_point": 1.573414,
+              "ratio_vs_float32_pos": 10.168967,
+              "fraction_of_12bit_baseline": 0.262236,
+              "seconds": 49.805071
+            }
+          }
+        }
+      },
+      "total_seconds": 73.912864
+    },
+    {
+      "label": "apt-analysis/data/499e563f-0c0c-4c6f-bc08-b8e76f59c31b.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/499e563f-0c0c-4c6f-bc08-b8e76f59c31b.POS",
+      "raw_bytes": 91540736,
+      "point_count": 5721296,
+      "quantized_baseline_bytes": 34327820,
+      "quantize_seconds": 0.238472,
+      "marginal_entropy_bits_per_point": 41.565562,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.648242,
+          "encoding": {
+            "bytes": 15939918,
+            "bytes_per_point": 2.786068,
+            "ratio_vs_float32_pos": 5.742861,
+            "fraction_of_12bit_baseline": 0.464344
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14302889,
+              "bytes_per_point": 2.499939,
+              "ratio_vs_float32_pos": 6.400157,
+              "fraction_of_12bit_baseline": 0.416656,
+              "seconds": 1.186016
+            },
+            "xz-9e": {
+              "bytes": 14235256,
+              "bytes_per_point": 2.488117,
+              "ratio_vs_float32_pos": 6.430565,
+              "fraction_of_12bit_baseline": 0.414686,
+              "seconds": 2.223736
+            },
+            "brotli-11": {
+              "bytes": 14275779,
+              "bytes_per_point": 2.4952,
+              "ratio_vs_float32_pos": 6.412311,
+              "fraction_of_12bit_baseline": 0.415866,
+              "seconds": 12.668685
+            }
+          }
+        }
+      },
+      "total_seconds": 18.166214
+    },
+    {
+      "label": "apt-analysis/data/86a2fa56-8593-4856-bd42-b73716197abf.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/86a2fa56-8593-4856-bd42-b73716197abf.POS",
+      "raw_bytes": 138520880,
+      "point_count": 8657555,
+      "quantized_baseline_bytes": 51945374,
+      "quantize_seconds": 0.360691,
+      "marginal_entropy_bits_per_point": 37.26891,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 2.476045,
+          "encoding": {
+            "bytes": 18865194,
+            "bytes_per_point": 2.179044,
+            "ratio_vs_float32_pos": 7.342669,
+            "fraction_of_12bit_baseline": 0.363174
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16452950,
+              "bytes_per_point": 1.900415,
+              "ratio_vs_float32_pos": 8.419212,
+              "fraction_of_12bit_baseline": 0.316736,
+              "seconds": 1.520978
+            },
+            "xz-9e": {
+              "bytes": 16424836,
+              "bytes_per_point": 1.897168,
+              "ratio_vs_float32_pos": 8.433623,
+              "fraction_of_12bit_baseline": 0.316194,
+              "seconds": 2.670551
+            },
+            "brotli-11": {
+              "bytes": 16360391,
+              "bytes_per_point": 1.889724,
+              "ratio_vs_float32_pos": 8.466844,
+              "fraction_of_12bit_baseline": 0.314954,
+              "seconds": 16.786648
+            }
+          }
+        }
+      },
+      "total_seconds": 24.110973
+    },
+    {
+      "label": "apt-analysis/data/Sample 1- POS file.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/Sample 1- POS file.POS",
+      "raw_bytes": 64213888,
+      "point_count": 4013368,
+      "quantized_baseline_bytes": 24080252,
+      "quantize_seconds": 0.166348,
+      "marginal_entropy_bits_per_point": 43.093098,
+      "methods": {
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 1.17428,
+          "encoding": {
+            "bytes": 12042413,
+            "bytes_per_point": 3.000575,
+            "ratio_vs_float32_pos": 5.332311,
+            "fraction_of_12bit_baseline": 0.500095
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11297072,
+              "bytes_per_point": 2.814861,
+              "ratio_vs_float32_pos": 5.684118,
+              "fraction_of_12bit_baseline": 0.469143,
+              "seconds": 0.786687
+            },
+            "xz-9e": {
+              "bytes": 11261260,
+              "bytes_per_point": 2.805938,
+              "ratio_vs_float32_pos": 5.702194,
+              "fraction_of_12bit_baseline": 0.467655,
+              "seconds": 1.432717
+            },
+            "brotli-11": {
+              "bytes": 11275060,
+              "bytes_per_point": 2.809376,
+              "ratio_vs_float32_pos": 5.695215,
+              "fraction_of_12bit_baseline": 0.468228,
+              "seconds": 8.597696
+            }
+          }
+        }
+      },
+      "total_seconds": 12.297457
+    },
+    {
+      "label": "apt-analysis/data/Sample 3 -POS file.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/Sample 3 -POS file.POS",
+      "raw_bytes": 287185824,
+      "point_count": 17949114,
+      "quantized_baseline_bytes": 107694728,
+      "quantize_seconds": 0.692763,
+      "marginal_entropy_bits_per_point": 42.804567,
+      "methods": {
+        "mass_prefix_10_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 4.931819,
+          "encoding": {
+            "bytes": 49045951,
+            "bytes_per_point": 2.7325,
+            "ratio_vs_float32_pos": 5.855444,
+            "fraction_of_12bit_baseline": 0.455416
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44388206,
+              "bytes_per_point": 2.473003,
+              "ratio_vs_float32_pos": 6.469868,
+              "fraction_of_12bit_baseline": 0.412167,
+              "seconds": 2.928229
+            },
+            "xz-9e": {
+              "bytes": 44264480,
+              "bytes_per_point": 2.466109,
+              "ratio_vs_float32_pos": 6.487952,
+              "fraction_of_12bit_baseline": 0.411018,
+              "seconds": 9.97813
+            },
+            "brotli-11": {
+              "bytes": 44263650,
+              "bytes_per_point": 2.466063,
+              "ratio_vs_float32_pos": 6.488074,
+              "fraction_of_12bit_baseline": 0.41101,
+              "seconds": 51.522793
+            }
+          }
+        }
+      },
+      "total_seconds": 70.630685
+    },
+    {
+      "label": "apt-analysis/data/e14f067b-4c6f-4c34-8e25-ac1e4a217c57.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/e14f067b-4c6f-4c34-8e25-ac1e4a217c57.POS",
+      "raw_bytes": 134429648,
+      "point_count": 8401853,
+      "quantized_baseline_bytes": 50411162,
+      "quantize_seconds": 0.357228,
+      "marginal_entropy_bits_per_point": 36.353277,
+      "methods": {
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 2.407511,
+          "encoding": {
+            "bytes": 17848522,
+            "bytes_per_point": 2.124355,
+            "ratio_vs_float32_pos": 7.531696,
+            "fraction_of_12bit_baseline": 0.354059
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15052266,
+              "bytes_per_point": 1.791541,
+              "ratio_vs_float32_pos": 8.930858,
+              "fraction_of_12bit_baseline": 0.29859,
+              "seconds": 1.218099
+            },
+            "xz-9e": {
+              "bytes": 15034024,
+              "bytes_per_point": 1.78937,
+              "ratio_vs_float32_pos": 8.941694,
+              "fraction_of_12bit_baseline": 0.298228,
+              "seconds": 2.240866
+            },
+            "brotli-11": {
+              "bytes": 15039581,
+              "bytes_per_point": 1.790031,
+              "ratio_vs_float32_pos": 8.938391,
+              "fraction_of_12bit_baseline": 0.298338,
+              "seconds": 13.622649
+            }
+          }
+        }
+      },
+      "total_seconds": 20.137637
+    }
+  ]
+}

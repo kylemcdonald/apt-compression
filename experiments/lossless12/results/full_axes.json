@@ -1,0 +1,2275 @@
+{
+  "generated_at": "2026-07-23T11:17:52.476476+00:00",
+  "stage": "axes",
+  "source": "experiments/lossless12/results/full_sweep.json",
+  "files": [
+    {
+      "label": "rangefinder/controls/control_Ck10_steel_felfer_R56_01769.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_Ck10_steel_felfer_R56_01769.pos",
+      "raw_bytes": 88405776,
+      "point_count": 5525361,
+      "quantized_baseline_bytes": 33152210,
+      "quantize_seconds": 0.201388,
+      "marginal_entropy_bits_per_point": 37.236427,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.085261,
+          "encoding": {
+            "bytes": 12462751,
+            "bytes_per_point": 2.255554,
+            "ratio_vs_float32_pos": 7.0936,
+            "fraction_of_12bit_baseline": 0.375925
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11014470,
+              "bytes_per_point": 1.993439,
+              "ratio_vs_float32_pos": 8.02633,
+              "fraction_of_12bit_baseline": 0.332239,
+              "seconds": 0.805259
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 1.467454,
+          "encoding": {
+            "bytes": 12463039,
+            "bytes_per_point": 2.255606,
+            "ratio_vs_float32_pos": 7.093437,
+            "fraction_of_12bit_baseline": 0.375934
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11012181,
+              "bytes_per_point": 1.993025,
+              "ratio_vs_float32_pos": 8.027999,
+              "fraction_of_12bit_baseline": 0.33217,
+              "seconds": 0.784185
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 1.556517,
+          "encoding": {
+            "bytes": 12447602,
+            "bytes_per_point": 2.252812,
+            "ratio_vs_float32_pos": 7.102234,
+            "fraction_of_12bit_baseline": 0.375468
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11013889,
+              "bytes_per_point": 1.993334,
+              "ratio_vs_float32_pos": 8.026754,
+              "fraction_of_12bit_baseline": 0.332222,
+              "seconds": 0.764818
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 1.593238,
+          "encoding": {
+            "bytes": 12445694,
+            "bytes_per_point": 2.252467,
+            "ratio_vs_float32_pos": 7.103322,
+            "fraction_of_12bit_baseline": 0.375411
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11013837,
+              "bytes_per_point": 1.993324,
+              "ratio_vs_float32_pos": 8.026792,
+              "fraction_of_12bit_baseline": 0.33222,
+              "seconds": 0.800982
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 1.592374,
+          "encoding": {
+            "bytes": 12471738,
+            "bytes_per_point": 2.257181,
+            "ratio_vs_float32_pos": 7.088489,
+            "fraction_of_12bit_baseline": 0.376196
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11014582,
+              "bytes_per_point": 1.993459,
+              "ratio_vs_float32_pos": 8.026249,
+              "fraction_of_12bit_baseline": 0.332243,
+              "seconds": 0.751284
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 1.554182,
+          "encoding": {
+            "bytes": 12471646,
+            "bytes_per_point": 2.257164,
+            "ratio_vs_float32_pos": 7.088541,
+            "fraction_of_12bit_baseline": 0.376194
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11015093,
+              "bytes_per_point": 1.993552,
+              "ratio_vs_float32_pos": 8.025876,
+              "fraction_of_12bit_baseline": 0.332258,
+              "seconds": 0.834186
+            }
+          }
+        }
+      },
+      "total_seconds": 13.987346
+    },
+    {
+      "label": "rangefinder/controls/control_MoHf_leitner_R21_08680.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_MoHf_leitner_R21_08680.pos",
+      "raw_bytes": 73337088,
+      "point_count": 4583568,
+      "quantized_baseline_bytes": 27501452,
+      "quantize_seconds": 0.168983,
+      "marginal_entropy_bits_per_point": 40.558582,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.319313,
+          "encoding": {
+            "bytes": 12255806,
+            "bytes_per_point": 2.673857,
+            "ratio_vs_float32_pos": 5.983865,
+            "fraction_of_12bit_baseline": 0.445642
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11371648,
+              "bytes_per_point": 2.48096,
+              "ratio_vs_float32_pos": 6.449117,
+              "fraction_of_12bit_baseline": 0.413493,
+              "seconds": 0.793173
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 1.312073,
+          "encoding": {
+            "bytes": 12254174,
+            "bytes_per_point": 2.673501,
+            "ratio_vs_float32_pos": 5.984662,
+            "fraction_of_12bit_baseline": 0.445583
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11370792,
+              "bytes_per_point": 2.480773,
+              "ratio_vs_float32_pos": 6.449602,
+              "fraction_of_12bit_baseline": 0.413462,
+              "seconds": 0.805114
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 1.325866,
+          "encoding": {
+            "bytes": 12256351,
+            "bytes_per_point": 2.673976,
+            "ratio_vs_float32_pos": 5.983599,
+            "fraction_of_12bit_baseline": 0.445662
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11367464,
+              "bytes_per_point": 2.480047,
+              "ratio_vs_float32_pos": 6.451491,
+              "fraction_of_12bit_baseline": 0.413341,
+              "seconds": 0.768398
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 1.313212,
+          "encoding": {
+            "bytes": 12255294,
+            "bytes_per_point": 2.673745,
+            "ratio_vs_float32_pos": 5.984115,
+            "fraction_of_12bit_baseline": 0.445624
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11371435,
+              "bytes_per_point": 2.480913,
+              "ratio_vs_float32_pos": 6.449238,
+              "fraction_of_12bit_baseline": 0.413485,
+              "seconds": 0.802497
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 1.320686,
+          "encoding": {
+            "bytes": 12274102,
+            "bytes_per_point": 2.677849,
+            "ratio_vs_float32_pos": 5.974945,
+            "fraction_of_12bit_baseline": 0.446307
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11372566,
+              "bytes_per_point": 2.48116,
+              "ratio_vs_float32_pos": 6.448596,
+              "fraction_of_12bit_baseline": 0.413526,
+              "seconds": 0.761251
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 1.328519,
+          "encoding": {
+            "bytes": 12274126,
+            "bytes_per_point": 2.677854,
+            "ratio_vs_float32_pos": 5.974934,
+            "fraction_of_12bit_baseline": 0.446308
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11374216,
+              "bytes_per_point": 2.48152,
+              "ratio_vs_float32_pos": 6.447661,
+              "fraction_of_12bit_baseline": 0.413586,
+              "seconds": 0.796207
+            }
+          }
+        }
+      },
+      "total_seconds": 12.982678
+    },
+    {
+      "label": "rangefinder/controls/control_ODSsteel_wang_R31_06365.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_ODSsteel_wang_R31_06365.pos",
+      "raw_bytes": 77891232,
+      "point_count": 4868202,
+      "quantized_baseline_bytes": 29209256,
+      "quantize_seconds": 0.180066,
+      "marginal_entropy_bits_per_point": 38.626451,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.404679,
+          "encoding": {
+            "bytes": 11675556,
+            "bytes_per_point": 2.39833,
+            "ratio_vs_float32_pos": 6.671308,
+            "fraction_of_12bit_baseline": 0.399721
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10771964,
+              "bytes_per_point": 2.212719,
+              "ratio_vs_float32_pos": 7.230922,
+              "fraction_of_12bit_baseline": 0.368786,
+              "seconds": 0.660501
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 1.426199,
+          "encoding": {
+            "bytes": 11680536,
+            "bytes_per_point": 2.399353,
+            "ratio_vs_float32_pos": 6.668464,
+            "fraction_of_12bit_baseline": 0.399892
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10773678,
+              "bytes_per_point": 2.213071,
+              "ratio_vs_float32_pos": 7.229772,
+              "fraction_of_12bit_baseline": 0.368845,
+              "seconds": 0.725718
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 1.413356,
+          "encoding": {
+            "bytes": 11675846,
+            "bytes_per_point": 2.39839,
+            "ratio_vs_float32_pos": 6.671142,
+            "fraction_of_12bit_baseline": 0.399731
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10775594,
+              "bytes_per_point": 2.213465,
+              "ratio_vs_float32_pos": 7.228486,
+              "fraction_of_12bit_baseline": 0.36891,
+              "seconds": 0.647194
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 1.446664,
+          "encoding": {
+            "bytes": 11680522,
+            "bytes_per_point": 2.39935,
+            "ratio_vs_float32_pos": 6.668472,
+            "fraction_of_12bit_baseline": 0.399891
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10774689,
+              "bytes_per_point": 2.213279,
+              "ratio_vs_float32_pos": 7.229093,
+              "fraction_of_12bit_baseline": 0.368879,
+              "seconds": 0.669061
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 1.445313,
+          "encoding": {
+            "bytes": 11681504,
+            "bytes_per_point": 2.399552,
+            "ratio_vs_float32_pos": 6.667911,
+            "fraction_of_12bit_baseline": 0.399925
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10773701,
+              "bytes_per_point": 2.213076,
+              "ratio_vs_float32_pos": 7.229756,
+              "fraction_of_12bit_baseline": 0.368845,
+              "seconds": 0.71334
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 1.431747,
+          "encoding": {
+            "bytes": 11681554,
+            "bytes_per_point": 2.399562,
+            "ratio_vs_float32_pos": 6.667883,
+            "fraction_of_12bit_baseline": 0.399926
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 10774617,
+              "bytes_per_point": 2.213264,
+              "ratio_vs_float32_pos": 7.229142,
+              "fraction_of_12bit_baseline": 0.368877,
+              "seconds": 0.709922
+            }
+          }
+        }
+      },
+      "total_seconds": 13.052538
+    },
+    {
+      "label": "rangefinder/controls/control_Si_apav_usa_denton_smith.pos",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_Si_apav_usa_denton_smith.pos",
+      "raw_bytes": 15123376,
+      "point_count": 945211,
+      "quantized_baseline_bytes": 5671310,
+      "quantize_seconds": 0.034276,
+      "marginal_entropy_bits_per_point": 37.680295,
+      "methods": {
+        "mass_prefix_10_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.297125,
+          "encoding": {
+            "bytes": 2663387,
+            "bytes_per_point": 2.81777,
+            "ratio_vs_float32_pos": 5.67825,
+            "fraction_of_12bit_baseline": 0.469625
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208179,
+              "bytes_per_point": 2.336176,
+              "ratio_vs_float32_pos": 6.8488,
+              "fraction_of_12bit_baseline": 0.38936,
+              "seconds": 0.107918
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.306348,
+          "encoding": {
+            "bytes": 2662869,
+            "bytes_per_point": 2.817222,
+            "ratio_vs_float32_pos": 5.679354,
+            "fraction_of_12bit_baseline": 0.469533
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208283,
+              "bytes_per_point": 2.336286,
+              "ratio_vs_float32_pos": 6.848477,
+              "fraction_of_12bit_baseline": 0.389378,
+              "seconds": 0.11146
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.314674,
+          "encoding": {
+            "bytes": 2663574,
+            "bytes_per_point": 2.817968,
+            "ratio_vs_float32_pos": 5.677851,
+            "fraction_of_12bit_baseline": 0.469658
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208102,
+              "bytes_per_point": 2.336094,
+              "ratio_vs_float32_pos": 6.849039,
+              "fraction_of_12bit_baseline": 0.389346,
+              "seconds": 0.114081
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.309661,
+          "encoding": {
+            "bytes": 2663324,
+            "bytes_per_point": 2.817703,
+            "ratio_vs_float32_pos": 5.678384,
+            "fraction_of_12bit_baseline": 0.469614
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208810,
+              "bytes_per_point": 2.336843,
+              "ratio_vs_float32_pos": 6.846843,
+              "fraction_of_12bit_baseline": 0.389471,
+              "seconds": 0.09912
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.297685,
+          "encoding": {
+            "bytes": 2658818,
+            "bytes_per_point": 2.812936,
+            "ratio_vs_float32_pos": 5.688007,
+            "fraction_of_12bit_baseline": 0.468819
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208961,
+              "bytes_per_point": 2.337003,
+              "ratio_vs_float32_pos": 6.846375,
+              "fraction_of_12bit_baseline": 0.389497,
+              "seconds": 0.097144
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.29957,
+          "encoding": {
+            "bytes": 2658465,
+            "bytes_per_point": 2.812562,
+            "ratio_vs_float32_pos": 5.688763,
+            "fraction_of_12bit_baseline": 0.468757
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 2208942,
+              "bytes_per_point": 2.336983,
+              "ratio_vs_float32_pos": 6.846434,
+              "fraction_of_12bit_baseline": 0.389494,
+              "seconds": 0.106027
+            }
+          }
+        }
+      },
+      "total_seconds": 2.548974
+    },
+    {
+      "label": "rangefinder/controls/extra/steelHD_5534859_70a59eff-003c-4337-832a-604c260dc623.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/extra/steelHD_5534859_70a59eff-003c-4337-832a-604c260dc623.POS",
+      "raw_bytes": 1952368,
+      "point_count": 122023,
+      "quantized_baseline_bytes": 732182,
+      "quantize_seconds": 0.004633,
+      "marginal_entropy_bits_per_point": 43.531647,
+      "methods": {
+        "mass_prefix_0_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.0212,
+          "encoding": {
+            "bytes": 556270,
+            "bytes_per_point": 4.558731,
+            "ratio_vs_float32_pos": 3.509749,
+            "fraction_of_12bit_baseline": 0.759743
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 426532,
+              "bytes_per_point": 3.495505,
+              "ratio_vs_float32_pos": 4.577307,
+              "fraction_of_12bit_baseline": 0.582549,
+              "seconds": 0.021731
+            }
+          }
+        },
+        "mass_prefix_0_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.02218,
+          "encoding": {
+            "bytes": 556204,
+            "bytes_per_point": 4.55819,
+            "ratio_vs_float32_pos": 3.510165,
+            "fraction_of_12bit_baseline": 0.759653
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 426251,
+              "bytes_per_point": 3.493202,
+              "ratio_vs_float32_pos": 4.580325,
+              "fraction_of_12bit_baseline": 0.582165,
+              "seconds": 0.021665
+            }
+          }
+        },
+        "mass_prefix_0_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.021089,
+          "encoding": {
+            "bytes": 556306,
+            "bytes_per_point": 4.559026,
+            "ratio_vs_float32_pos": 3.509522,
+            "fraction_of_12bit_baseline": 0.759792
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 426498,
+              "bytes_per_point": 3.495226,
+              "ratio_vs_float32_pos": 4.577672,
+              "fraction_of_12bit_baseline": 0.582503,
+              "seconds": 0.021737
+            }
+          }
+        },
+        "mass_prefix_0_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.021909,
+          "encoding": {
+            "bytes": 556305,
+            "bytes_per_point": 4.559018,
+            "ratio_vs_float32_pos": 3.509528,
+            "fraction_of_12bit_baseline": 0.759791
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 426431,
+              "bytes_per_point": 3.494677,
+              "ratio_vs_float32_pos": 4.578391,
+              "fraction_of_12bit_baseline": 0.582411,
+              "seconds": 0.022026
+            }
+          }
+        },
+        "mass_prefix_0_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.021019,
+          "encoding": {
+            "bytes": 555919,
+            "bytes_per_point": 4.555854,
+            "ratio_vs_float32_pos": 3.511965,
+            "fraction_of_12bit_baseline": 0.759263
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 426145,
+              "bytes_per_point": 3.492333,
+              "ratio_vs_float32_pos": 4.581464,
+              "fraction_of_12bit_baseline": 0.582021,
+              "seconds": 0.022257
+            }
+          }
+        },
+        "mass_prefix_0_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.021069,
+          "encoding": {
+            "bytes": 555516,
+            "bytes_per_point": 4.552552,
+            "ratio_vs_float32_pos": 3.514513,
+            "fraction_of_12bit_baseline": 0.758713
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 425807,
+              "bytes_per_point": 3.489563,
+              "ratio_vs_float32_pos": 4.585101,
+              "fraction_of_12bit_baseline": 0.581559,
+              "seconds": 0.019921
+            }
+          }
+        }
+      },
+      "total_seconds": 0.288473
+    },
+    {
+      "label": "rangefinder/controls/extra/steelHD_5534859_8fe936a9-c8bf-417a-8006-bff810375bc7.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/extra/steelHD_5534859_8fe936a9-c8bf-417a-8006-bff810375bc7.POS",
+      "raw_bytes": 3650816,
+      "point_count": 228176,
+      "quantized_baseline_bytes": 1369100,
+      "quantize_seconds": 0.008097,
+      "marginal_entropy_bits_per_point": 43.927346,
+      "methods": {
+        "mass_prefix_2_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.050323,
+          "encoding": {
+            "bytes": 943976,
+            "bytes_per_point": 4.137052,
+            "ratio_vs_float32_pos": 3.867488,
+            "fraction_of_12bit_baseline": 0.689487
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 747596,
+              "bytes_per_point": 3.276401,
+              "ratio_vs_float32_pos": 4.883408,
+              "fraction_of_12bit_baseline": 0.546049,
+              "seconds": 0.039081
+            }
+          }
+        },
+        "mass_prefix_2_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.063215,
+          "encoding": {
+            "bytes": 943967,
+            "bytes_per_point": 4.137013,
+            "ratio_vs_float32_pos": 3.867525,
+            "fraction_of_12bit_baseline": 0.68948
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 748530,
+              "bytes_per_point": 3.280494,
+              "ratio_vs_float32_pos": 4.877314,
+              "fraction_of_12bit_baseline": 0.546731,
+              "seconds": 0.03879
+            }
+          }
+        },
+        "mass_prefix_2_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.051041,
+          "encoding": {
+            "bytes": 943986,
+            "bytes_per_point": 4.137096,
+            "ratio_vs_float32_pos": 3.867447,
+            "fraction_of_12bit_baseline": 0.689494
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 746829,
+              "bytes_per_point": 3.273039,
+              "ratio_vs_float32_pos": 4.888423,
+              "fraction_of_12bit_baseline": 0.545489,
+              "seconds": 0.038179
+            }
+          }
+        },
+        "mass_prefix_2_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.052405,
+          "encoding": {
+            "bytes": 943992,
+            "bytes_per_point": 4.137122,
+            "ratio_vs_float32_pos": 3.867423,
+            "fraction_of_12bit_baseline": 0.689498
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 747738,
+              "bytes_per_point": 3.277023,
+              "ratio_vs_float32_pos": 4.88248,
+              "fraction_of_12bit_baseline": 0.546153,
+              "seconds": 0.03876
+            }
+          }
+        },
+        "mass_prefix_2_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.051484,
+          "encoding": {
+            "bytes": 942828,
+            "bytes_per_point": 4.132021,
+            "ratio_vs_float32_pos": 3.872197,
+            "fraction_of_12bit_baseline": 0.688648
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 747584,
+              "bytes_per_point": 3.276348,
+              "ratio_vs_float32_pos": 4.883486,
+              "fraction_of_12bit_baseline": 0.54604,
+              "seconds": 0.038959
+            }
+          }
+        },
+        "mass_prefix_2_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.049771,
+          "encoding": {
+            "bytes": 942976,
+            "bytes_per_point": 4.13267,
+            "ratio_vs_float32_pos": 3.87159,
+            "fraction_of_12bit_baseline": 0.688756
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 747850,
+              "bytes_per_point": 3.277514,
+              "ratio_vs_float32_pos": 4.881749,
+              "fraction_of_12bit_baseline": 0.546235,
+              "seconds": 0.038269
+            }
+          }
+        }
+      },
+      "total_seconds": 0.586266
+    },
+    {
+      "label": "rangefinder/controls/extra/steelHD_5534859_aa137df8-ce0e-481e-93e6-a22cb5a34882.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/extra/steelHD_5534859_aa137df8-ce0e-481e-93e6-a22cb5a34882.POS",
+      "raw_bytes": 2273952,
+      "point_count": 142122,
+      "quantized_baseline_bytes": 852776,
+      "quantize_seconds": 0.004891,
+      "marginal_entropy_bits_per_point": 40.114066,
+      "methods": {
+        "mass_prefix_9_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.053288,
+          "encoding": {
+            "bytes": 543133,
+            "bytes_per_point": 3.821597,
+            "ratio_vs_float32_pos": 4.186731,
+            "fraction_of_12bit_baseline": 0.6369
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 448991,
+              "bytes_per_point": 3.159194,
+              "ratio_vs_float32_pos": 5.064583,
+              "fraction_of_12bit_baseline": 0.526505,
+              "seconds": 0.018645
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.055886,
+          "encoding": {
+            "bytes": 543305,
+            "bytes_per_point": 3.822807,
+            "ratio_vs_float32_pos": 4.185406,
+            "fraction_of_12bit_baseline": 0.637102
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 449140,
+              "bytes_per_point": 3.160243,
+              "ratio_vs_float32_pos": 5.062902,
+              "fraction_of_12bit_baseline": 0.52668,
+              "seconds": 0.019704
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.058151,
+          "encoding": {
+            "bytes": 543201,
+            "bytes_per_point": 3.822075,
+            "ratio_vs_float32_pos": 4.186207,
+            "fraction_of_12bit_baseline": 0.63698
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 448828,
+              "bytes_per_point": 3.158047,
+              "ratio_vs_float32_pos": 5.066422,
+              "fraction_of_12bit_baseline": 0.526314,
+              "seconds": 0.018948
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.056855,
+          "encoding": {
+            "bytes": 543316,
+            "bytes_per_point": 3.822885,
+            "ratio_vs_float32_pos": 4.185321,
+            "fraction_of_12bit_baseline": 0.637115
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 449177,
+              "bytes_per_point": 3.160503,
+              "ratio_vs_float32_pos": 5.062485,
+              "fraction_of_12bit_baseline": 0.526723,
+              "seconds": 0.019164
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.056316,
+          "encoding": {
+            "bytes": 542832,
+            "bytes_per_point": 3.819479,
+            "ratio_vs_float32_pos": 4.189053,
+            "fraction_of_12bit_baseline": 0.636547
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 449142,
+              "bytes_per_point": 3.160257,
+              "ratio_vs_float32_pos": 5.06288,
+              "fraction_of_12bit_baseline": 0.526682,
+              "seconds": 0.020767
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.055314,
+          "encoding": {
+            "bytes": 542764,
+            "bytes_per_point": 3.819001,
+            "ratio_vs_float32_pos": 4.189578,
+            "fraction_of_12bit_baseline": 0.636467
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 448821,
+              "bytes_per_point": 3.157998,
+              "ratio_vs_float32_pos": 5.066501,
+              "fraction_of_12bit_baseline": 0.526306,
+              "seconds": 0.021086
+            }
+          }
+        }
+      },
+      "total_seconds": 0.483958
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_al_mg_si.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_al_mg_si.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.057434,
+      "marginal_entropy_bits_per_point": 38.362472,
+      "methods": {
+        "mass_prefix_9_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.312398,
+          "encoding": {
+            "bytes": 4156117,
+            "bytes_per_point": 2.770745,
+            "ratio_vs_float32_pos": 5.774621,
+            "fraction_of_12bit_baseline": 0.461789
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3629554,
+              "bytes_per_point": 2.419703,
+              "ratio_vs_float32_pos": 6.612383,
+              "fraction_of_12bit_baseline": 0.403282,
+              "seconds": 0.16646
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.408083,
+          "encoding": {
+            "bytes": 4155860,
+            "bytes_per_point": 2.770573,
+            "ratio_vs_float32_pos": 5.774978,
+            "fraction_of_12bit_baseline": 0.46176
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3630271,
+              "bytes_per_point": 2.420181,
+              "ratio_vs_float32_pos": 6.611077,
+              "fraction_of_12bit_baseline": 0.403361,
+              "seconds": 0.154868
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.39566,
+          "encoding": {
+            "bytes": 4156058,
+            "bytes_per_point": 2.770705,
+            "ratio_vs_float32_pos": 5.774703,
+            "fraction_of_12bit_baseline": 0.461782
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3629495,
+              "bytes_per_point": 2.419663,
+              "ratio_vs_float32_pos": 6.61249,
+              "fraction_of_12bit_baseline": 0.403275,
+              "seconds": 0.170261
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.415346,
+          "encoding": {
+            "bytes": 4155821,
+            "bytes_per_point": 2.770547,
+            "ratio_vs_float32_pos": 5.775032,
+            "fraction_of_12bit_baseline": 0.461756
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3629115,
+              "bytes_per_point": 2.41941,
+              "ratio_vs_float32_pos": 6.613183,
+              "fraction_of_12bit_baseline": 0.403233,
+              "seconds": 0.156029
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.40267,
+          "encoding": {
+            "bytes": 4155332,
+            "bytes_per_point": 2.770221,
+            "ratio_vs_float32_pos": 5.775712,
+            "fraction_of_12bit_baseline": 0.461701
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3629634,
+              "bytes_per_point": 2.419756,
+              "ratio_vs_float32_pos": 6.612237,
+              "fraction_of_12bit_baseline": 0.403291,
+              "seconds": 0.171294
+            }
+          }
+        },
+        "mass_prefix_9_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.407703,
+          "encoding": {
+            "bytes": 4155436,
+            "bytes_per_point": 2.770291,
+            "ratio_vs_float32_pos": 5.775567,
+            "fraction_of_12bit_baseline": 0.461713
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3629104,
+              "bytes_per_point": 2.419403,
+              "ratio_vs_float32_pos": 6.613203,
+              "fraction_of_12bit_baseline": 0.403232,
+              "seconds": 0.171048
+            }
+          }
+        }
+      },
+      "total_seconds": 3.460157
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_si_o.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_si_o.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.059002,
+      "marginal_entropy_bits_per_point": 39.985554,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.532659,
+          "encoding": {
+            "bytes": 4132385,
+            "bytes_per_point": 2.754923,
+            "ratio_vs_float32_pos": 5.807784,
+            "fraction_of_12bit_baseline": 0.459152
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3953953,
+              "bytes_per_point": 2.635969,
+              "ratio_vs_float32_pos": 6.069875,
+              "fraction_of_12bit_baseline": 0.439326,
+              "seconds": 0.131372
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.522336,
+          "encoding": {
+            "bytes": 4132077,
+            "bytes_per_point": 2.754718,
+            "ratio_vs_float32_pos": 5.808217,
+            "fraction_of_12bit_baseline": 0.459117
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3954911,
+              "bytes_per_point": 2.636607,
+              "ratio_vs_float32_pos": 6.068405,
+              "fraction_of_12bit_baseline": 0.439432,
+              "seconds": 0.148607
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.524727,
+          "encoding": {
+            "bytes": 4132339,
+            "bytes_per_point": 2.754893,
+            "ratio_vs_float32_pos": 5.807849,
+            "fraction_of_12bit_baseline": 0.459147
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3954397,
+              "bytes_per_point": 2.636265,
+              "ratio_vs_float32_pos": 6.069193,
+              "fraction_of_12bit_baseline": 0.439375,
+              "seconds": 0.1347
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.516098,
+          "encoding": {
+            "bytes": 4132077,
+            "bytes_per_point": 2.754718,
+            "ratio_vs_float32_pos": 5.808217,
+            "fraction_of_12bit_baseline": 0.459117
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3954555,
+              "bytes_per_point": 2.63637,
+              "ratio_vs_float32_pos": 6.068951,
+              "fraction_of_12bit_baseline": 0.439393,
+              "seconds": 0.147904
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.505212,
+          "encoding": {
+            "bytes": 4131663,
+            "bytes_per_point": 2.754442,
+            "ratio_vs_float32_pos": 5.808799,
+            "fraction_of_12bit_baseline": 0.459071
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3953991,
+              "bytes_per_point": 2.635994,
+              "ratio_vs_float32_pos": 6.069817,
+              "fraction_of_12bit_baseline": 0.43933,
+              "seconds": 0.131822
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.516927,
+          "encoding": {
+            "bytes": 4131715,
+            "bytes_per_point": 2.754477,
+            "ratio_vs_float32_pos": 5.808726,
+            "fraction_of_12bit_baseline": 0.459077
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3954867,
+              "bytes_per_point": 2.636578,
+              "ratio_vs_float32_pos": 6.068472,
+              "fraction_of_12bit_baseline": 0.439428,
+              "seconds": 0.158859
+            }
+          }
+        }
+      },
+      "total_seconds": 4.101595
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_zn_cu_al.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_zn_cu_al.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.056687,
+      "marginal_entropy_bits_per_point": 41.242039,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.515155,
+          "encoding": {
+            "bytes": 4343208,
+            "bytes_per_point": 2.895472,
+            "ratio_vs_float32_pos": 5.525869,
+            "fraction_of_12bit_baseline": 0.482576
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4197109,
+              "bytes_per_point": 2.798073,
+              "ratio_vs_float32_pos": 5.718222,
+              "fraction_of_12bit_baseline": 0.466343,
+              "seconds": 0.144631
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.510776,
+          "encoding": {
+            "bytes": 4343082,
+            "bytes_per_point": 2.895388,
+            "ratio_vs_float32_pos": 5.52603,
+            "fraction_of_12bit_baseline": 0.482562
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4198447,
+              "bytes_per_point": 2.798965,
+              "ratio_vs_float32_pos": 5.716399,
+              "fraction_of_12bit_baseline": 0.466492,
+              "seconds": 0.162728
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.505505,
+          "encoding": {
+            "bytes": 4343186,
+            "bytes_per_point": 2.895457,
+            "ratio_vs_float32_pos": 5.525897,
+            "fraction_of_12bit_baseline": 0.482574
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4196628,
+              "bytes_per_point": 2.797752,
+              "ratio_vs_float32_pos": 5.718877,
+              "fraction_of_12bit_baseline": 0.46629,
+              "seconds": 0.146194
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.508964,
+          "encoding": {
+            "bytes": 4343019,
+            "bytes_per_point": 2.895346,
+            "ratio_vs_float32_pos": 5.52611,
+            "fraction_of_12bit_baseline": 0.482555
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4197699,
+              "bytes_per_point": 2.798466,
+              "ratio_vs_float32_pos": 5.717418,
+              "fraction_of_12bit_baseline": 0.466409,
+              "seconds": 0.164168
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.507584,
+          "encoding": {
+            "bytes": 4342539,
+            "bytes_per_point": 2.895026,
+            "ratio_vs_float32_pos": 5.526721,
+            "fraction_of_12bit_baseline": 0.482502
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4198495,
+              "bytes_per_point": 2.798997,
+              "ratio_vs_float32_pos": 5.716334,
+              "fraction_of_12bit_baseline": 0.466497,
+              "seconds": 0.147093
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.514307,
+          "encoding": {
+            "bytes": 4342630,
+            "bytes_per_point": 2.895087,
+            "ratio_vs_float32_pos": 5.526605,
+            "fraction_of_12bit_baseline": 0.482512
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 4197441,
+              "bytes_per_point": 2.798294,
+              "ratio_vs_float32_pos": 5.717769,
+              "fraction_of_12bit_baseline": 0.46638,
+              "seconds": 0.159682
+            }
+          }
+        }
+      },
+      "total_seconds": 4.116019
+    },
+    {
+      "label": "rangefinder/controls/synthetic/synthetic_zn_layer_on_al.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/synthetic/synthetic_zn_layer_on_al.POS",
+      "raw_bytes": 24000000,
+      "point_count": 1500000,
+      "quantized_baseline_bytes": 9000044,
+      "quantize_seconds": 0.056421,
+      "marginal_entropy_bits_per_point": 40.160422,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 0.529413,
+          "encoding": {
+            "bytes": 4169426,
+            "bytes_per_point": 2.779617,
+            "ratio_vs_float32_pos": 5.756188,
+            "fraction_of_12bit_baseline": 0.463267
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3870473,
+              "bytes_per_point": 2.580315,
+              "ratio_vs_float32_pos": 6.200793,
+              "fraction_of_12bit_baseline": 0.43005,
+              "seconds": 0.162018
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 0.505,
+          "encoding": {
+            "bytes": 4169367,
+            "bytes_per_point": 2.779578,
+            "ratio_vs_float32_pos": 5.756269,
+            "fraction_of_12bit_baseline": 0.463261
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3871017,
+              "bytes_per_point": 2.580678,
+              "ratio_vs_float32_pos": 6.199921,
+              "fraction_of_12bit_baseline": 0.430111,
+              "seconds": 0.162966
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 0.510536,
+          "encoding": {
+            "bytes": 4165955,
+            "bytes_per_point": 2.777303,
+            "ratio_vs_float32_pos": 5.760984,
+            "fraction_of_12bit_baseline": 0.462882
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3870245,
+              "bytes_per_point": 2.580163,
+              "ratio_vs_float32_pos": 6.201158,
+              "fraction_of_12bit_baseline": 0.430025,
+              "seconds": 0.15666
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 0.515201,
+          "encoding": {
+            "bytes": 4168780,
+            "bytes_per_point": 2.779187,
+            "ratio_vs_float32_pos": 5.75708,
+            "fraction_of_12bit_baseline": 0.463196
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3869968,
+              "bytes_per_point": 2.579979,
+              "ratio_vs_float32_pos": 6.201602,
+              "fraction_of_12bit_baseline": 0.429994,
+              "seconds": 0.166007
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 0.530252,
+          "encoding": {
+            "bytes": 4166274,
+            "bytes_per_point": 2.777516,
+            "ratio_vs_float32_pos": 5.760543,
+            "fraction_of_12bit_baseline": 0.462917
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3870476,
+              "bytes_per_point": 2.580317,
+              "ratio_vs_float32_pos": 6.200788,
+              "fraction_of_12bit_baseline": 0.430051,
+              "seconds": 0.173338
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 0.513819,
+          "encoding": {
+            "bytes": 4166872,
+            "bytes_per_point": 2.777915,
+            "ratio_vs_float32_pos": 5.759716,
+            "fraction_of_12bit_baseline": 0.462984
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 3870461,
+              "bytes_per_point": 2.580307,
+              "ratio_vs_float32_pos": 6.200812,
+              "fraction_of_12bit_baseline": 0.430049,
+              "seconds": 0.15234
+            }
+          }
+        }
+      },
+      "total_seconds": 4.203687
+    },
+    {
+      "label": "apt-analysis/data/12d8ba7d-b728-4362-a879-558857c7b4d2.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/12d8ba7d-b728-4362-a879-558857c7b4d2.POS",
+      "raw_bytes": 335186368,
+      "point_count": 20949148,
+      "quantized_baseline_bytes": 125694932,
+      "quantize_seconds": 0.881696,
+      "marginal_entropy_bits_per_point": 42.351786,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 5.710008,
+          "encoding": {
+            "bytes": 55038019,
+            "bytes_per_point": 2.62722,
+            "ratio_vs_float32_pos": 6.090088,
+            "fraction_of_12bit_baseline": 0.43787
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50250260,
+              "bytes_per_point": 2.398678,
+              "ratio_vs_float32_pos": 6.670341,
+              "fraction_of_12bit_baseline": 0.39978,
+              "seconds": 2.995874
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 5.727533,
+          "encoding": {
+            "bytes": 55021992,
+            "bytes_per_point": 2.626455,
+            "ratio_vs_float32_pos": 6.091862,
+            "fraction_of_12bit_baseline": 0.437742
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50243128,
+              "bytes_per_point": 2.398338,
+              "ratio_vs_float32_pos": 6.671288,
+              "fraction_of_12bit_baseline": 0.399723,
+              "seconds": 3.002062
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 5.666359,
+          "encoding": {
+            "bytes": 54995763,
+            "bytes_per_point": 2.625203,
+            "ratio_vs_float32_pos": 6.094767,
+            "fraction_of_12bit_baseline": 0.437534
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50235770,
+              "bytes_per_point": 2.397986,
+              "ratio_vs_float32_pos": 6.672265,
+              "fraction_of_12bit_baseline": 0.399664,
+              "seconds": 2.945847
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 5.770902,
+          "encoding": {
+            "bytes": 54969050,
+            "bytes_per_point": 2.623928,
+            "ratio_vs_float32_pos": 6.097729,
+            "fraction_of_12bit_baseline": 0.437321
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50225009,
+              "bytes_per_point": 2.397473,
+              "ratio_vs_float32_pos": 6.673695,
+              "fraction_of_12bit_baseline": 0.399579,
+              "seconds": 3.017554
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 5.729385,
+          "encoding": {
+            "bytes": 55124636,
+            "bytes_per_point": 2.631355,
+            "ratio_vs_float32_pos": 6.080518,
+            "fraction_of_12bit_baseline": 0.438559
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50266832,
+              "bytes_per_point": 2.399469,
+              "ratio_vs_float32_pos": 6.668142,
+              "fraction_of_12bit_baseline": 0.399911,
+              "seconds": 3.05844
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 5.674456,
+          "encoding": {
+            "bytes": 55124800,
+            "bytes_per_point": 2.631362,
+            "ratio_vs_float32_pos": 6.0805,
+            "fraction_of_12bit_baseline": 0.43856
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 50266304,
+              "bytes_per_point": 2.399444,
+              "ratio_vs_float32_pos": 6.668212,
+              "fraction_of_12bit_baseline": 0.399907,
+              "seconds": 3.008127
+            }
+          }
+        }
+      },
+      "total_seconds": 53.890338
+    },
+    {
+      "label": "apt-analysis/data/2166bb75-7ff6-4c85-bf2d-564431f0b089.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/2166bb75-7ff6-4c85-bf2d-564431f0b089.POS",
+      "raw_bytes": 476961088,
+      "point_count": 29810068,
+      "quantized_baseline_bytes": 178860452,
+      "quantize_seconds": 1.285392,
+      "marginal_entropy_bits_per_point": 36.489527,
+      "methods": {
+        "mass_prefix_12_hilbert": {
+          "ordered": false,
+          "transform_seconds": 8.650399,
+          "encoding": {
+            "bytes": 53256755,
+            "bytes_per_point": 1.786536,
+            "ratio_vs_float32_pos": 8.95588,
+            "fraction_of_12bit_baseline": 0.297756
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 46993713,
+              "bytes_per_point": 1.576438,
+              "ratio_vs_float32_pos": 10.149466,
+              "fraction_of_12bit_baseline": 0.26274,
+              "seconds": 2.905659
+            }
+          }
+        },
+        "mass_prefix_12_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 8.513889,
+          "encoding": {
+            "bytes": 53285914,
+            "bytes_per_point": 1.787514,
+            "ratio_vs_float32_pos": 8.950979,
+            "fraction_of_12bit_baseline": 0.297919
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 46988031,
+              "bytes_per_point": 1.576247,
+              "ratio_vs_float32_pos": 10.150693,
+              "fraction_of_12bit_baseline": 0.262708,
+              "seconds": 2.841069
+            }
+          }
+        },
+        "mass_prefix_12_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 8.479186,
+          "encoding": {
+            "bytes": 53228206,
+            "bytes_per_point": 1.785578,
+            "ratio_vs_float32_pos": 8.960683,
+            "fraction_of_12bit_baseline": 0.297596
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 46993953,
+              "bytes_per_point": 1.576446,
+              "ratio_vs_float32_pos": 10.149414,
+              "fraction_of_12bit_baseline": 0.262741,
+              "seconds": 2.913924
+            }
+          }
+        },
+        "mass_prefix_12_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 8.541489,
+          "encoding": {
+            "bytes": 53195012,
+            "bytes_per_point": 1.784465,
+            "ratio_vs_float32_pos": 8.966275,
+            "fraction_of_12bit_baseline": 0.297411
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 46998720,
+              "bytes_per_point": 1.576606,
+              "ratio_vs_float32_pos": 10.148385,
+              "fraction_of_12bit_baseline": 0.262768,
+              "seconds": 2.877903
+            }
+          }
+        },
+        "mass_prefix_12_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 8.569856,
+          "encoding": {
+            "bytes": 53424895,
+            "bytes_per_point": 1.792176,
+            "ratio_vs_float32_pos": 8.927694,
+            "fraction_of_12bit_baseline": 0.298696
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 46995585,
+              "bytes_per_point": 1.5765,
+              "ratio_vs_float32_pos": 10.149062,
+              "fraction_of_12bit_baseline": 0.26275,
+              "seconds": 2.877998
+            }
+          }
+        },
+        "mass_prefix_12_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 8.511015,
+          "encoding": {
+            "bytes": 53425106,
+            "bytes_per_point": 1.792183,
+            "ratio_vs_float32_pos": 8.927658,
+            "fraction_of_12bit_baseline": 0.298697
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 47000821,
+              "bytes_per_point": 1.576676,
+              "ratio_vs_float32_pos": 10.147931,
+              "fraction_of_12bit_baseline": 0.262779,
+              "seconds": 2.863533
+            }
+          }
+        }
+      },
+      "total_seconds": 70.837351
+    },
+    {
+      "label": "apt-analysis/data/499e563f-0c0c-4c6f-bc08-b8e76f59c31b.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/499e563f-0c0c-4c6f-bc08-b8e76f59c31b.POS",
+      "raw_bytes": 91540736,
+      "point_count": 5721296,
+      "quantized_baseline_bytes": 34327820,
+      "quantize_seconds": 0.223374,
+      "marginal_entropy_bits_per_point": 41.565562,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.635161,
+          "encoding": {
+            "bytes": 15939918,
+            "bytes_per_point": 2.786068,
+            "ratio_vs_float32_pos": 5.742861,
+            "fraction_of_12bit_baseline": 0.464344
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14302889,
+              "bytes_per_point": 2.499939,
+              "ratio_vs_float32_pos": 6.400157,
+              "fraction_of_12bit_baseline": 0.416656,
+              "seconds": 1.185473
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 1.659777,
+          "encoding": {
+            "bytes": 15938280,
+            "bytes_per_point": 2.785781,
+            "ratio_vs_float32_pos": 5.743451,
+            "fraction_of_12bit_baseline": 0.464296
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14304167,
+              "bytes_per_point": 2.500162,
+              "ratio_vs_float32_pos": 6.399585,
+              "fraction_of_12bit_baseline": 0.416693,
+              "seconds": 1.191157
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 1.638851,
+          "encoding": {
+            "bytes": 15927834,
+            "bytes_per_point": 2.783956,
+            "ratio_vs_float32_pos": 5.747218,
+            "fraction_of_12bit_baseline": 0.463992
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14303651,
+              "bytes_per_point": 2.500072,
+              "ratio_vs_float32_pos": 6.399816,
+              "fraction_of_12bit_baseline": 0.416678,
+              "seconds": 1.196356
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 1.674347,
+          "encoding": {
+            "bytes": 15921367,
+            "bytes_per_point": 2.782825,
+            "ratio_vs_float32_pos": 5.749553,
+            "fraction_of_12bit_baseline": 0.463804
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14303159,
+              "bytes_per_point": 2.499986,
+              "ratio_vs_float32_pos": 6.400036,
+              "fraction_of_12bit_baseline": 0.416664,
+              "seconds": 1.193475
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 1.676577,
+          "encoding": {
+            "bytes": 15968264,
+            "bytes_per_point": 2.791022,
+            "ratio_vs_float32_pos": 5.732667,
+            "fraction_of_12bit_baseline": 0.46517
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14308930,
+              "bytes_per_point": 2.500995,
+              "ratio_vs_float32_pos": 6.397455,
+              "fraction_of_12bit_baseline": 0.416832,
+              "seconds": 1.194768
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 1.699801,
+          "encoding": {
+            "bytes": 15968524,
+            "bytes_per_point": 2.791068,
+            "ratio_vs_float32_pos": 5.732573,
+            "fraction_of_12bit_baseline": 0.465177
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 14311493,
+              "bytes_per_point": 2.501443,
+              "ratio_vs_float32_pos": 6.396309,
+              "fraction_of_12bit_baseline": 0.416907,
+              "seconds": 1.193662
+            }
+          }
+        }
+      },
+      "total_seconds": 17.568527
+    },
+    {
+      "label": "apt-analysis/data/86a2fa56-8593-4856-bd42-b73716197abf.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/86a2fa56-8593-4856-bd42-b73716197abf.POS",
+      "raw_bytes": 138520880,
+      "point_count": 8657555,
+      "quantized_baseline_bytes": 51945374,
+      "quantize_seconds": 0.328574,
+      "marginal_entropy_bits_per_point": 37.26891,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 2.497283,
+          "encoding": {
+            "bytes": 18865194,
+            "bytes_per_point": 2.179044,
+            "ratio_vs_float32_pos": 7.342669,
+            "fraction_of_12bit_baseline": 0.363174
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16452950,
+              "bytes_per_point": 1.900415,
+              "ratio_vs_float32_pos": 8.419212,
+              "fraction_of_12bit_baseline": 0.316736,
+              "seconds": 1.549038
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 2.425659,
+          "encoding": {
+            "bytes": 18860468,
+            "bytes_per_point": 2.178498,
+            "ratio_vs_float32_pos": 7.344509,
+            "fraction_of_12bit_baseline": 0.363083
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16458098,
+              "bytes_per_point": 1.90101,
+              "ratio_vs_float32_pos": 8.416579,
+              "fraction_of_12bit_baseline": 0.316835,
+              "seconds": 1.609183
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 2.502181,
+          "encoding": {
+            "bytes": 18851859,
+            "bytes_per_point": 2.177504,
+            "ratio_vs_float32_pos": 7.347863,
+            "fraction_of_12bit_baseline": 0.362917
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16456632,
+              "bytes_per_point": 1.900841,
+              "ratio_vs_float32_pos": 8.417329,
+              "fraction_of_12bit_baseline": 0.316806,
+              "seconds": 1.506434
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 2.438829,
+          "encoding": {
+            "bytes": 18839976,
+            "bytes_per_point": 2.176131,
+            "ratio_vs_float32_pos": 7.352498,
+            "fraction_of_12bit_baseline": 0.362688
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16460306,
+              "bytes_per_point": 1.901265,
+              "ratio_vs_float32_pos": 8.41545,
+              "fraction_of_12bit_baseline": 0.316877,
+              "seconds": 1.560237
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 2.448174,
+          "encoding": {
+            "bytes": 18893084,
+            "bytes_per_point": 2.182266,
+            "ratio_vs_float32_pos": 7.33183,
+            "fraction_of_12bit_baseline": 0.363711
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16458018,
+              "bytes_per_point": 1.901001,
+              "ratio_vs_float32_pos": 8.41662,
+              "fraction_of_12bit_baseline": 0.316833,
+              "seconds": 1.557906
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 2.459836,
+          "encoding": {
+            "bytes": 18893281,
+            "bytes_per_point": 2.182288,
+            "ratio_vs_float32_pos": 7.331754,
+            "fraction_of_12bit_baseline": 0.363714
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 16460104,
+              "bytes_per_point": 1.901242,
+              "ratio_vs_float32_pos": 8.415553,
+              "fraction_of_12bit_baseline": 0.316873,
+              "seconds": 1.506146
+            }
+          }
+        }
+      },
+      "total_seconds": 24.69816
+    },
+    {
+      "label": "apt-analysis/data/Sample 1- POS file.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/Sample 1- POS file.POS",
+      "raw_bytes": 64213888,
+      "point_count": 4013368,
+      "quantized_baseline_bytes": 24080252,
+      "quantize_seconds": 0.151457,
+      "marginal_entropy_bits_per_point": 43.093098,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 1.185379,
+          "encoding": {
+            "bytes": 12052727,
+            "bytes_per_point": 3.003145,
+            "ratio_vs_float32_pos": 5.327748,
+            "fraction_of_12bit_baseline": 0.500523
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11299579,
+              "bytes_per_point": 2.815485,
+              "ratio_vs_float32_pos": 5.682857,
+              "fraction_of_12bit_baseline": 0.469247,
+              "seconds": 0.772468
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 1.156408,
+          "encoding": {
+            "bytes": 12051428,
+            "bytes_per_point": 3.002822,
+            "ratio_vs_float32_pos": 5.328322,
+            "fraction_of_12bit_baseline": 0.500469
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11297727,
+              "bytes_per_point": 2.815024,
+              "ratio_vs_float32_pos": 5.683788,
+              "fraction_of_12bit_baseline": 0.46917,
+              "seconds": 0.805621
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 1.204154,
+          "encoding": {
+            "bytes": 12050152,
+            "bytes_per_point": 3.002504,
+            "ratio_vs_float32_pos": 5.328886,
+            "fraction_of_12bit_baseline": 0.500416
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11303786,
+              "bytes_per_point": 2.816534,
+              "ratio_vs_float32_pos": 5.680742,
+              "fraction_of_12bit_baseline": 0.469421,
+              "seconds": 0.773416
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 1.181675,
+          "encoding": {
+            "bytes": 12042413,
+            "bytes_per_point": 3.000575,
+            "ratio_vs_float32_pos": 5.332311,
+            "fraction_of_12bit_baseline": 0.500095
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11297072,
+              "bytes_per_point": 2.814861,
+              "ratio_vs_float32_pos": 5.684118,
+              "fraction_of_12bit_baseline": 0.469143,
+              "seconds": 0.768158
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 1.148094,
+          "encoding": {
+            "bytes": 12075197,
+            "bytes_per_point": 3.008744,
+            "ratio_vs_float32_pos": 5.317834,
+            "fraction_of_12bit_baseline": 0.501456
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11303109,
+              "bytes_per_point": 2.816365,
+              "ratio_vs_float32_pos": 5.681082,
+              "fraction_of_12bit_baseline": 0.469393,
+              "seconds": 0.839866
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 1.168766,
+          "encoding": {
+            "bytes": 12075357,
+            "bytes_per_point": 3.008784,
+            "ratio_vs_float32_pos": 5.317763,
+            "fraction_of_12bit_baseline": 0.501463
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 11302527,
+              "bytes_per_point": 2.81622,
+              "ratio_vs_float32_pos": 5.681374,
+              "fraction_of_12bit_baseline": 0.469369,
+              "seconds": 0.794376
+            }
+          }
+        }
+      },
+      "total_seconds": 12.098036
+    },
+    {
+      "label": "apt-analysis/data/Sample 3 -POS file.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/Sample 3 -POS file.POS",
+      "raw_bytes": 287185824,
+      "point_count": 17949114,
+      "quantized_baseline_bytes": 107694728,
+      "quantize_seconds": 0.714505,
+      "marginal_entropy_bits_per_point": 42.804567,
+      "methods": {
+        "mass_prefix_10_hilbert": {
+          "ordered": false,
+          "transform_seconds": 4.928452,
+          "encoding": {
+            "bytes": 49103838,
+            "bytes_per_point": 2.735725,
+            "ratio_vs_float32_pos": 5.848541,
+            "fraction_of_12bit_baseline": 0.455954
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44420375,
+              "bytes_per_point": 2.474795,
+              "ratio_vs_float32_pos": 6.465182,
+              "fraction_of_12bit_baseline": 0.412466,
+              "seconds": 2.945577
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 4.921931,
+          "encoding": {
+            "bytes": 49080686,
+            "bytes_per_point": 2.734435,
+            "ratio_vs_float32_pos": 5.8513,
+            "fraction_of_12bit_baseline": 0.455739
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44390637,
+              "bytes_per_point": 2.473138,
+              "ratio_vs_float32_pos": 6.469513,
+              "fraction_of_12bit_baseline": 0.41219,
+              "seconds": 2.926967
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 4.894574,
+          "encoding": {
+            "bytes": 49089294,
+            "bytes_per_point": 2.734915,
+            "ratio_vs_float32_pos": 5.850274,
+            "fraction_of_12bit_baseline": 0.455819
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44422266,
+              "bytes_per_point": 2.4749,
+              "ratio_vs_float32_pos": 6.464907,
+              "fraction_of_12bit_baseline": 0.412483,
+              "seconds": 2.971277
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 4.860277,
+          "encoding": {
+            "bytes": 49045951,
+            "bytes_per_point": 2.7325,
+            "ratio_vs_float32_pos": 5.855444,
+            "fraction_of_12bit_baseline": 0.455416
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44388206,
+              "bytes_per_point": 2.473003,
+              "ratio_vs_float32_pos": 6.469868,
+              "fraction_of_12bit_baseline": 0.412167,
+              "seconds": 3.053905
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 4.978683,
+          "encoding": {
+            "bytes": 49216771,
+            "bytes_per_point": 2.742017,
+            "ratio_vs_float32_pos": 5.835121,
+            "fraction_of_12bit_baseline": 0.457003
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44405387,
+              "bytes_per_point": 2.47396,
+              "ratio_vs_float32_pos": 6.467365,
+              "fraction_of_12bit_baseline": 0.412326,
+              "seconds": 3.034017
+            }
+          }
+        },
+        "mass_prefix_10_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 4.966727,
+          "encoding": {
+            "bytes": 49217192,
+            "bytes_per_point": 2.74204,
+            "ratio_vs_float32_pos": 5.835071,
+            "fraction_of_12bit_baseline": 0.457007
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 44412447,
+              "bytes_per_point": 2.474353,
+              "ratio_vs_float32_pos": 6.466336,
+              "fraction_of_12bit_baseline": 0.412392,
+              "seconds": 3.023567
+            }
+          }
+        }
+      },
+      "total_seconds": 48.820573
+    },
+    {
+      "label": "apt-analysis/data/e14f067b-4c6f-4c34-8e25-ac1e4a217c57.POS",
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/e14f067b-4c6f-4c34-8e25-ac1e4a217c57.POS",
+      "raw_bytes": 134429648,
+      "point_count": 8401853,
+      "quantized_baseline_bytes": 50411162,
+      "quantize_seconds": 0.324563,
+      "marginal_entropy_bits_per_point": 36.353277,
+      "methods": {
+        "mass_prefix_11_hilbert": {
+          "ordered": false,
+          "transform_seconds": 2.467039,
+          "encoding": {
+            "bytes": 17809559,
+            "bytes_per_point": 2.119718,
+            "ratio_vs_float32_pos": 7.548174,
+            "fraction_of_12bit_baseline": 0.353286
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15053676,
+              "bytes_per_point": 1.791709,
+              "ratio_vs_float32_pos": 8.930021,
+              "fraction_of_12bit_baseline": 0.298618,
+              "seconds": 1.276535
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_xzy": {
+          "ordered": false,
+          "transform_seconds": 2.421421,
+          "encoding": {
+            "bytes": 17799614,
+            "bytes_per_point": 2.118534,
+            "ratio_vs_float32_pos": 7.552391,
+            "fraction_of_12bit_baseline": 0.353089
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15056674,
+              "bytes_per_point": 1.792066,
+              "ratio_vs_float32_pos": 8.928243,
+              "fraction_of_12bit_baseline": 0.298677,
+              "seconds": 1.266047
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yxz": {
+          "ordered": false,
+          "transform_seconds": 2.429,
+          "encoding": {
+            "bytes": 17805050,
+            "bytes_per_point": 2.119181,
+            "ratio_vs_float32_pos": 7.550085,
+            "fraction_of_12bit_baseline": 0.353197
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15056359,
+              "bytes_per_point": 1.792028,
+              "ratio_vs_float32_pos": 8.92843,
+              "fraction_of_12bit_baseline": 0.298671,
+              "seconds": 1.290705
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_yzx": {
+          "ordered": false,
+          "transform_seconds": 2.4546,
+          "encoding": {
+            "bytes": 17795293,
+            "bytes_per_point": 2.11802,
+            "ratio_vs_float32_pos": 7.554225,
+            "fraction_of_12bit_baseline": 0.353003
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15056899,
+              "bytes_per_point": 1.792093,
+              "ratio_vs_float32_pos": 8.92811,
+              "fraction_of_12bit_baseline": 0.298682,
+              "seconds": 1.284457
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zxy": {
+          "ordered": false,
+          "transform_seconds": 2.449704,
+          "encoding": {
+            "bytes": 17848555,
+            "bytes_per_point": 2.124359,
+            "ratio_vs_float32_pos": 7.531682,
+            "fraction_of_12bit_baseline": 0.35406
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15055619,
+              "bytes_per_point": 1.79194,
+              "ratio_vs_float32_pos": 8.928869,
+              "fraction_of_12bit_baseline": 0.298656,
+              "seconds": 1.294257
+            }
+          }
+        },
+        "mass_prefix_11_hilbert_zyx": {
+          "ordered": false,
+          "transform_seconds": 2.448011,
+          "encoding": {
+            "bytes": 17848522,
+            "bytes_per_point": 2.124355,
+            "ratio_vs_float32_pos": 7.531696,
+            "fraction_of_12bit_baseline": 0.354059
+          },
+          "compressed": {
+            "zstd-19": {
+              "bytes": 15052266,
+              "bytes_per_point": 1.791541,
+              "ratio_vs_float32_pos": 8.930858,
+              "fraction_of_12bit_baseline": 0.29859,
+              "seconds": 1.272769
+            }
+          }
+        }
+      },
+      "total_seconds": 22.984905
+    }
+  ]
+}
