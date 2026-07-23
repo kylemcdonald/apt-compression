@@ -287,6 +287,16 @@ function residualPointFraction(range, baseTotal, residualTotal) {
   return Math.min(0.35, residualTotal / Math.max(baseTotal + residualTotal, 1e-6));
 }
 
+function interpolatedCellCoordinate(index, cellCount, rand) {
+  // A tent kernel is a box convolved with a second box. Mixing one tent per
+  // voxel by that voxel's weight produces the piecewise-linear interpolation
+  // of the grid instead of a piecewise-constant block with visible seams.
+  let coordinate = index + rand() + rand() - 0.5;
+  if (coordinate < 0) coordinate = -coordinate;
+  if (coordinate > cellCount) coordinate = 2 * cellCount - coordinate;
+  return Math.max(0, Math.min(cellCount, coordinate));
+}
+
 function sampleFromCdf(cdf, total, indices, target, shape, bounds, range, seed) {
   const points = new Float32Array(target * 4);
   if (!(total > 0) || !target) return points;
@@ -306,9 +316,9 @@ function sampleFromCdf(cdf, total, indices, target, shape, bounds, range, seed) 
     const rem = idx - zi * xy;
     const yi = Math.floor(rem / gx);
     const xi = rem - yi * gx;
-    points[i * 4 + 0] = min[0] + ((xi + rand()) / gx) * extent[0];
-    points[i * 4 + 1] = min[1] + ((yi + rand()) / gy) * extent[1];
-    points[i * 4 + 2] = min[2] + ((zi + rand()) / gz) * extent[2];
+    points[i * 4 + 0] = min[0] + (interpolatedCellCoordinate(xi, gx, rand) / gx) * extent[0];
+    points[i * 4 + 1] = min[1] + (interpolatedCellCoordinate(yi, gy, rand) / gy) * extent[1];
+    points[i * 4 + 2] = min[2] + (interpolatedCellCoordinate(zi, gz, rand) / gz) * extent[2];
     points[i * 4 + 3] = massMin + rand() * massWidth;
   }
   return points;

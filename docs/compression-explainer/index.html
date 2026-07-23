@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APT Compression Explainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="title-row">
+    <h1>APT compression techniques, side by side</h1>
+    <label class="ds-label">dataset
+      <select id="dataset-select"></select>
+    </label>
+  </div>
+  <div class="sub" id="subtitle">loading…</div>
+</header>
+
+<section class="verdict" id="aggregate-verdict" hidden>
+  <div class="verdict-copy">
+    <div class="eyebrow" id="verdict-eyebrow"></div>
+    <h2><span id="verdict-method"></span> is the best balanced codec</h2>
+    <p id="verdict-copy"></p>
+  </div>
+  <div class="verdict-stats" id="verdict-stats"></div>
+</section>
+
+<section class="controls">
+  <div class="control-group">
+    <label>point size <input type="range" id="point-size" min="0.5" max="10" step="0.05" value="0.5">
+      <label class="toggle"><input type="checkbox" id="size-auto" checked> auto</label></label>
+    <label>opacity <input type="range" id="opacity" min="0.01" max="1" step="0.01" value="0.10">
+      <label class="toggle"><input type="checkbox" id="opacity-auto" checked> auto</label></label>
+    <button class="mini-button" id="reset-view">Reset view</button>
+    <span class="cloud-hint">left drag rotate · right drag pan · wheel zoom · double-click reset</span>
+  </div>
+  <div class="control-group" id="species-chips"></div>
+</section>
+
+<section class="panels">
+  <div class="panel" id="panel-A">
+    <div class="panel-head">
+      <span class="panel-tag tag-a">A</span>
+      <select class="method-select"></select>
+      <span class="chips"></span>
+      <span class="pt-count"></span>
+    </div>
+    <canvas class="cloud"></canvas>
+  </div>
+  <div class="panel" id="panel-B">
+    <div class="panel-head">
+      <span class="panel-tag tag-b">B</span>
+      <select class="method-select"></select>
+      <span class="chips"></span>
+      <span class="pt-count"></span>
+    </div>
+    <canvas class="cloud"></canvas>
+  </div>
+</section>
+
+<section class="spectrum-block">
+  <div class="spectrum-head">
+    <span class="legend"><span class="key key-orig"></span>original</span>
+    <span class="legend"><span class="key key-a"></span><span id="legend-a">A</span></span>
+    <span class="legend"><span class="key key-b"></span><span id="legend-b">B</span></span>
+    <span class="sel-chips" id="sel-chips"></span>
+    <button class="mini-button" id="clear-sel" style="display:none">clear selection</button>
+    <span class="hint-inline">drag to select a mass range · wheel to zoom · shift-drag to pan · double-click resets</span>
+  </div>
+  <canvas id="spectrum"></canvas>
+  <div class="representation-block" id="representation-block" hidden>
+    <div class="representation-head">
+      <span class="representation-title" id="representation-title">hybrid storage</span>
+      <span class="representation-legend"><span class="representation-swatch swatch-exact"></span>exact points</span>
+      <span class="representation-legend"><span class="representation-swatch swatch-modeled"></span>modeled distribution</span>
+      <span class="representation-legend"><span class="representation-swatch swatch-sampled"></span>sampled points</span>
+      <span class="representation-legend"><span class="representation-swatch swatch-mixed"></span>mixed boundary bin</span>
+      <span class="representation-hint">hover for bin details</span>
+    </div>
+    <canvas id="representation-map" role="img"
+      aria-label="Hybrid exact-point and modeled-distribution mass intervals"></canvas>
+  </div>
+</section>
+
+<section class="summary">
+  <h2>Cross-dataset benchmark</h2>
+  <div class="viz-note" id="aggregate-note"></div>
+  <div class="table-wrap"><table id="aggregate-table"></table></div>
+</section>
+
+<section class="summary">
+  <h2>Size vs. rare-element fidelity</h2>
+  <div class="viz-note" id="scatter-note"></div>
+  <div id="scatter"></div>
+</section>
+
+<section class="summary">
+  <h2>All methods</h2>
+  <div class="viz-note">click a column header to sort · A/B buttons load a method into a panel ·
+  methods without a stored payload show metrics only</div>
+  <div class="table-wrap"><table id="metrics-table"></table></div>
+</section>
+
+<section class="summary" id="notes">
+  <h2>Techniques &amp; trade-offs</h2>
+  <div class="viz-note">narrative numbers reference the 86a2fa56 (Ga wire) dataset; see the table for the current dataset</div>
+  <div id="notes-body"></div>
+</section>
+
+<script src="viewer.js"></script>
+</body>
+</html>

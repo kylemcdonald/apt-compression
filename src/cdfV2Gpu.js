@@ -60,6 +60,18 @@ fn rand01(seed: u32) -> f32 {
   return f32(hash_u32(seed) & 0x00ffffffu) / 16777216.0;
 }
 
+fn interpolated_cell_coordinate(cell: u32, cellCount: u32, seedA: u32, seedB: u32) -> f32 {
+  var coordinate = f32(cell) + rand01(seedA) + rand01(seedB) - 0.5;
+  let limit = f32(cellCount);
+  if (coordinate < 0.0) {
+    coordinate = -coordinate;
+  }
+  if (coordinate > limit) {
+    coordinate = 2.0 * limit - coordinate;
+  }
+  return clamp(coordinate, 0.0, limit);
+}
+
 fn cell_weight(cell: u32) -> f32 {
   var value = f32(byte_at(&meanPacked, cell)) / 255.0;
   for (var r = 0u; r < params.rank; r = r + 1u) {
@@ -105,9 +117,12 @@ fn sample_points(@builtin(global_invocation_id) gid: vec3<u32>) {
   let yi = rem / params.gx;
   let xi = rem - yi * params.gx;
   let jitterSeed = seedBase ^ select(0x1f123bb5u, 0x9e3779b9u, accepted);
-  let x = params.minX + (f32(xi) + rand01(jitterSeed ^ 0x11u)) / f32(params.gx) * params.extentX;
-  let y = params.minY + (f32(yi) + rand01(jitterSeed ^ 0x21u)) / f32(params.gy) * params.extentY;
-  let z = params.minZ + (f32(zi) + rand01(jitterSeed ^ 0x41u)) / f32(params.gz) * params.extentZ;
+  let xCell = interpolated_cell_coordinate(xi, params.gx, jitterSeed ^ 0x11u, jitterSeed ^ 0x19u);
+  let yCell = interpolated_cell_coordinate(yi, params.gy, jitterSeed ^ 0x21u, jitterSeed ^ 0x29u);
+  let zCell = interpolated_cell_coordinate(zi, params.gz, jitterSeed ^ 0x41u, jitterSeed ^ 0x49u);
+  let x = params.minX + xCell / f32(params.gx) * params.extentX;
+  let y = params.minY + yCell / f32(params.gy) * params.extentY;
+  let z = params.minZ + zCell / f32(params.gz) * params.extentZ;
   let mass = params.massMin + rand01(jitterSeed ^ 0x81u) * params.massWidth;
   points[outIndex] = vec4<f32>(x, y, z, mass);
 }
@@ -183,6 +198,13 @@ function residualPointFraction(range, baseTarget, residualTotal) {
   return Math.min(0.35, residualTotal / Math.max(baseTarget + residualTotal, 1e-6));
 }
 
+function interpolatedCellCoordinate(index, cellCount, rand) {
+  let coordinate = index + rand() + rand() - 0.5;
+  if (coordinate < 0) coordinate = -coordinate;
+  if (coordinate > cellCount) coordinate = 2 * cellCount - coordinate;
+  return Math.max(0, Math.min(cellCount, coordinate));
+}
+
 function sampleFromCdf(cdf, total, indices, target, shape, bounds, range, seed) {
   const points = new Float32Array(target * 4);
   if (!(total > 0) || !target) return points;
@@ -202,9 +224,9 @@ function sampleFromCdf(cdf, total, indices, target, shape, bounds, range, seed) 
     const rem = idx - zi * xy;
     const yi = Math.floor(rem / gx);
     const xi = rem - yi * gx;
-    points[i * 4 + 0] = min[0] + ((xi + rand()) / gx) * extent[0];
-    points[i * 4 + 1] = min[1] + ((yi + rand()) / gy) * extent[1];
-    points[i * 4 + 2] = min[2] + ((zi + rand()) / gz) * extent[2];
+    points[i * 4 + 0] = min[0] + (interpolatedCellCoordinate(xi, gx, rand) / gx) * extent[0];
+    points[i * 4 + 1] = min[1] + (interpolatedCellCoordinate(yi, gy, rand) / gy) * extent[1];
+    points[i * 4 + 2] = min[2] + (interpolatedCellCoordinate(zi, gz, rand) / gz) * extent[2];
     points[i * 4 + 3] = massMin + rand() * massWidth;
   }
   return points;

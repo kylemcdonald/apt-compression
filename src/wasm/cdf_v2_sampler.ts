@@ -30,6 +30,16 @@ function rand01(seed: u32): f32 {
   return <f32>(hashU32(seed) & 0x00ffffff) / 16777216.0;
 }
 
+function interpolatedCellCoordinate(cell: u32, cellCount: u32, a: f32, b: f32): f32 {
+  let coordinate = <f32>cell + a + b - 0.5;
+  const limit = <f32>cellCount;
+  if (coordinate < 0.0) coordinate = -coordinate;
+  if (coordinate > limit) coordinate = 2.0 * limit - coordinate;
+  if (coordinate < 0.0) return 0.0;
+  if (coordinate > limit) return limit;
+  return coordinate;
+}
+
 function cellWeight(
   mean: u32,
   basis: u32,
@@ -106,9 +116,15 @@ export function sample_range(
     const xi = rem - yi * gx;
     const jitterSeed = seedBase ^ (accepted ? 0x9e3779b9 : 0x1f123bb5);
     const base = out + i * 16;
-    store<f32>(base, minX + (<f32>xi + rand01(jitterSeed ^ 0x11)) / <f32>gx * extentX);
-    store<f32>(base + 4, minY + (<f32>yi + rand01(jitterSeed ^ 0x21)) / <f32>gy * extentY);
-    store<f32>(base + 8, minZ + (<f32>zi + rand01(jitterSeed ^ 0x41)) / <f32>gz * extentZ);
+    const xCell = interpolatedCellCoordinate(
+      xi, gx, rand01(jitterSeed ^ 0x11), rand01(jitterSeed ^ 0x19));
+    const yCell = interpolatedCellCoordinate(
+      yi, gy, rand01(jitterSeed ^ 0x21), rand01(jitterSeed ^ 0x29));
+    const zCell = interpolatedCellCoordinate(
+      zi, gz, rand01(jitterSeed ^ 0x41), rand01(jitterSeed ^ 0x49));
+    store<f32>(base, minX + xCell / <f32>gx * extentX);
+    store<f32>(base + 4, minY + yCell / <f32>gy * extentY);
+    store<f32>(base + 8, minZ + zCell / <f32>gz * extentZ);
     store<f32>(base + 12, massMin + rand01(jitterSeed ^ 0x81) * massWidth);
   }
 }
