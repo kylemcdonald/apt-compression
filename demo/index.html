@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Encode APT POS files as compact CPOS previews in your browser.">
+  <title>cpos · APT preview codec</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>cpos</h1>
+      <p>lossy APT <code>.pos</code> codec for quick web previews</p>
+    </div>
+    <a href="https://github.com/kylemcdonald/apt-cpos">source</a>
+  </header>
+
+  <section class="drop-zone" id="drop-zone">
+    <input id="file-input" type="file" accept=".pos,.POS" hidden>
+    <button class="primary" id="choose-file" type="button">Choose .pos</button>
+    <span>or drop a file here</span>
+    <label>
+      retain
+      <select id="max-points">
+        <option value="99800">99,800 points</option>
+        <option value="249500">249,500 points</option>
+        <option value="499000" selected>499,000 points</option>
+        <option value="998000">998,000 points</option>
+      </select>
+    </label>
+    <button id="download" type="button" disabled>Download .cpos</button>
+  </section>
+
+  <div class="status-row">
+    <span id="status" role="status">Loading the public Ck10 steel example…</span>
+    <span id="summary"></span>
+  </div>
+
+  <main class="panels">
+    <article class="panel">
+      <div class="panel-head">
+        <strong>original .pos</strong>
+        <span id="source-stats">drop a POS file to compare</span>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="source-cloud" aria-label="Original POS point cloud"></canvas>
+        <span class="empty-label" id="source-empty">no source file loaded</span>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="panel-head">
+        <strong>decoded .cpos</strong>
+        <span id="cpos-stats">—</span>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="cpos-cloud" aria-label="Decoded CPOS point cloud"></canvas>
+        <span class="empty-label" id="cpos-empty">loading example</span>
+      </div>
+    </article>
+  </main>
+
+  <section class="spectrum-panel">
+    <div class="spectrum-head">
+      <strong>mass spectrum</strong>
+      <span><i class="key original"></i>original counts</span>
+      <span><i class="key retained"></i>retained points · normalized</span>
+      <span class="hint">drag either cloud to rotate · wheel to zoom · double-click to reset</span>
+    </div>
+    <canvas id="spectrum" aria-label="Original and retained mass spectra"></canvas>
+  </section>
+
+  <footer>
+    <span id="example-credit">Public example: Ck10 steel · Zenodo 7979668 · CC-BY-4.0</span>
+    <span>CPOS container 1.0 · codec 1.0.0 · processing stays in this browser</span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

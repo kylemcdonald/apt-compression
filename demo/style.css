@@ -1,0 +1,204 @@
+:root {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --canvas: #070807;
+  --text: #fff;
+  --secondary: #c3c2b7;
+  --muted: #898781;
+  --border: rgba(255, 255, 255, 0.12);
+  --blue: #3987e5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 16px 18px 48px;
+  background: var(--page);
+  color: var(--text);
+  font-size: 14px;
+}
+
+header,
+.drop-zone,
+.status-row,
+.panel-head,
+.spectrum-head,
+footer {
+  display: flex;
+  align-items: center;
+}
+
+header {
+  min-height: 46px;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+h1 {
+  display: inline;
+  margin: 0 9px 0 0;
+  font: 700 21px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+header p { display: inline; margin: 0; color: var(--secondary); }
+a { color: var(--secondary); }
+a:hover { color: var(--text); }
+code, select, button { font: inherit; }
+
+.drop-zone {
+  min-height: 58px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--muted);
+  transition: border-color 120ms, background 120ms;
+}
+
+.drop-zone.dragging {
+  border-color: var(--blue);
+  background: rgba(57, 135, 229, 0.12);
+}
+
+.drop-zone label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+}
+
+button,
+select {
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #262624;
+  color: var(--text);
+}
+
+button { cursor: pointer; }
+button:hover:not(:disabled) { border-color: rgba(255, 255, 255, 0.3); background: #30302e; }
+button.primary { border-color: rgba(57, 135, 229, 0.7); background: var(--blue); }
+button:disabled { cursor: default; opacity: 0.42; }
+
+.status-row {
+  min-height: 38px;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--secondary);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+#summary { color: var(--muted); text-align: right; }
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel,
+.spectrum-panel {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.panel-head {
+  min-height: 28px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px 6px;
+}
+
+.panel-head strong,
+.spectrum-head strong { font-size: 13px; }
+
+.panel-head span {
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.canvas-wrap { position: relative; }
+canvas { display: block; width: 100%; }
+
+canvas[id$="-cloud"] {
+  height: min(64vh, 720px);
+  min-height: 430px;
+  border-radius: 7px;
+  background: var(--canvas);
+  cursor: grab;
+  touch-action: none;
+}
+
+canvas[id$="-cloud"]:active { cursor: grabbing; }
+
+.empty-label {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.spectrum-panel { margin-top: 12px; }
+
+.spectrum-head {
+  min-height: 28px;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 0 2px 6px;
+  color: var(--secondary);
+  font-size: 12px;
+}
+
+.key {
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  margin-right: 5px;
+  border-radius: 2px;
+  vertical-align: 3px;
+}
+
+.key.original { background: var(--muted); }
+.key.retained { background: var(--blue); }
+.hint { margin-left: auto; color: var(--muted); }
+
+#spectrum {
+  height: 170px;
+  border-radius: 7px;
+  background: #111110;
+}
+
+footer {
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 14px;
+  color: var(--muted);
+  font-size: 11.5px;
+}
+
+body.busy { cursor: progress; }
+body.busy button,
+body.busy select { pointer-events: none; }
+
+@media (max-width: 850px) {
+  .panels { grid-template-columns: 1fr; }
+  canvas[id$="-cloud"] { height: 52vh; min-height: 340px; }
+  .drop-zone label { margin-left: 0; }
+  .hint { width: 100%; margin-left: 0; }
+  footer { align-items: flex-start; flex-direction: column; }
+}

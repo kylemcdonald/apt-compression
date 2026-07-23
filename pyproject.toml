@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "apt-cpos"
+version = "1.0.0"
+description = "A lossy APT .POS codec for quick web-based previews"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8",
+]
+
+[project.scripts]
+cpos = "cpos.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cpos"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
