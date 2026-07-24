@@ -77,9 +77,21 @@ python3 -m experiments.lossy4m.cli decode preview.cp4m expanded.pos
 
 ## JavaScript and visualizer
 
-[`javascript/cp4m.js`](javascript/cp4m.js) is a dependency-free ES module for
-inspecting, decoding, and expanding `.cp4m` in browsers and Node. Rendering is
-kept separately in [`demo/renderer.js`](demo/renderer.js).
+[`javascript/cp4m.js`](javascript/cp4m.js) inspects, decodes, and expands
+`.cp4m` in browsers and Node. [`javascript/cp4m-encode.js`](javascript/cp4m-encode.js)
+encodes big-endian `.pos` buffers. Its output is byte-for-byte identical to the
+Python encoder for the same options, including both 0.1 Da and 0.01 Da
+histograms. The encoder vendors Pako 2.1.0 for the same zlib-compatible
+level-9 Deflate stream produced by the Python implementation; its license is
+kept beside the vendored module.
+
+```bash
+node experiments/lossy4m/javascript/encode.mjs \
+  input.pos preview.cp4m
+```
+
+Rendering remains separate in [`demo/renderer.js`](demo/renderer.js), and the
+interactive spectrum is separate in [`demo/spectrum.js`](demo/spectrum.js).
 
 Build the bundled public Ck10 example and a standalone static site:
 
@@ -89,10 +101,18 @@ python3 -m experiments.lossy4m.build_demo \
 python3 -m http.server 8000 -d experiments/lossy4m/site
 ```
 
-The visualizer shows CPOS 1.0 retained points, CP4M exact seeds, and the CP4M
-expanded cloud side by side. Exact and synthesized records use separate
-colors. The spectrum draws original, exact, and synthesized counts, with a
-bin-level exact/synthesized strip and per-bin hover details.
+Drop a `.pos` file on the visualizer to encode both codecs in a Web Worker. It
+shows the original sample, decoded CPOS 1.0 result, expanded CP4M result, and
+all three file sizes side by side. The three clouds share the same bounds and
+camera. Point opacity, point size, additive blending, projection, CP4M dither,
+and provenance coloring are adjustable.
+
+The spectrum compares original counts with CPOS and CP4M retained spectra
+normalized back to the source total, so shape differences are directly
+visible even though the codecs retain different numbers of points. Dragging a
+mass range filters all three clouds; wheel zooms or pans, dragging the y-axis
+blends between logarithmic and linear scaling, and the bottom strip identifies
+exact versus synthesized CP4M bins.
 
 ## Validation and benchmark
 
@@ -109,9 +129,10 @@ python3 -m experiments.lossy4m.report \
 
 The tests verify Python round trips, exact retained 12-bit tuples, exact
 expanded point counts and spectra, checksum/version rejection, allocation
-invariants, and JavaScript decoder parity. The benchmark fully expands every
-file, validates provenance and histogram counts, and compares size and
-distribution metrics with CPOS 1.0.
+invariants, JavaScript decoder parity, and byte-for-byte JavaScript encoder
+parity with Python. The benchmark fully expands every file, validates
+provenance and histogram counts, and compares size and distribution metrics
+with CPOS 1.0.
 
 The source `.POS` files are read from the two local public/reference corpora
 and are never committed:

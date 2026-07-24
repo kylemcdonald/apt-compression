@@ -5,130 +5,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta
     name="description"
-    content="Inspect exact retained seeds and synthesized points in experimental CP4M files."
+    content="Side-by-side browser comparison of an APT POS file, CPOS 1.0, and experimental CP4M."
   >
-  <title>cp4m codec lab</title>
+  <title>POS · CPOS · CP4M</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <div>
-      <h1>cp4m</h1>
-      <span>4M exact 12-bit seeds → original point count</span>
+      <h1>POS · CPOS · CP4M</h1>
+      <span>browser codec comparison</span>
     </div>
     <a href="https://github.com/kylemcdonald/apt-cpos/tree/research/lossy-4m">source</a>
   </header>
 
   <section class="controls" id="drop-zone">
-    <input id="file-input" type="file" accept=".cp4m" hidden>
-    <button class="primary" id="choose-file" type="button">Choose .cp4m</button>
-    <span class="drop-copy">or drop one here</span>
+    <input id="file-input" type="file" accept=".pos" hidden>
+    <button class="primary" id="choose-file" type="button">Choose .pos</button>
+    <span class="drop-copy">or drop a POS file here</span>
+
+    <label class="range-control">
+      <span>opacity <output id="opacity-value" for="opacity">5%</output></span>
+      <input
+        id="opacity"
+        type="range"
+        min="0.00001"
+        max="1"
+        step="0.00001"
+        value="0.05"
+      >
+    </label>
+    <label class="range-control">
+      <span>size <output id="point-size-value" for="point-size">0.50</output></span>
+      <input
+        id="point-size"
+        type="range"
+        min="0.25"
+        max="10"
+        step="0.01"
+        value="0.5"
+      >
+    </label>
+    <label class="check-control">
+      <input id="additive" type="checkbox" checked>
+      additive
+    </label>
+    <label class="check-control">
+      <input id="perspective" type="checkbox" checked>
+      perspective
+    </label>
     <label>
       display
       <select id="display-points">
-        <option value="100000">100k points</option>
-        <option value="250000">250k points</option>
-        <option value="500000" selected>500k points</option>
+        <option value="100000">100k</option>
+        <option value="250000">250k</option>
+        <option value="500000" selected>500k</option>
       </select>
     </label>
     <label>
-      synthesized dither
+      CP4M dither
       <select id="noise">
         <option value="none">none</option>
-        <option value="uniform" selected>uniform ±½ cell</option>
-        <option value="gaussian">clipped Gaussian</option>
+        <option value="uniform" selected>uniform</option>
+        <option value="gaussian">Gaussian</option>
       </select>
     </label>
     <label>
-      expanded color
+      CP4M color
       <select id="color-mode">
         <option value="provenance" selected>exact / synthesized</option>
         <option value="mass">mass</option>
       </select>
     </label>
+    <button id="reset-camera" type="button">Reset view</button>
   </section>
 
   <div class="status-row">
-    <span id="status" role="status">Loading the public Ck10 comparison…</span>
+    <span id="status" role="status">Loading the public Ck10 example…</span>
+    <progress id="progress" max="1" value="0" hidden></progress>
     <span id="summary"></span>
   </div>
 
   <main class="panels">
     <article class="panel">
       <div class="panel-head">
-        <strong>CPOS 1.0 retained · Ck10 baseline</strong>
+        <strong>original .pos</strong>
+        <span id="original-stats">waiting for a POS file</span>
+      </div>
+      <div class="cloud-wrap">
+        <canvas id="original-cloud" aria-label="Original POS point cloud"></canvas>
+        <div class="empty-state" id="original-empty">
+          The example POS is not stored in this repository.<br>
+          Drop a .pos file to render its original points.
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="panel-head">
+        <strong>CPOS 1.0</strong>
         <span id="cpos-stats">loading</span>
+        <button id="download-cpos" type="button" disabled>Download .cpos</button>
       </div>
-      <canvas id="cpos-cloud" aria-label="Current CPOS retained point cloud"></canvas>
+      <div class="cloud-wrap">
+        <canvas id="cpos-cloud" aria-label="CPOS decoded point cloud"></canvas>
+      </div>
     </article>
 
     <article class="panel">
       <div class="panel-head">
-        <strong>CP4M exact seeds</strong>
-        <span id="exact-stats">loading</span>
+        <strong>CP4M 1.0 expanded</strong>
+        <span id="cp4m-stats">loading</span>
+        <button id="download-cp4m" type="button" disabled>Download .cp4m</button>
       </div>
-      <canvas id="exact-cloud" aria-label="CP4M exact retained seeds"></canvas>
-    </article>
-
-    <article class="panel">
-      <div class="panel-head">
-        <strong>CP4M expanded</strong>
-        <span id="expanded-stats">loading</span>
+      <div class="cloud-wrap">
+        <canvas id="cp4m-cloud" aria-label="CP4M expanded point cloud"></canvas>
       </div>
-      <canvas id="expanded-cloud" aria-label="CP4M expanded point cloud"></canvas>
     </article>
   </main>
 
   <section class="spectrum-panel">
     <div class="spectrum-head">
-      <strong>0.1 Da allocation</strong>
-      <span><i class="key exact"></i>exact retained</span>
-      <span><i class="key synthesized"></i>synthesized</span>
-      <span><i class="key total"></i>original total</span>
-      <span class="hint">hover bins for counts · drag clouds to rotate · wheel to zoom</span>
+      <strong>mass spectrum</strong>
+      <span><i class="key source"></i>original counts</span>
+      <span><i class="key cpos"></i>CPOS retained · normalized</span>
+      <span><i class="key cp4m"></i>CP4M exact · normalized</span>
+      <span><i class="key exact"></i><i class="key synthesized"></i>exact / synthesized bins</span>
+      <button id="clear-spectrum" type="button" disabled>Clear selection</button>
+      <span class="hint">
+        drag to filter clouds · wheel to zoom · drag y-axis for log/linear
+      </span>
     </div>
     <div class="spectrum-wrap">
-      <canvas id="spectrum" aria-label="Exact and synthesized counts by mass bin"></canvas>
+      <canvas id="spectrum" aria-label="Codec spectra and mass selection"></canvas>
       <output id="bin-tooltip" hidden></output>
     </div>
   </section>
 
-  <section class="metrics" aria-label="Codec comparison">
-    <div><span>source points</span><strong id="metric-source">—</strong></div>
-    <div><span>CPOS file · Ck10</span><strong id="metric-cpos-size">—</strong></div>
-    <div><span>CP4M file</span><strong id="metric-cp4m-size">—</strong></div>
-    <div><span>exact seeds</span><strong id="metric-exact">—</strong></div>
-    <div><span>synthesized</span><strong id="metric-synth">—</strong></div>
-    <div><span>fully exact bins</span><strong id="metric-bins">—</strong></div>
-  </section>
-
-  <details class="benchmark">
-    <summary>
-      <strong>18-file benchmark</strong>
-      <span id="benchmark-summary">loading comparison…</span>
-    </summary>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>file</th>
-            <th>points</th>
-            <th>.pos</th>
-            <th>CPOS 1.0</th>
-            <th>CP4M</th>
-            <th>exact</th>
-            <th>spatial JS · CPOS</th>
-            <th>spatial JS · CP4M</th>
-          </tr>
-        </thead>
-        <tbody id="benchmark-body"></tbody>
-      </table>
+  <section class="metrics" aria-label="File sizes">
+    <div>
+      <span>original .pos</span>
+      <strong id="metric-original-size">—</strong>
+      <small id="metric-original-detail"></small>
     </div>
-  </details>
+    <div>
+      <span>CPOS 1.0</span>
+      <strong id="metric-cpos-size">—</strong>
+      <small id="metric-cpos-detail"></small>
+    </div>
+    <div>
+      <span>CP4M 1.0</span>
+      <strong id="metric-cp4m-size">—</strong>
+      <small id="metric-cp4m-detail"></small>
+    </div>
+  </section>
 
   <footer>
     <span id="credit">Public example: Ck10 steel · Zenodo 7979668 · CC-BY-4.0</span>
-    <span>CP4M container 1.0 · experimental codec 1.0.0</span>
+    <span>
+      all encoding and decoding stays in this browser ·
+      drag clouds to orbit · shift-drag/right-drag to pan · double-click to reset
+    </span>
   </footer>
 
   <script type="module" src="app.js"></script>

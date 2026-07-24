@@ -8,6 +8,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from cpos.io import write_pos
+
 from .codec import (
     CODEC_VERSION,
     CONTAINER_VERSION,
@@ -176,3 +178,40 @@ def test_javascript_decoder_matches_python(tmp_path: Path):
     assert result["storedTotal"] == 12_003
     assert result["displayPoints"] == 50_003
     assert result["displayExact"] == 12_003
+
+
+@pytest.mark.parametrize(
+    ("bin_width", "exponent"),
+    [(0.1, 0.75), (0.01, 0.5)],
+)
+def test_javascript_encoder_matches_python_byte_for_byte(
+    tmp_path: Path,
+    bin_width: float,
+    exponent: float,
+):
+    points = fixture(count=30_003)
+    expected = encode(
+        points,
+        target_points=12_003,
+        bin_width_da=bin_width,
+        allocation_exponent=exponent,
+    )
+    source_path = tmp_path / "fixture.pos"
+    output_path = tmp_path / "javascript.cp4m"
+    write_pos(source_path, points)
+    root = Path(__file__).parents[2]
+    subprocess.run(
+        (
+            "node",
+            str(root / "experiments/lossy4m/javascript/encode.mjs"),
+            str(source_path),
+            str(output_path),
+            "12003",
+            str(bin_width),
+            str(exponent),
+        ),
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert output_path.read_bytes() == expected

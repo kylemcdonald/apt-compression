@@ -7,10 +7,15 @@ uniform float uScale;
 uniform float uYaw;
 uniform float uPitch;
 uniform float uZoom;
+uniform vec2 uPan;
 uniform float uAspect;
 uniform float uPointSize;
 uniform float uColorMode;
+uniform float uPerspective;
+uniform float uMassMin;
+uniform float uMassMax;
 varying vec3 vColor;
+varying float vVisible;
 
 vec3 palette(float t) {
   t = clamp(t, 0.0, 1.0);
@@ -26,18 +31,35 @@ vec3 palette(float t) {
 }
 
 void main() {
-  vec3 p = (aPosition - uCenter) * uScale;
+  vVisible = (aMass >= uMassMin && aMass <= uMassMax) ? 1.0 : 0.0;
+
+  // APT reconstructions are conventionally tall along z. Put z on the
+  // horizontal image axis, matching Rangefinder's point-image orientation.
+  vec3 p = vec3(
+    aPosition.z - uCenter.z,
+    aPosition.x - uCenter.x,
+    aPosition.y - uCenter.y
+  ) * uScale;
+
   float cy = cos(uYaw);
   float sy = sin(uYaw);
   float cp = cos(uPitch);
   float sp = sin(uPitch);
-  float xr = cy * p.x - sy * p.y;
-  float yr = sy * p.x + cy * p.y;
-  float ys = cp * p.z - sp * yr;
-  gl_Position = vec4(xr * uZoom / uAspect, ys * uZoom, 0.0, 1.0);
-  gl_PointSize = uPointSize;
+  float xr = cy * p.x + sy * p.z;
+  float zr = -sy * p.x + cy * p.z;
+  float yr = cp * p.y - sp * zr;
+  float zd = sp * p.y + cp * zr;
+
+  vec2 orthographic = vec2(xr / uAspect, yr) * uZoom;
+  float cameraDistance = 2.4;
+  float perspectiveScale = 1.6 / max(0.25, cameraDistance - zd);
+  vec2 perspective = orthographic * perspectiveScale;
+  vec2 projected = mix(orthographic, perspective, uPerspective) + uPan;
+  gl_Position = vec4(projected, 0.0, 1.0);
+  gl_PointSize = max(0.25, uPointSize);
+
   vec3 exactColor = vec3(0.20, 0.66, 0.96);
-  vec3 synthesizedColor = vec3(0.95, 0.33, 0.12);
+  vec3 synthesizedColor = vec3(0.98, 0.25, 0.08);
   vec3 provenance = mix(synthesizedColor, exactColor, aExact);
   vColor = mix(palette(aMass / 120.0), provenance, uColorMode);
 }`;
@@ -46,64 +68,95 @@ const FRAGMENT_SHADER = `
 precision mediump float;
 uniform float uOpacity;
 varying vec3 vColor;
+varying float vVisible;
 
 void main() {
+  if (vVisible < 0.5 || uOpacity <= 0.0) discard;
   vec2 p = gl_PointCoord - vec2(0.5);
   if (dot(p, p) > 0.25) discard;
   gl_FragColor = vec4(vColor, uOpacity);
 }`;
 
-function shader(gl, type, source) {
-  const value = gl.createShader(type);
-  gl.shaderSource(value, source);
-  gl.compileShader(value);
-  if (!gl.getShaderParameter(value, gl.COMPILE_STATUS)) {
-    throw new Error(gl.getShaderInfoLog(value) || "WebGL shader compilation failed");
+function compileShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    throw new Error(
+      gl.getShaderInfoLog(shader) || "WebGL shader compilation failed",
+    );
   }
-  return value;
+  return shader;
 }
 
-function program(gl) {
-  const value = gl.createProgram();
-  gl.attachShader(value, shader(gl, gl.VERTEX_SHADER, VERTEX_SHADER));
-  gl.attachShader(value, shader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER));
-  gl.linkProgram(value);
-  if (!gl.getProgramParameter(value, gl.LINK_STATUS)) {
-    throw new Error(gl.getProgramInfoLog(value) || "WebGL program linking failed");
+function createProgram(gl) {
+  const program = gl.createProgram();
+  gl.attachShader(program, compileShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER));
+  gl.attachShader(
+    program,
+    compileShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER),
+  );
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    throw new Error(
+      gl.getProgramInfoLog(program) || "WebGL program linking failed",
+    );
   }
-  return value;
-}
-
-export function createSharedCamera() {
-  return {
-    yaw: -0.72,
-    pitch: 0.34,
-    zoom: 0.72,
-    views: new Set(),
-  };
+  return program;
 }
 
 function redraw(camera) {
   for (const view of camera.views) view.draw();
 }
 
-export class ProvenanceCloudRenderer {
-  constructor(canvas, camera, { colorMode = "mass" } = {}) {
+export function createSharedCamera() {
+  return {
+    yaw: 0.08,
+    pitch: -0.1,
+    zoom: 1,
+    panX: 0,
+    panY: 0,
+    perspective: true,
+    views: new Set(),
+    reset() {
+      this.yaw = 0.08;
+      this.pitch = -0.1;
+      this.zoom = 1;
+      this.panX = 0;
+      this.panY = 0;
+      redraw(this);
+    },
+  };
+}
+
+export class PointCloudRenderer {
+  constructor(canvas, camera, {
+    colorMode = "mass",
+    pointSize = 0.7,
+    opacity = 0.05,
+    additive = true,
+  } = {}) {
     this.canvas = canvas;
     this.camera = camera;
     this.colorMode = colorMode;
+    this.pointSize = pointSize;
+    this.opacity = opacity;
+    this.additive = additive;
+    this.massMin = -1e9;
+    this.massMax = 1e9;
     this.gl = canvas.getContext("webgl", {
       antialias: false,
       alpha: false,
       preserveDrawingBuffer: false,
+      powerPreference: "high-performance",
     });
     if (!this.gl) throw new Error("WebGL is unavailable");
-    this.program = program(this.gl);
+    this.program = createProgram(this.gl);
     this.pointBuffer = this.gl.createBuffer();
     this.exactBuffer = this.gl.createBuffer();
     this.count = 0;
     this.center = [0, 0, 0];
-    this.scale = 1;
+    this.extent = [1, 1, 1];
     this.locations = {
       position: this.gl.getAttribLocation(this.program, "aPosition"),
       mass: this.gl.getAttribLocation(this.program, "aMass"),
@@ -113,10 +166,14 @@ export class ProvenanceCloudRenderer {
       yaw: this.gl.getUniformLocation(this.program, "uYaw"),
       pitch: this.gl.getUniformLocation(this.program, "uPitch"),
       zoom: this.gl.getUniformLocation(this.program, "uZoom"),
+      pan: this.gl.getUniformLocation(this.program, "uPan"),
       aspect: this.gl.getUniformLocation(this.program, "uAspect"),
       pointSize: this.gl.getUniformLocation(this.program, "uPointSize"),
       opacity: this.gl.getUniformLocation(this.program, "uOpacity"),
       colorMode: this.gl.getUniformLocation(this.program, "uColorMode"),
+      perspective: this.gl.getUniformLocation(this.program, "uPerspective"),
+      massMin: this.gl.getUniformLocation(this.program, "uMassMin"),
+      massMax: this.gl.getUniformLocation(this.program, "uMassMax"),
     };
     camera.views.add(this);
     this.bindInteraction();
@@ -125,45 +182,55 @@ export class ProvenanceCloudRenderer {
   }
 
   bindInteraction() {
-    let dragging = false;
-    let previousX = 0;
-    let previousY = 0;
+    let drag = null;
+    this.canvas.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
     this.canvas.addEventListener("pointerdown", (event) => {
-      dragging = true;
-      previousX = event.clientX;
-      previousY = event.clientY;
+      drag = {
+        x: event.clientX,
+        y: event.clientY,
+        pan: event.button !== 0 || event.shiftKey,
+      };
       this.canvas.setPointerCapture(event.pointerId);
     });
     this.canvas.addEventListener("pointermove", (event) => {
-      if (!dragging) return;
-      this.camera.yaw += (event.clientX - previousX) * 0.008;
-      this.camera.pitch = Math.max(
-        -1.45,
-        Math.min(1.45, this.camera.pitch + (event.clientY - previousY) * 0.008),
-      );
-      previousX = event.clientX;
-      previousY = event.clientY;
+      if (!drag) return;
+      const dx = event.clientX - drag.x;
+      const dy = event.clientY - drag.y;
+      if (drag.pan) {
+        this.camera.panX += dx / Math.max(1, this.canvas.clientWidth) * 2;
+        this.camera.panY -= dy / Math.max(1, this.canvas.clientHeight) * 2;
+      } else {
+        this.camera.yaw += dx * 0.007;
+        this.camera.pitch = Math.max(
+          -1.48,
+          Math.min(1.48, this.camera.pitch + dy * 0.007),
+        );
+      }
+      drag.x = event.clientX;
+      drag.y = event.clientY;
       redraw(this.camera);
     });
     const end = () => {
-      dragging = false;
+      drag = null;
     };
     this.canvas.addEventListener("pointerup", end);
     this.canvas.addEventListener("pointercancel", end);
     this.canvas.addEventListener("wheel", (event) => {
       event.preventDefault();
       this.camera.zoom = Math.max(
-        0.15,
-        Math.min(8, this.camera.zoom * Math.exp(-event.deltaY * 0.001)),
+        0.08,
+        Math.min(40, this.camera.zoom * Math.exp(-event.deltaY * 0.001)),
       );
       redraw(this.camera);
     }, { passive: false });
-    this.canvas.addEventListener("dblclick", () => {
-      this.camera.yaw = -0.72;
-      this.camera.pitch = 0.34;
-      this.camera.zoom = 0.72;
-      redraw(this.camera);
-    });
+    this.canvas.addEventListener("dblclick", () => this.camera.reset());
+  }
+
+  clear() {
+    this.count = 0;
+    this.draw();
   }
 
   setColorMode(mode) {
@@ -171,6 +238,49 @@ export class ProvenanceCloudRenderer {
       throw new Error("color mode must be mass or provenance");
     }
     this.colorMode = mode;
+    this.draw();
+  }
+
+  setAppearance({
+    pointSize = this.pointSize,
+    opacity = this.opacity,
+    additive = this.additive,
+    perspective = this.camera.perspective,
+  } = {}) {
+    this.pointSize = Math.max(0.25, Math.min(10, Number(pointSize)));
+    this.opacity = Math.max(1 / 65536, Math.min(1, Number(opacity)));
+    this.additive = Boolean(additive);
+    this.camera.perspective = Boolean(perspective);
+    redraw(this.camera);
+  }
+
+  setMassWindow(window) {
+    this.massMin = window ? window.min : -1e9;
+    this.massMax = window ? window.max : 1e9;
+    this.draw();
+  }
+
+  setBounds(minimum, maximum) {
+    if (
+      !Array.isArray(minimum)
+      || !Array.isArray(maximum)
+      || minimum.length < 3
+      || maximum.length < 3
+    ) {
+      throw new TypeError("bounds must contain three spatial dimensions");
+    }
+    this.center = [0, 1, 2].map(
+      (axis) => (Number(minimum[axis]) + Number(maximum[axis])) * 0.5,
+    );
+    this.extent = [0, 1, 2].map(
+      (axis) => Number(maximum[axis]) - Number(minimum[axis]),
+    );
+    if (
+      this.center.some((value) => !Number.isFinite(value))
+      || this.extent.some((value) => !Number.isFinite(value) || value < 0)
+    ) {
+      throw new Error("bounds must be finite and ordered");
+    }
     this.draw();
   }
 
@@ -189,15 +299,16 @@ export class ProvenanceCloudRenderer {
     }
     const minimum = [Infinity, Infinity, Infinity];
     const maximum = [-Infinity, -Infinity, -Infinity];
-    for (let index = 0; index < points.length; index += 4) {
+    for (let record = 0; record < points.length; record += 4) {
       for (let axis = 0; axis < 3; axis += 1) {
-        minimum[axis] = Math.min(minimum[axis], points[index + axis]);
-        maximum[axis] = Math.max(maximum[axis], points[index + axis]);
+        minimum[axis] = Math.min(minimum[axis], points[record + axis]);
+        maximum[axis] = Math.max(maximum[axis], points[record + axis]);
       }
     }
-    this.center = minimum.map((value, axis) => (value + maximum[axis]) * 0.5);
-    const extent = maximum.map((value, axis) => value - minimum[axis]);
-    this.scale = 1 / Math.max(...extent, 1e-9);
+    this.center = minimum.map((value, axis) => (
+      (value + maximum[axis]) * 0.5
+    ));
+    this.extent = minimum.map((value, axis) => maximum[axis] - value);
     const gl = this.gl;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.pointBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
@@ -223,6 +334,19 @@ export class ProvenanceCloudRenderer {
     gl.clearColor(0.027, 0.031, 0.027, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
     if (!this.count) return;
+
+    const aspect = width / height;
+    const horizontalExtent = this.extent[2];
+    const verticalExtent = this.extent[0];
+    const depthExtent = this.extent[1];
+    const fitExtent = Math.max(
+      horizontalExtent / Math.max(aspect, 1e-6),
+      verticalExtent,
+      depthExtent * 0.45,
+      1e-9,
+    );
+    const fitScale = 1.7 / fitExtent;
+
     gl.useProgram(this.program);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.pointBuffer);
     gl.enableVertexAttribArray(this.locations.position);
@@ -233,122 +357,35 @@ export class ProvenanceCloudRenderer {
     gl.enableVertexAttribArray(this.locations.exact);
     gl.vertexAttribPointer(this.locations.exact, 1, gl.FLOAT, false, 4, 0);
     gl.uniform3fv(this.locations.center, this.center);
-    gl.uniform1f(this.locations.scale, this.scale);
+    gl.uniform1f(this.locations.scale, fitScale);
     gl.uniform1f(this.locations.yaw, this.camera.yaw);
     gl.uniform1f(this.locations.pitch, this.camera.pitch);
     gl.uniform1f(this.locations.zoom, this.camera.zoom);
-    gl.uniform1f(this.locations.aspect, width / height);
-    gl.uniform1f(this.locations.pointSize, Math.max(1.15, ratio * 0.86));
-    gl.uniform1f(this.locations.colorMode, this.colorMode === "provenance" ? 1 : 0);
-    gl.uniform1f(
-      this.locations.opacity,
-      Math.max(0.035, Math.min(0.2, 18000 / this.count)),
+    gl.uniform2f(
+      this.locations.pan,
+      this.camera.panX,
+      this.camera.panY,
     );
+    gl.uniform1f(this.locations.aspect, aspect);
+    gl.uniform1f(this.locations.pointSize, this.pointSize * ratio);
+    gl.uniform1f(this.locations.opacity, this.opacity);
+    gl.uniform1f(
+      this.locations.colorMode,
+      this.colorMode === "provenance" ? 1 : 0,
+    );
+    gl.uniform1f(
+      this.locations.perspective,
+      this.camera.perspective ? 1 : 0,
+    );
+    gl.uniform1f(this.locations.massMin, this.massMin);
+    gl.uniform1f(this.locations.massMax, this.massMax);
     gl.disable(gl.DEPTH_TEST);
+    gl.depthMask(false);
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(
+      gl.SRC_ALPHA,
+      this.additive ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA,
+    );
     gl.drawArrays(gl.POINTS, 0, this.count);
   }
-}
-
-function resizeCanvas(canvas) {
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
-  const width = Math.max(1, Math.round(canvas.clientWidth * ratio));
-  const height = Math.max(1, Math.round(canvas.clientHeight * ratio));
-  if (canvas.width !== width || canvas.height !== height) {
-    canvas.width = width;
-    canvas.height = height;
-  }
-  return { width, height, ratio };
-}
-
-function pixelSum(counts, binsPerPixel, pixel) {
-  const start = Math.floor(pixel * binsPerPixel);
-  const end = Math.min(counts.length, Math.ceil((pixel + 1) * binsPerPixel));
-  let sum = 0;
-  for (let bin = start; bin < end; bin += 1) sum += counts[bin];
-  return sum;
-}
-
-export function drawAllocationSpectrum(
-  canvas,
-  trueCounts,
-  storedCounts,
-  {
-    binWidth = 0.1,
-    maxMass = 120,
-  } = {},
-) {
-  const { width, height, ratio } = resizeCanvas(canvas);
-  const context = canvas.getContext("2d");
-  context.clearRect(0, 0, width, height);
-  context.fillStyle = "#111110";
-  context.fillRect(0, 0, width, height);
-  if (!trueCounts || !storedCounts) return null;
-  const padding = {
-    left: 42 * ratio,
-    right: 10 * ratio,
-    top: 9 * ratio,
-    bottom: 24 * ratio,
-  };
-  const plotWidth = width - padding.left - padding.right;
-  const plotHeight = height - padding.top - padding.bottom;
-  const visibleBins = Math.min(trueCounts.length, Math.ceil(maxMass / binWidth));
-  const binsPerPixel = visibleBins / plotWidth;
-  let peak = 1;
-  for (let bin = 0; bin < visibleBins; bin += 1) {
-    peak = Math.max(peak, trueCounts[bin]);
-  }
-  const logPeak = Math.log1p(peak);
-  context.strokeStyle = "rgba(255,255,255,0.10)";
-  context.lineWidth = ratio;
-  context.beginPath();
-  context.moveTo(padding.left, padding.top + plotHeight);
-  context.lineTo(padding.left + plotWidth, padding.top + plotHeight);
-  context.stroke();
-
-  function trace(color, getter) {
-    context.strokeStyle = color;
-    context.lineWidth = ratio;
-    context.beginPath();
-    for (let x = 0; x < plotWidth; x += 1) {
-      const count = getter(x);
-      const y = padding.top + plotHeight * (1 - Math.log1p(count) / logPeak);
-      if (x === 0) context.moveTo(padding.left + x, y);
-      else context.lineTo(padding.left + x, y);
-    }
-    context.stroke();
-  }
-  trace("#898781", (x) => pixelSum(trueCounts, binsPerPixel, x));
-  trace("#f26932", (x) => (
-    pixelSum(trueCounts, binsPerPixel, x)
-    - pixelSum(storedCounts, binsPerPixel, x)
-  ));
-  trace("#4ba3f2", (x) => pixelSum(storedCounts, binsPerPixel, x));
-
-  const stripY = padding.top + plotHeight - 3 * ratio;
-  for (let x = 0; x < plotWidth; x += 1) {
-    const start = Math.floor(x * binsPerPixel);
-    const end = Math.min(visibleBins, Math.ceil((x + 1) * binsPerPixel));
-    let exact = true;
-    let active = false;
-    for (let bin = start; bin < end; bin += 1) {
-      active ||= trueCounts[bin] > 0;
-      exact &&= trueCounts[bin] === storedCounts[bin];
-    }
-    context.fillStyle = !active
-      ? "rgba(255,255,255,0.04)"
-      : exact ? "#4ba3f2" : "#f26932";
-    context.fillRect(padding.left + x, stripY, 1, 3 * ratio);
-  }
-
-  context.fillStyle = "#898781";
-  context.font = `${10 * ratio}px system-ui`;
-  context.textAlign = "center";
-  context.textBaseline = "top";
-  for (const mass of [0, 20, 40, 60, 80, 100, 120]) {
-    const x = padding.left + mass / maxMass * plotWidth;
-    context.fillText(`${mass}`, x, padding.top + plotHeight + 6 * ratio);
-  }
-  return { padding, plotWidth, plotHeight, visibleBins, ratio };
 }

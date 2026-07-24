@@ -84,14 +84,34 @@ def main() -> int:
     if args.site:
         root = Path(__file__).parents[2]
         args.site.mkdir(parents=True, exist_ok=True)
-        for name in ("index.html", "style.css", "app.js", "renderer.js"):
+        for name in (
+            "index.html",
+            "style.css",
+            "app.js",
+            "renderer.js",
+            "spectrum.js",
+            "encoder-worker.js",
+        ):
             shutil.copy2(args.demo / name, args.site / name)
         shutil.copy2(
             Path(__file__).parent / "javascript" / "cp4m.js",
             args.site / "cp4m.js",
         )
+        shutil.copy2(
+            Path(__file__).parent / "javascript" / "cp4m-encode.js",
+            args.site / "cp4m-encode.js",
+        )
+        shutil.copytree(
+            Path(__file__).parent / "javascript" / "vendor",
+            args.site / "vendor",
+            dirs_exist_ok=True,
+        )
         shutil.copy2(root / "javascript" / "cpos.js", args.site / "cpos.js")
         shutil.copytree(data, args.site / "data", dirs_exist_ok=True)
+        shutil.copy2(
+            root / "demo" / "data" / "example.cpos",
+            args.site / "data" / "example.cpos",
+        )
     return 0
 
 

@@ -92,6 +92,11 @@ stream in retained-record order.
 The outer core uses zlib/Deflate level 9 so the same file can be decoded with
 the browser-native `DecompressionStream("deflate")`.
 
+The JavaScript reference encoder uses the vendored Pako 2.1.0 Deflate
+implementation. For identical input records and codec options, the complete
+container is byte-for-byte identical to the Python reference encoder,
+including the compressed stream and CRC32.
+
 ## Expansion
 
 Decoding the retained core exactly reconstructs the stored multiset of 12-bit

@@ -87,4 +87,6 @@ branch.
 The [`research/lossy-4m`](experiments/lossy4m/README.md) branch contains an
 experimental mass-aware codec that retains up to four million exact 12-bit
 seeds and expands them back to the source point count with explicit
-exact/synthesized provenance.
+exact/synthesized provenance. Its JavaScript encoder is byte-equivalent to
+Python, and its local visualizer can encode a dropped `.pos` file and compare
+the original, CPOS, and CP4M results side by side.
