@@ -83,3 +83,8 @@ python3 scripts/build_demo.py --pos /path/to/R56_01769-v01.pos
 Earlier compression experiments remain isolated on the
 [`archive/all-codecs`](https://github.com/kylemcdonald/apt-cpos/tree/archive/all-codecs)
 branch.
+
+The [`research/lossy-4m`](experiments/lossy4m/README.md) branch contains an
+experimental mass-aware codec that retains up to four million exact 12-bit
+seeds and expands them back to the source point count with explicit
+exact/synthesized provenance.

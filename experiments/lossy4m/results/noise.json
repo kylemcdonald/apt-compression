@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-07-24T01:48:22.133452+00:00",
+  "grid_size": 64,
+  "files": [
+    {
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_Ck10_steel_felfer_R56_01769.pos",
+      "point_count": 5525361,
+      "file_bytes": 8955422,
+      "modes": [
+        {
+          "noise": "none",
+          "decode_and_measure_seconds": 1.054973,
+          "quality": {
+            "spatial_js_bits": 0.000201644,
+            "spatial_total_variation": 0.009820716,
+            "occupied_voxel_recall": 0.997234449,
+            "mean_axis_emd": 4.6507e-05
+          }
+        },
+        {
+          "noise": "uniform",
+          "decode_and_measure_seconds": 1.11755,
+          "quality": {
+            "spatial_js_bits": 0.000207896,
+            "spatial_total_variation": 0.010127121,
+            "occupied_voxel_recall": 0.997383938,
+            "mean_axis_emd": 3.4067e-05
+          }
+        },
+        {
+          "noise": "gaussian",
+          "decode_and_measure_seconds": 1.214274,
+          "quality": {
+            "spatial_js_bits": 0.000204094,
+            "spatial_total_variation": 0.009953377,
+            "occupied_voxel_recall": 0.997325804,
+            "mean_axis_emd": 3.9403e-05
+          }
+        }
+      ]
+    },
+    {
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/Sample 3 -POS file.POS",
+      "point_count": 17949114,
+      "file_bytes": 12889554,
+      "modes": [
+        {
+          "noise": "none",
+          "decode_and_measure_seconds": 1.823243,
+          "quality": {
+            "spatial_js_bits": 0.002199448,
+            "spatial_total_variation": 0.040199477,
+            "occupied_voxel_recall": 0.989185858,
+            "mean_axis_emd": 5.335e-05
+          }
+        },
+        {
+          "noise": "uniform",
+          "decode_and_measure_seconds": 2.287723,
+          "quality": {
+            "spatial_js_bits": 0.00217108,
+            "spatial_total_variation": 0.040057576,
+            "occupied_voxel_recall": 0.990373732,
+            "mean_axis_emd": 2.9523e-05
+          }
+        },
+        {
+          "noise": "gaussian",
+          "decode_and_measure_seconds": 3.333668,
+          "quality": {
+            "spatial_js_bits": 0.002175927,
+            "spatial_total_variation": 0.040083427,
+            "occupied_voxel_recall": 0.990172018,
+            "mean_axis_emd": 3.6714e-05
+          }
+        }
+      ]
+    }
+  ]
+}

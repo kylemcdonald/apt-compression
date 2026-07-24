@@ -1,0 +1,744 @@
+{
+  "generated_at": "2026-07-24T01:42:53.926787+00:00",
+  "target_points": 4000000,
+  "files": [
+    {
+      "path": "/Users/kyle/Documents/GitHub/uap/rangefinder/controls/control_Ck10_steel_felfer_R56_01769.pos",
+      "point_count": 5525361,
+      "candidates": [
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.25,
+          "file_bytes": 10575797,
+          "seconds": 7.878278,
+          "quality": {
+            "spatial_js_bits": 2.1778e-05,
+            "spatial_total_variation": 0.002767311,
+            "occupied_voxel_recall": 0.997369387,
+            "mean_axis_emd": 4.5552e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29708,
+            "exact_bins": 29703,
+            "exact_bin_fraction": 0.999831695,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715261224
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.5,
+          "file_bytes": 10571709,
+          "seconds": 8.021492,
+          "quality": {
+            "spatial_js_bits": 2.0075e-05,
+            "spatial_total_variation": 0.002765195,
+            "occupied_voxel_recall": 0.997858803,
+            "mean_axis_emd": 4.6956e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29708,
+            "exact_bins": 29703,
+            "exact_bin_fraction": 0.999831695,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715261224
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.75,
+          "file_bytes": 10558515,
+          "seconds": 8.018522,
+          "quality": {
+            "spatial_js_bits": 2.1862e-05,
+            "spatial_total_variation": 0.002854129,
+            "occupied_voxel_recall": 0.997491741,
+            "mean_axis_emd": 4.6485e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29708,
+            "exact_bins": 29700,
+            "exact_bin_fraction": 0.999730712,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715261224
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 1.0,
+          "file_bytes": 10219851,
+          "seconds": 7.951958,
+          "quality": {
+            "spatial_js_bits": 4.5764e-05,
+            "spatial_total_variation": 0.005113088,
+            "occupied_voxel_recall": 0.997002325,
+            "mean_axis_emd": 5.7912e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29708,
+            "exact_bins": 13039,
+            "exact_bin_fraction": 0.438905345,
+            "median_bin_retention": 0.875,
+            "rare_point_retention": 0.949913751,
+            "major_point_retention": 0.719456067
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.25,
+          "file_bytes": 9300923,
+          "seconds": 3.393989,
+          "quality": {
+            "spatial_js_bits": 1.4216e-05,
+            "spatial_total_variation": 0.002231795,
+            "occupied_voxel_recall": 0.997675272,
+            "mean_axis_emd": 4.6479e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 5990,
+            "exact_bins": 5989,
+            "exact_bin_fraction": 0.999833055,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715186685
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.5,
+          "file_bytes": 9300923,
+          "seconds": 3.306256,
+          "quality": {
+            "spatial_js_bits": 1.4216e-05,
+            "spatial_total_variation": 0.002231795,
+            "occupied_voxel_recall": 0.997675272,
+            "mean_axis_emd": 4.6479e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 5990,
+            "exact_bins": 5989,
+            "exact_bin_fraction": 0.999833055,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715186685
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.75,
+          "file_bytes": 9288639,
+          "seconds": 3.287984,
+          "quality": {
+            "spatial_js_bits": 1.5002e-05,
+            "spatial_total_variation": 0.002288578,
+            "occupied_voxel_recall": 0.997797626,
+            "mean_axis_emd": 4.617e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 5990,
+            "exact_bins": 5988,
+            "exact_bin_fraction": 0.99966611,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715186685
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 1.0,
+          "file_bytes": 8898107,
+          "seconds": 3.236114,
+          "quality": {
+            "spatial_js_bits": 3.2432e-05,
+            "spatial_total_variation": 0.004383487,
+            "occupied_voxel_recall": 0.99791998,
+            "mean_axis_emd": 3.2243e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 5990,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.756097561,
+            "rare_point_retention": 0.769340782,
+            "major_point_retention": 0.722963329
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.25,
+          "file_bytes": 8955422,
+          "seconds": 2.774149,
+          "quality": {
+            "spatial_js_bits": 1.3309e-05,
+            "spatial_total_variation": 0.002202341,
+            "occupied_voxel_recall": 0.997981157,
+            "mean_axis_emd": 4.6129e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 2995,
+            "exact_bins": 2994,
+            "exact_bin_fraction": 0.99966611,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715120886
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.5,
+          "file_bytes": 8955422,
+          "seconds": 2.684892,
+          "quality": {
+            "spatial_js_bits": 1.3309e-05,
+            "spatial_total_variation": 0.002202341,
+            "occupied_voxel_recall": 0.997981157,
+            "mean_axis_emd": 4.6129e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 2995,
+            "exact_bins": 2994,
+            "exact_bin_fraction": 0.99966611,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715120886
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.75,
+          "file_bytes": 8955422,
+          "seconds": 2.689429,
+          "quality": {
+            "spatial_js_bits": 1.3309e-05,
+            "spatial_total_variation": 0.002202341,
+            "occupied_voxel_recall": 0.997981157,
+            "mean_axis_emd": 4.6129e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 2995,
+            "exact_bins": 2994,
+            "exact_bin_fraction": 0.99966611,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.715120886
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 1.0,
+          "file_bytes": 8593085,
+          "seconds": 2.930826,
+          "quality": {
+            "spatial_js_bits": 3.0898e-05,
+            "spatial_total_variation": 0.004230192,
+            "occupied_voxel_recall": 0.997552918,
+            "mean_axis_emd": 4.1552e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 2995,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.739130435,
+            "rare_point_retention": 0.746368347,
+            "major_point_retention": 0.72344934
+          }
+        }
+      ]
+    },
+    {
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/2166bb75-7ff6-4c85-bf2d-564431f0b089.POS",
+      "point_count": 29810068,
+      "candidates": [
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.25,
+          "file_bytes": 11171922,
+          "seconds": 16.401542,
+          "quality": {
+            "spatial_js_bits": 7.842e-05,
+            "spatial_total_variation": 0.004233797,
+            "occupied_voxel_recall": 0.988844879,
+            "mean_axis_emd": 5.6059e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29909,
+            "exact_bins": 29884,
+            "exact_bin_fraction": 0.999164131,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128366784
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.5,
+          "file_bytes": 10923943,
+          "seconds": 16.122318,
+          "quality": {
+            "spatial_js_bits": 4.2084e-05,
+            "spatial_total_variation": 0.002667618,
+            "occupied_voxel_recall": 0.988602377,
+            "mean_axis_emd": 5.2278e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29909,
+            "exact_bins": 29868,
+            "exact_bin_fraction": 0.998629175,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128366784
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.75,
+          "file_bytes": 10422609,
+          "seconds": 16.131954,
+          "quality": {
+            "spatial_js_bits": 2.6755e-05,
+            "spatial_total_variation": 0.002391812,
+            "occupied_voxel_recall": 0.989976558,
+            "mean_axis_emd": 4.8329e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29909,
+            "exact_bins": 29757,
+            "exact_bin_fraction": 0.994917918,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128366784
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 1.0,
+          "file_bytes": 9115766,
+          "seconds": 16.128907,
+          "quality": {
+            "spatial_js_bits": 4.0971e-05,
+            "spatial_total_variation": 0.004158067,
+            "occupied_voxel_recall": 0.989006548,
+            "mean_axis_emd": 9.6444e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 29909,
+            "exact_bins": 453,
+            "exact_bin_fraction": 0.015145943,
+            "median_bin_retention": 0.285714286,
+            "rare_point_retention": 0.359127446,
+            "major_point_retention": 0.13327875
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.25,
+          "file_bytes": 9929505,
+          "seconds": 10.191071,
+          "quality": {
+            "spatial_js_bits": 3.8094e-05,
+            "spatial_total_variation": 0.002385582,
+            "occupied_voxel_recall": 0.98827904,
+            "mean_axis_emd": 5.1859e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 5993,
+            "exact_bin_fraction": 0.998833333,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128282148
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.5,
+          "file_bytes": 9680581,
+          "seconds": 10.788847,
+          "quality": {
+            "spatial_js_bits": 2.2783e-05,
+            "spatial_total_variation": 0.001742854,
+            "occupied_voxel_recall": 0.989087382,
+            "mean_axis_emd": 5.0917e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 5986,
+            "exact_bin_fraction": 0.997666667,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128282148
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.75,
+          "file_bytes": 9175417,
+          "seconds": 10.544237,
+          "quality": {
+            "spatial_js_bits": 1.8393e-05,
+            "spatial_total_variation": 0.001646198,
+            "occupied_voxel_recall": 0.990380729,
+            "mean_axis_emd": 4.82e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 5956,
+            "exact_bin_fraction": 0.992666667,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128282148
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 1.0,
+          "file_bytes": 8061813,
+          "seconds": 10.623898,
+          "quality": {
+            "spatial_js_bits": 2.6544e-05,
+            "spatial_total_variation": 0.003251101,
+            "occupied_voxel_recall": 0.989572387,
+            "mean_axis_emd": 6.2099e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.160714286,
+            "rare_point_retention": 0.171369674,
+            "major_point_retention": 0.134002101
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.25,
+          "file_bytes": 9765094,
+          "seconds": 9.878767,
+          "quality": {
+            "spatial_js_bits": 3.4419e-05,
+            "spatial_total_variation": 0.002273637,
+            "occupied_voxel_recall": 0.988925713,
+            "mean_axis_emd": 5.0848e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 2993,
+            "exact_bin_fraction": 0.997666667,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128257092
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.5,
+          "file_bytes": 9518564,
+          "seconds": 9.990951,
+          "quality": {
+            "spatial_js_bits": 2.2942e-05,
+            "spatial_total_variation": 0.001674888,
+            "occupied_voxel_recall": 0.988925713,
+            "mean_axis_emd": 4.94e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 2987,
+            "exact_bin_fraction": 0.995666667,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128257092
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.75,
+          "file_bytes": 9028335,
+          "seconds": 9.983542,
+          "quality": {
+            "spatial_js_bits": 1.5952e-05,
+            "spatial_total_variation": 0.001614508,
+            "occupied_voxel_recall": 0.990623232,
+            "mean_axis_emd": 4.9779e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 2967,
+            "exact_bin_fraction": 0.989,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.128257092
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 1.0,
+          "file_bytes": 8009515,
+          "seconds": 10.636078,
+          "quality": {
+            "spatial_js_bits": 2.6614e-05,
+            "spatial_total_variation": 0.003091178,
+            "occupied_voxel_recall": 0.988925713,
+            "mean_axis_emd": 5.5363e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.147727273,
+            "rare_point_retention": 0.153395007,
+            "major_point_retention": 0.134092586
+          }
+        }
+      ]
+    },
+    {
+      "path": "/Users/kyle/Documents/GitHub/uap/apt-analysis/data/Sample 3 -POS file.POS",
+      "point_count": 17949114,
+      "candidates": [
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.25,
+          "file_bytes": 15641514,
+          "seconds": 12.504465,
+          "quality": {
+            "spatial_js_bits": 0.015364751,
+            "spatial_total_variation": 0.115575701,
+            "occupied_voxel_recall": 0.989025389,
+            "mean_axis_emd": 0.000273415,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 30000,
+            "exact_bins": 20298,
+            "exact_bin_fraction": 0.6766,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.066845874
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.5,
+          "file_bytes": 15520195,
+          "seconds": 12.030167,
+          "quality": {
+            "spatial_js_bits": 0.001668253,
+            "spatial_total_variation": 0.034070299,
+            "occupied_voxel_recall": 0.989271089,
+            "mean_axis_emd": 0.000105696,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 30000,
+            "exact_bins": 11510,
+            "exact_bin_fraction": 0.383666667,
+            "median_bin_retention": 0.91,
+            "rare_point_retention": 0.984027787,
+            "major_point_retention": 0.093905889
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 0.75,
+          "file_bytes": 14983163,
+          "seconds": 12.440437,
+          "quality": {
+            "spatial_js_bits": 0.000308757,
+            "spatial_total_variation": 0.014274115,
+            "occupied_voxel_recall": 0.98968059,
+            "mean_axis_emd": 6.4243e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 30000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.55,
+            "rare_point_retention": 0.600747806,
+            "major_point_retention": 0.151230487
+          }
+        },
+        {
+          "bin_width_da": 0.01,
+          "allocation_exponent": 1.0,
+          "file_bytes": 13776084,
+          "seconds": 13.301156,
+          "quality": {
+            "spatial_js_bits": 0.000304378,
+            "spatial_total_variation": 0.014402029,
+            "occupied_voxel_recall": 0.991646192,
+            "mean_axis_emd": 0.000183089,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 30000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.22972973,
+            "rare_point_retention": 0.235062988,
+            "major_point_retention": 0.221399191
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.25,
+          "file_bytes": 13979909,
+          "seconds": 9.070733,
+          "quality": {
+            "spatial_js_bits": 0.005306236,
+            "spatial_total_variation": 0.062948117,
+            "occupied_voxel_recall": 0.98968059,
+            "mean_axis_emd": 0.000147653,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 4054,
+            "exact_bin_fraction": 0.675666667,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.067154847
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.5,
+          "file_bytes": 13860718,
+          "seconds": 7.990856,
+          "quality": {
+            "spatial_js_bits": 0.000604161,
+            "spatial_total_variation": 0.018808256,
+            "occupied_voxel_recall": 0.98976249,
+            "mean_axis_emd": 7.386e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 2066,
+            "exact_bin_fraction": 0.344333333,
+            "median_bin_retention": 0.895419896,
+            "rare_point_retention": 0.980024562,
+            "major_point_retention": 0.095388567
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 0.75,
+          "file_bytes": 13346260,
+          "seconds": 8.051873,
+          "quality": {
+            "spatial_js_bits": 0.000170186,
+            "spatial_total_variation": 0.010153441,
+            "occupied_voxel_recall": 0.98992629,
+            "mean_axis_emd": 5.6483e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.53507014,
+            "rare_point_retention": 0.580991161,
+            "major_point_retention": 0.15454412
+          }
+        },
+        {
+          "bin_width_da": 0.05,
+          "allocation_exponent": 1.0,
+          "file_bytes": 12337313,
+          "seconds": 7.58635,
+          "quality": {
+            "spatial_js_bits": 0.000205723,
+            "spatial_total_variation": 0.011895247,
+            "occupied_voxel_recall": 0.99017199,
+            "mean_axis_emd": 6.7259e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 6000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.22425952,
+            "rare_point_retention": 0.225341695,
+            "major_point_retention": 0.222561031
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.25,
+          "file_bytes": 13512899,
+          "seconds": 7.234699,
+          "quality": {
+            "spatial_js_bits": 0.002254528,
+            "spatial_total_variation": 0.038303084,
+            "occupied_voxel_recall": 0.98959869,
+            "mean_axis_emd": 0.000113811,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 2016,
+            "exact_bin_fraction": 0.672,
+            "median_bin_retention": 1.0,
+            "rare_point_retention": 1.0,
+            "major_point_retention": 0.067604208
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.5,
+          "file_bytes": 13389915,
+          "seconds": 7.396843,
+          "quality": {
+            "spatial_js_bits": 0.000377187,
+            "spatial_total_variation": 0.014091831,
+            "occupied_voxel_recall": 0.989434889,
+            "mean_axis_emd": 7.0097e-05,
+            "mass_js_bits": 0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 970,
+            "exact_bin_fraction": 0.323333333,
+            "median_bin_retention": 0.883201174,
+            "rare_point_retention": 0.975143603,
+            "major_point_retention": 0.096998759
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 0.75,
+          "file_bytes": 12889554,
+          "seconds": 7.273114,
+          "quality": {
+            "spatial_js_bits": 0.000133065,
+            "spatial_total_variation": 0.008699805,
+            "occupied_voxel_recall": 0.98984439,
+            "mean_axis_emd": 5.4519e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.523880621,
+            "rare_point_retention": 0.568830192,
+            "major_point_retention": 0.157048667
+          }
+        },
+        {
+          "bin_width_da": 0.1,
+          "allocation_exponent": 1.0,
+          "file_bytes": 11992604,
+          "seconds": 6.96517,
+          "quality": {
+            "spatial_js_bits": 0.000170041,
+            "spatial_total_variation": 0.010833384,
+            "occupied_voxel_recall": 0.99025389,
+            "mean_axis_emd": 6.0747e-05,
+            "mass_js_bits": -0.0,
+            "mass_total_variation": 0.0,
+            "active_bins": 3000,
+            "exact_bins": 0,
+            "exact_bin_fraction": 0.0,
+            "median_bin_retention": 0.223549488,
+            "rare_point_retention": 0.224074217,
+            "major_point_retention": 0.222706502
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -16,6 +16,8 @@ dist/
 public/
 site/
 /experiments/lossless12/work/
+/experiments/lossy4m/work/
+/experiments/lossy4m/site/
 
 demo/data/*
 !demo/data/example.cpos

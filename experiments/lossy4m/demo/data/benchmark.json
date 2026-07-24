@@ -1,0 +1,187 @@
+{
+  "target_points": 4000000,
+  "bin_width_da": 0.1,
+  "allocation_exponent": 0.75,
+  "files": [
+    {
+      "name": "control_Ck10_steel_felfer_R56_01769.pos",
+      "points": 5525361,
+      "raw_bytes": 88405776,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 8955422,
+      "cp4m_exact_fraction": 0.723934599,
+      "cpos_spatial_js": 0.005385539,
+      "cp4m_spatial_js": 1.5352e-05
+    },
+    {
+      "name": "control_MoHf_leitner_R21_08680.pos",
+      "points": 4583568,
+      "raw_bytes": 73337088,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 10640015,
+      "cp4m_exact_fraction": 0.872682591,
+      "cpos_spatial_js": 0.005885557,
+      "cp4m_spatial_js": 2.6973e-05
+    },
+    {
+      "name": "control_ODSsteel_wang_R31_06365.pos",
+      "points": 4868202,
+      "raw_bytes": 77891232,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 9731686,
+      "cp4m_exact_fraction": 0.821658592,
+      "cpos_spatial_js": 0.007129631,
+      "cp4m_spatial_js": 2.087e-05
+    },
+    {
+      "name": "control_Si_apav_usa_denton_smith.pos",
+      "points": 945211,
+      "raw_bytes": 15123376,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 2296070,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 0.002460633,
+      "cp4m_spatial_js": 3.5008e-05
+    },
+    {
+      "name": "steelHD_5534859_70a59eff-003c-4337-832a-604c260dc623.POS",
+      "points": 122023,
+      "raw_bytes": 1952368,
+      "cpos_bytes": 1024312,
+      "cp4m_bytes": 519613,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 1.7368e-05,
+      "cp4m_spatial_js": 0.000131328
+    },
+    {
+      "name": "steelHD_5534859_8fe936a9-c8bf-417a-8006-bff810375bc7.POS",
+      "points": 228176,
+      "raw_bytes": 3650816,
+      "cpos_bytes": 1873536,
+      "cp4m_bytes": 865474,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 5.876e-06,
+      "cp4m_spatial_js": 9.6135e-05
+    },
+    {
+      "name": "steelHD_5534859_aa137df8-ce0e-481e-93e6-a22cb5a34882.POS",
+      "points": 142122,
+      "raw_bytes": 2273952,
+      "cpos_bytes": 1185104,
+      "cp4m_bytes": 496737,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 9.275e-06,
+      "cp4m_spatial_js": 0.000139897
+    },
+    {
+      "name": "synthetic_al_mg_si.POS",
+      "points": 1500000,
+      "raw_bytes": 24000000,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 3820627,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 0.006886141,
+      "cp4m_spatial_js": 3.7108e-05
+    },
+    {
+      "name": "synthetic_si_o.POS",
+      "points": 1500000,
+      "raw_bytes": 24000000,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 4186112,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 0.006880602,
+      "cp4m_spatial_js": 3.8298e-05
+    },
+    {
+      "name": "synthetic_zn_cu_al.POS",
+      "points": 1500000,
+      "raw_bytes": 24000000,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 4483799,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 0.006836618,
+      "cp4m_spatial_js": 3.8045e-05
+    },
+    {
+      "name": "synthetic_zn_layer_on_al.POS",
+      "points": 1500000,
+      "raw_bytes": 24000000,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 4121939,
+      "cp4m_exact_fraction": 1.0,
+      "cpos_spatial_js": 0.006934123,
+      "cp4m_spatial_js": 3.7425e-05
+    },
+    {
+      "name": "12d8ba7d-b728-4362-a879-558857c7b4d2.POS",
+      "points": 20949148,
+      "raw_bytes": 335186368,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 12737719,
+      "cp4m_exact_fraction": 0.190938553,
+      "cpos_spatial_js": 0.004572808,
+      "cp4m_spatial_js": 0.00011587
+    },
+    {
+      "name": "2166bb75-7ff6-4c85-bf2d-564431f0b089.POS",
+      "points": 29810068,
+      "raw_bytes": 476961088,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 9028335,
+      "cp4m_exact_fraction": 0.134182854,
+      "cpos_spatial_js": 0.004469301,
+      "cp4m_spatial_js": 1.5345e-05
+    },
+    {
+      "name": "499e563f-0c0c-4c6f-bc08-b8e76f59c31b.POS",
+      "points": 5721296,
+      "raw_bytes": 91540736,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 11698898,
+      "cp4m_exact_fraction": 0.699142292,
+      "cpos_spatial_js": 0.004521798,
+      "cp4m_spatial_js": 3.1056e-05
+    },
+    {
+      "name": "86a2fa56-8593-4856-bd42-b73716197abf.POS",
+      "points": 8657555,
+      "raw_bytes": 138520880,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 9569011,
+      "cp4m_exact_fraction": 0.462024209,
+      "cpos_spatial_js": 0.004363367,
+      "cp4m_spatial_js": 1.259e-05
+    },
+    {
+      "name": "Sample 1- POS file.POS",
+      "points": 4013368,
+      "raw_bytes": 64213888,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 12092517,
+      "cp4m_exact_fraction": 0.996669132,
+      "cpos_spatial_js": 0.004109034,
+      "cp4m_spatial_js": 9.706e-06
+    },
+    {
+      "name": "Sample 3 -POS file.POS",
+      "points": 17949114,
+      "raw_bytes": 287185824,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 12889554,
+      "cp4m_exact_fraction": 0.222852225,
+      "cpos_spatial_js": 0.004394371,
+      "cp4m_spatial_js": 0.000132295
+    },
+    {
+      "name": "e14f067b-4c6f-4c34-8e25-ac1e4a217c57.POS",
+      "points": 8401853,
+      "raw_bytes": 134429648,
+      "cpos_bytes": 4040128,
+      "cp4m_bytes": 8524585,
+      "cp4m_exact_fraction": 0.476085454,
+      "cpos_spatial_js": 0.004118286,
+      "cp4m_spatial_js": 1.2954e-05
+    }
+  ]
+}
